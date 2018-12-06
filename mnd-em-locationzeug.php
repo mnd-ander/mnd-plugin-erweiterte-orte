@@ -1,0 +1,732 @@
+<?php
+
+/**
+ * fügt das mndzeug array dem event zu, wenn es von der db instanziiert wird
+ */
+function mnd_em_loc_load($EM_Location)
+{
+	global $wpdb;
+	
+	//diese variable geht ins location_object und trägt alle murks metadaten
+	$mndzeug = array();
+	
+	//art des ortes abfragen	
+	$loc_id = $EM_Location->location_id;
+	$query = "SELECT meta_value FROM ".EM_META_TABLE." WHERE object_id=".$loc_id." AND meta_key='formular_art'";
+	$db_ergebnis = $wpdb->get_var($query);
+	
+	if($db_ergebnis == 'handelsort')
+	{
+		$mndzeug['formular_art'] = 'handelsort';
+		
+		//div1 erfassung anfang
+		
+		//div1 radio
+		$query = "SELECT meta_value FROM ".EM_META_TABLE." WHERE object_id=".$loc_id." AND meta_key='div1_radio'";
+		$db_ergebnis = $wpdb->get_var($query);
+		//vergleich mit radios, damit kein murks angezeigt wird
+		$div1_radio = (is_array(get_option('handel_div1_radio'))) ? get_option('handel_div1_radio'):array();
+		if(in_array($db_ergebnis, $div1_radio))
+		{
+			$mndzeug['div1_radio'] = $db_ergebnis;
+		}
+		//div1 checkboxen
+		$metakeytobe = "meta_key='div1_checkboxes'";
+		
+		//checkboxen metakey abfrage ausführen
+		$sql = $wpdb->prepare("SELECT meta_value FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		
+		$db_ergebnis = $wpdb->get_col($sql, 0);
+		
+		//vergleich mit den eingestellten checkboxen, damit kein murks angezeigt wird
+		$div1_checkboxes = (is_array(get_option('handel_div1_checkboxes'))) ? get_option('handel_div1_checkboxes'):array();
+		
+		$mndzeug['div1_checkboxes'] = array();
+		foreach($db_ergebnis as $meta_entry)
+		{
+			if(in_array($meta_entry, $div1_checkboxes))
+			{
+				$mndzeug['div1_checkboxes'][] = $meta_entry;
+			}
+		}
+		
+		//div3 erfassung
+		$div3_teile = (is_array(get_option('handel_div3_teile'))) ? get_option('handel_div3_teile'):array();
+		$metakeytobe = "meta_key='".$div3_teile[0]."'";
+		
+		for($i = 1; $i < count($div3_teile); $i++)
+		{
+			$metakeytobe = $metakeytobe." OR meta_key='".$div3_teile[$i]."' ";
+		}
+		$metakeytobe = "( ".$metakeytobe." )";
+		
+		$sql = $wpdb->prepare("SELECT * FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		$db_ergebnis = $wpdb->get_results($sql);
+		
+		if($db_ergebnis)
+		{
+			foreach ( $db_ergebnis as $post )
+			{
+				//kann hier typen ignorieren, weil alles strings
+				$mndzeug[$post->meta_key] = $post->meta_value;
+			}
+		}
+		
+		//div4 erfassung
+		$div4_teile = (is_array(get_option('handel_div4_teile'))) ? get_option('handel_div4_teile'):array();
+		$metakeytobe = "meta_key='".$div4_teile[0]."'";
+		
+		for($i = 1; $i < count($div4_teile); $i++)
+		{
+			$metakeytobe = $metakeytobe." OR meta_key='".$div4_teile[$i]."' ";
+		}
+		$metakeytobe = "( ".$metakeytobe." )";
+		
+		$sql = $wpdb->prepare("SELECT * FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		$db_ergebnis = $wpdb->get_results($sql);
+		
+		if($db_ergebnis)
+		{
+			foreach ( $db_ergebnis as $post )
+			{
+				$mndzeug[$post->meta_key] = $post->meta_value;
+			}
+		}
+		//das passiert mind 2mal, sollte optimiert werden
+		//div4_zielgruppen_demografisch
+		$metakeytobe = "meta_key='div4_zielgruppen_demografisch'";
+		
+		$sql = $wpdb->prepare("SELECT meta_value FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		
+		$db_ergebnis = $wpdb->get_col($sql, 0);
+		$div4_zielgruppen_demografisch = (is_array(get_option('div4_zielgruppen_demografisch'))) ? get_option('div4_zielgruppen_demografisch'):array();
+		
+		$mndzeug['div4_zielgruppen_demografisch'] = array();
+		foreach($db_ergebnis as $meta_entry)
+		{
+			if(in_array($meta_entry, $div4_zielgruppen_demografisch))
+			{
+				$mndzeug['div4_zielgruppen_demografisch'][] = $meta_entry;
+			}
+		}
+		//div4_zielgruppen_psychografisch
+		$metakeytobe = "meta_key='div4_zielgruppen_psychografisch'";
+		
+		$sql = $wpdb->prepare("SELECT meta_value FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		
+		$db_ergebnis = $wpdb->get_col($sql, 0);
+		$div4_zielgruppen_psychografisch = (is_array(get_option('div4_zielgruppen_psychografisch'))) ? get_option('div4_zielgruppen_psychografisch'):array();
+		
+		$mndzeug['div4_zielgruppen_psychografisch'] = array();
+		foreach($db_ergebnis as $meta_entry)
+		{
+			if(in_array($meta_entry, $div4_zielgruppen_psychografisch))
+			{
+				$mndzeug['div4_zielgruppen_psychografisch'][] = $meta_entry;
+			}
+		}
+		
+	}//ende von if($db_ergebnis == 'handelsort')
+	elseif($db_ergebnis == 'lernort')
+	{
+		$mndzeug['formular_art'] = 'lernort';
+		
+		//div1 erfassung anfang
+		
+		//div1 radio
+		$query = "SELECT meta_value FROM ".EM_META_TABLE." WHERE object_id=".$loc_id." AND meta_key='div1_radio'";
+		$db_ergebnis = $wpdb->get_var($query);
+		//vergleich mit radios, damit kein murks angezeigt wird
+		$div1_radio = (is_array(get_option('lernort_div1_radio'))) ? get_option('lernort_div1_radio'):array();
+		if(in_array($db_ergebnis, $div1_radio))
+		{
+			$mndzeug['div1_radio'] = $db_ergebnis;
+		}
+		//div1 checkboxen
+		$metakeytobe = "meta_key='div1_checkboxes'";
+		
+		//checkboxen metakey abfrage ausführen
+		$sql = $wpdb->prepare("SELECT meta_value FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		
+		$db_ergebnis = $wpdb->get_col($sql, 0);
+		
+		//vergleich mit den eingestellten checkboxen, damit kein murks angezeigt wird
+		$div1_checkboxes = (is_array(get_option('lernort_div1_inventar_cb'))) ? get_option('lernort_div1_inventar_cb'):array();
+		
+		$mndzeug['div1_checkboxes'] = array();
+		foreach($db_ergebnis as $meta_entry)
+		{
+			if(in_array($meta_entry, $div1_checkboxes))
+			{
+				$mndzeug['div1_checkboxes'][] = $meta_entry;
+			}
+		}
+		
+		//div1+3+4 erfassung
+		$lernort_div1_teile = (is_array(get_option('lernort_div1_teile'))) ? get_option('lernort_div1_teile'):array();
+		$lernort_div3_teile = (is_array(get_option('lernort_div3_teile'))) ? get_option('lernort_div3_teile'):array();
+		$lernort_div4_teile = (is_array(get_option('lernort_div4_teile'))) ? get_option('lernort_div4_teile'):array();
+		$divs_eindeutig_zuweisbare_teile = array_merge($lernort_div1_teile,$lernort_div3_teile,$lernort_div4_teile);
+		$metakeytobe = "meta_key='".$divs_eindeutig_zuweisbare_teile[0]."'";
+		
+		for($i = 1; $i < count($divs_eindeutig_zuweisbare_teile); $i++)
+		{
+			$metakeytobe = $metakeytobe." OR meta_key='".$divs_eindeutig_zuweisbare_teile[$i]."' ";
+		}
+		$metakeytobe = "( ".$metakeytobe." )";
+		
+		$sql = $wpdb->prepare("SELECT * FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		$db_ergebnis = $wpdb->get_results($sql);
+		
+		if($db_ergebnis)
+		{
+			foreach ( $db_ergebnis as $post )
+			{
+				//kann hier typen ignorieren, weil alles strings
+				$mndzeug[$post->meta_key] = $post->meta_value;
+			}
+		}
+		
+		//das steht hier mind 2mal, sollte optimiert werden
+		//div4_zielgruppen_demografisch
+		$metakeytobe = "meta_key='div4_zielgruppen_demografisch'";
+		
+		$sql = $wpdb->prepare("SELECT meta_value FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		
+		$db_ergebnis = $wpdb->get_col($sql, 0);
+		$div4_zielgruppen_demografisch = (is_array(get_option('div4_zielgruppen_demografisch'))) ? get_option('div4_zielgruppen_demografisch'):array();
+		
+		$mndzeug['div4_zielgruppen_demografisch'] = array();
+		foreach($db_ergebnis as $meta_entry)
+		{
+			if(in_array($meta_entry, $div4_zielgruppen_demografisch))
+			{
+				$mndzeug['div4_zielgruppen_demografisch'][] = $meta_entry;
+			}
+		}
+		//div4_zielgruppen_psychografisch
+		$metakeytobe = "meta_key='div4_zielgruppen_psychografisch'";
+		
+		$sql = $wpdb->prepare("SELECT meta_value FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		
+		$db_ergebnis = $wpdb->get_col($sql, 0);
+		$div4_zielgruppen_psychografisch = (is_array(get_option('div4_zielgruppen_psychografisch'))) ? get_option('div4_zielgruppen_psychografisch'):array();
+		
+		$mndzeug['div4_zielgruppen_psychografisch'] = array();
+		foreach($db_ergebnis as $meta_entry)
+		{
+			if(in_array($meta_entry, $div4_zielgruppen_psychografisch))
+			{
+				$mndzeug['div4_zielgruppen_psychografisch'][] = $meta_entry;
+			}
+		}
+	}//ende von elseif($db_ergebnis == 'lernort')
+	elseif($db_ergebnis == 'repaircafe')
+	{
+		$mndzeug['formular_art'] = 'repaircafe';
+		
+		//div1 erfassung anfang
+		
+		//div1 radio
+		$query = "SELECT meta_value FROM ".EM_META_TABLE." WHERE object_id=".$loc_id." AND meta_key='div1_radio'";
+		$db_ergebnis = $wpdb->get_var($query);
+		//vergleich mit radios, damit kein murks angezeigt wird
+		$div1_radio = (is_array(get_option('repaircafe_div1_radio'))) ? get_option('repaircafe_div1_radio'):array();
+		if(in_array($db_ergebnis, $div1_radio))
+		{
+			$mndzeug['div1_radio'] = $db_ergebnis;
+		}
+		//div1 checkboxen
+		$metakeytobe = "meta_key='div1_checkboxes'";
+		
+		///checkboxen metakey abfrage ausführen
+		$sql = $wpdb->prepare("SELECT meta_value FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		
+		$db_ergebnis = $wpdb->get_col($sql, 0);
+		
+		///vergleich mit den eingestellten checkboxen, damit kein murks angezeigt wird
+		$div1_checkboxes = (is_array(get_option('repaircafe_div1_ausstattung_cb'))) ? get_option('repaircafe_div1_ausstattung_cb'):array();
+		
+		$mndzeug['div1_checkboxes'] = array();
+		foreach($db_ergebnis as $meta_entry)
+		{
+			if(in_array($meta_entry, $div1_checkboxes))
+			{
+				$mndzeug['div1_checkboxes'][] = $meta_entry;
+			}
+		}
+		
+		//div1_oeffnungstage
+		$metakeytobe = "meta_key='oeffnungstage'";
+		
+		///checkboxen metakey abfrage ausführen
+		$sql = $wpdb->prepare("SELECT meta_value FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		
+		$db_ergebnis = $wpdb->get_col($sql, 0);
+		
+		///vergleich mit den eingestellten checkboxen, damit kein murks angezeigt wird
+		$wochentage = array
+		(
+			'Mo','Di','Mi','Do','Fr','Sa','So'
+		);
+		$mndzeug['oeffnungstage'] = array();
+		foreach($db_ergebnis as $meta_entry)
+		{
+			if(in_array($meta_entry, $wochentage))
+			{
+				$mndzeug['oeffnungstage'][] = $meta_entry;
+			}
+		}
+		//div3_fokus_cb
+		$metakeytobe = "meta_key='div3_fokus_cb'";
+		
+		///checkboxen metakey abfrage ausführen
+		$sql = $wpdb->prepare("SELECT meta_value FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		
+		$db_ergebnis = $wpdb->get_col($sql, 0);
+		
+		///vergleich mit den eingestellten checkboxen, damit kein murks angezeigt wird
+		$repaircafe_div3_fokus_cb = (is_array(get_option('repaircafe_div3_fokus_cb'))) ? get_option('repaircafe_div3_fokus_cb'):array();
+		
+		$mndzeug['div3_fokus_cb'] = array();
+		foreach($db_ergebnis as $meta_entry)
+		{
+			if(in_array($meta_entry, $repaircafe_div3_fokus_cb))
+			{
+				$mndzeug['div3_fokus_cb'][] = $meta_entry;
+			}
+		}
+		
+		//div1+3+4_teile erfassung
+		$repaircafe_div1_teile = (is_array(get_option('repaircafe_div1_teile'))) ? get_option('repaircafe_div1_teile'):array();
+		$repaircafe_div3_teile = (is_array(get_option('repaircafe_div3_teile'))) ? get_option('repaircafe_div3_teile'):array();
+		$repaircafe_div4_teile = (is_array(get_option('repaircafe_div4_teile'))) ? get_option('repaircafe_div4_teile'):array();
+		$divs_eindeutig_zuweisbare_teile = array_merge($repaircafe_div1_teile,$repaircafe_div3_teile,$repaircafe_div4_teile);
+		$metakeytobe = "meta_key='".$divs_eindeutig_zuweisbare_teile[0]."'";
+		
+		for($i = 1; $i < count($divs_eindeutig_zuweisbare_teile); $i++)
+		{
+			$metakeytobe = $metakeytobe." OR meta_key='".$divs_eindeutig_zuweisbare_teile[$i]."' ";
+		}
+		$metakeytobe = "( ".$metakeytobe." )";
+		
+		$sql = $wpdb->prepare("SELECT * FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		$db_ergebnis = $wpdb->get_results($sql);
+		
+		if($db_ergebnis)
+		{
+			foreach ( $db_ergebnis as $post )
+			{
+				//kann hier typen ignorieren, weil alles strings
+				$mndzeug[$post->meta_key] = $post->meta_value;
+			}
+		}
+		
+		//das steht hier mind 2mal, sollte optimiert werden
+		//div4_zielgruppen_demografisch
+		$metakeytobe = "meta_key='div4_zielgruppen_demografisch'";
+		
+		$sql = $wpdb->prepare("SELECT meta_value FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		
+		$db_ergebnis = $wpdb->get_col($sql, 0);
+		$div4_zielgruppen_demografisch = (is_array(get_option('div4_zielgruppen_demografisch'))) ? get_option('div4_zielgruppen_demografisch'):array();
+		
+		$mndzeug['div4_zielgruppen_demografisch'] = array();
+		foreach($db_ergebnis as $meta_entry)
+		{
+			if(in_array($meta_entry, $div4_zielgruppen_demografisch))
+			{
+				$mndzeug['div4_zielgruppen_demografisch'][] = $meta_entry;
+			}
+		}
+		//div4_zielgruppen_psychografisch
+		$metakeytobe = "meta_key='div4_zielgruppen_psychografisch'";
+		
+		$sql = $wpdb->prepare("SELECT meta_value FROM "
+								.EM_META_TABLE
+								." WHERE object_id=%s AND ".$metakeytobe,
+							   $EM_Location->location_id);
+		
+		$db_ergebnis = $wpdb->get_col($sql, 0);
+		$div4_zielgruppen_psychografisch = (is_array(get_option('div4_zielgruppen_psychografisch'))) ? get_option('div4_zielgruppen_psychografisch'):array();
+		
+		$mndzeug['div4_zielgruppen_psychografisch'] = array();
+		foreach($db_ergebnis as $meta_entry)
+		{
+			if(in_array($meta_entry, $div4_zielgruppen_psychografisch))
+			{
+				$mndzeug['div4_zielgruppen_psychografisch'][] = $meta_entry;
+			}
+		}
+	}//ende von elseif($db_ergebnis == 'repaircafe')
+	
+	
+	$EM_Location->mndzeug = $mndzeug;
+}
+add_action('em_location','mnd_em_loc_load',1,1);
+
+/**
+ * speichert die metadaten in die datenbank im EM_META_TABLE
+ * @param bool $result
+ * @param EM_Event $EM_Event
+ * @return bool
+ */
+function mnd_em_loc_save($result,$EM_Location)
+{
+	//diese Funktion kann einiges an optimierung vertragen
+	//->paar dinge sind mehrmals geschrieben
+	
+	global $wpdb;
+	//First delete any old saves of meta
+	if(!empty($_POST['formular_art']))
+	{
+		$wpdb->query("DELETE FROM ".EM_META_TABLE
+				." WHERE object_id='{$EM_Location->location_id}' AND "
+				.mnd_em_get_loc_meta_keys($_POST['formular_art']) );
+	}
+	
+	//$EM_Location->location_id bedeutet, dass es eine location_id hat, also dass es ein ordentlich gespeicherter ort ist
+	if( $EM_Location->location_id && isset($_POST['formular_art']) )
+	{
+		$ids_to_add = array();
+		$EM_Location->mndzeug = array();
+		
+		if($_POST['formular_art'] == 'handelsort')
+		{
+			$EM_Location->mndzeug['formular_art'] = 'handelsort';
+			
+			//das sind die query teile zum speichern in meta_table
+											//	object_id,       meta_key,  meta_value)
+			$ids_to_add[] = "({$EM_Location->location_id}, 'formular_art', 'handelsort')";
+			
+			//div1
+			$div1_checkboxes = (is_array(get_option('handel_div1_checkboxes'))) ? get_option('handel_div1_checkboxes'):array();
+			$div1_radio = (is_array(get_option('handel_div1_radio'))) ? get_option('handel_div1_radio'):array();
+			$chosen_radio = (isset($_POST['div1_radio'])) ? $_POST['div1_radio'] : null;
+			if( in_array($chosen_radio, $div1_radio, true) )
+			{
+				$ids_to_add[] = "({$EM_Location->location_id}, 'div1_radio', '$chosen_radio')";
+				$EM_Location->mndzeug['div1_radio'] = $chosen_radio;
+			}
+			
+			if(isset($_POST['div1']))
+			{
+				foreach( $_POST['div1'] as $checkbox_name )
+				{
+					if( in_array($checkbox_name, $div1_checkboxes, true) )
+					{
+						$ids_to_add[] = "({$EM_Location->location_id}, 'div1_checkboxes', '$checkbox_name')";
+						$EM_Location->mndzeug['div1_checkboxes'][] = $checkbox_name;
+					}
+				}
+			}			
+			
+			//div3
+			$div3_teile = (is_array(get_option('handel_div3_teile'))) ? get_option('handel_div3_teile'):array();
+			foreach( $div3_teile as $div_teil )
+			{
+				$meta_val = $_POST[$div_teil];
+				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
+				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
+			}
+			
+			//div4
+			$div4_teile = (is_array(get_option('handel_div4_teile'))) ? get_option('handel_div4_teile'):array();
+			foreach( $div4_teile as $div_teil )
+			{
+				$meta_val = $_POST[$div_teil];
+				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
+				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
+			}
+			
+		}
+		elseif($_POST['formular_art'] == 'lernort')
+		{
+			$EM_Location->mndzeug['formular_art'] = 'lernort';
+			//das sind die query teile zum speichern in meta_table
+											//	object_id,       meta_key,  meta_value)
+			$ids_to_add[] = "({$EM_Location->location_id}, 'formular_art', 'lernort')";
+			
+			//div1
+			$div1_checkboxes = (is_array(get_option('lernort_div1_inventar_cb'))) ? get_option('lernort_div1_inventar_cb'):array();
+			$div1_radio = (is_array(get_option('lernort_div1_radio'))) ? get_option('lernort_div1_radio'):array();
+			$chosen_radio = (isset($_POST['div1_radio'])) ? $_POST['div1_radio'] : null;
+			if( in_array($chosen_radio, $div1_radio, true) )
+			{
+				$ids_to_add[] = "({$EM_Location->location_id}, 'div1_radio', '$chosen_radio')";
+				$EM_Location->mndzeug['div1_radio'] = $chosen_radio;
+			}
+			
+			if(isset($_POST['div1']))
+			{
+				foreach( $_POST['div1'] as $checkbox_name )
+				{
+					if( in_array($checkbox_name, $div1_checkboxes, true) )
+					{
+						$ids_to_add[] = "({$EM_Location->location_id}, 'div1_checkboxes', '$checkbox_name')";
+						$EM_Location->mndzeug['div1_checkboxes'][] = $checkbox_name;
+					}
+				}
+			}
+			
+			//div1
+			$div1_teile = (is_array(get_option('lernort_div1_teile'))) ? get_option('lernort_div1_teile'):array();
+			foreach( $div1_teile as $div_teil )
+			{
+				$meta_val = $_POST[$div_teil];
+				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
+				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
+			}
+			
+			//div3
+			$div3_teile = (is_array(get_option('lernort_div3_teile'))) ? get_option('lernort_div3_teile'):array();
+			foreach( $div3_teile as $div_teil )
+			{
+				$meta_val = $_POST[$div_teil];
+				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
+				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
+			}
+			
+			//div4
+			$div4_teile = (is_array(get_option('lernort_div4_teile'))) ? get_option('lernort_div4_teile'):array();
+			foreach( $div4_teile as $div_teil )
+			{
+				$meta_val = $_POST[$div_teil];
+				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
+				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
+			}
+		}
+		elseif($_POST['formular_art'] == 'repaircafe')
+		{
+			$EM_Location->mndzeug['formular_art'] = 'repaircafe';
+			//das sind die query teile zum speichern in meta_table
+											//	object_id,       meta_key,  meta_value)
+			$ids_to_add[] = "({$EM_Location->location_id}, 'formular_art', 'repaircafe')";
+			
+			//div1 radio und cb
+			$div1_checkboxes = (is_array(get_option('repaircafe_div1_ausstattung_cb'))) ? get_option('repaircafe_div1_ausstattung_cb'):array();
+			$div1_radio = (is_array(get_option('repaircafe_div1_radio'))) ? get_option('repaircafe_div1_radio'):array();
+			$chosen_radio = (isset($_POST['div1_radio'])) ? $_POST['div1_radio'] : null;
+			if( in_array($chosen_radio, $div1_radio, true) )
+			{
+				$ids_to_add[] = "({$EM_Location->location_id}, 'div1_radio', '$chosen_radio')";
+				$EM_Location->mndzeug['div1_radio'] = $chosen_radio;
+			}
+			
+			if(isset($_POST['div1']))
+			{
+				foreach( $_POST['div1'] as $checkbox_name )
+				{
+					if( in_array($checkbox_name, $div1_checkboxes, true) )
+					{
+						$ids_to_add[] = "({$EM_Location->location_id}, 'div1_checkboxes', '$checkbox_name')";
+						$EM_Location->mndzeug['div1_checkboxes'][] = $checkbox_name;
+					}
+				}
+			}
+			
+			//div1_teile
+			$div1_teile = (is_array(get_option('repaircafe_div1_teile'))) ? get_option('repaircafe_div1_teile'):array();
+			foreach( $div1_teile as $div_teil )
+			{
+				$meta_val = $_POST[$div_teil];
+				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
+				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
+			}
+			//div1_oeffnungstage
+			$wochentage = array
+			(
+				'Mo','Di','Mi','Do','Fr','Sa','So'
+			);
+			if(isset($_POST['oeffnungstage']))
+			{
+				foreach( $_POST['oeffnungstage'] as $oeffnungstag )
+				{
+					if( in_array($oeffnungstag, $wochentage, true) )
+					{
+						$ids_to_add[] = "({$EM_Location->location_id}, 'oeffnungstage', '$oeffnungstag')";
+						$EM_Location->mndzeug['oeffnungstage'][] = $oeffnungstag;
+					}
+				}
+			}
+			
+			//div3
+			$div3_teile = (is_array(get_option('repaircafe_div3_teile'))) ? get_option('repaircafe_div3_teile'):array();
+			foreach( $div3_teile as $div_teil )
+			{
+				$meta_val = $_POST[$div_teil];
+				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
+				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
+			}
+			//div3_fokus_cb
+			$repaircafe_div3_fokus_cb = (is_array(get_option('repaircafe_div3_fokus_cb'))) ? get_option('repaircafe_div3_fokus_cb'):array();
+			if(isset($_POST['div3_fokus_cb']))
+			{
+				foreach( $_POST['div3_fokus_cb'] as $checkbox_name )
+				{
+					if( in_array($checkbox_name, $repaircafe_div3_fokus_cb, true) )
+					{
+						$ids_to_add[] = "({$EM_Location->location_id}, 'div3_fokus_cb', '$checkbox_name')";
+						$EM_Location->mndzeug['div3_fokus_cb'][] = $checkbox_name;
+					}
+				}
+			}
+			
+			//div4
+			$div4_teile = (is_array(get_option('repaircafe_div4_teile'))) ? get_option('repaircafe_div4_teile'):array();
+			foreach( $div4_teile as $div_teil )
+			{
+				$meta_val = $_POST[$div_teil];
+				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
+				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
+			}
+		}
+		//zielgruppen sind bei einzigen zwei orttypen gleich, daher hier einfach immer hintendran
+		//dieser umstand könnte sich irgendwann ändern, also beachten und eventuell ändern
+		if(isset($_POST['div4_zielgruppen_demografisch']))
+		{
+			$div4_zielgruppen_demografisch = (is_array(get_option('div4_zielgruppen_demografisch'))) ? get_option('div4_zielgruppen_demografisch'):array();
+			foreach( $_POST['div4_zielgruppen_demografisch'] as $checkbox_name )
+			{
+				if( in_array($checkbox_name, $div4_zielgruppen_demografisch, true) )
+				{
+					$ids_to_add[] = "({$EM_Location->location_id}, 'div4_zielgruppen_demografisch', '$checkbox_name')";
+					$EM_Location->mndzeug['div4_zielgruppen_demografisch'][] = $checkbox_name;
+				}
+			}
+		}
+		if(isset($_POST['div4_zielgruppen_psychografisch']))
+		{
+			$div4_zielgruppen_psychografisch = (is_array(get_option('div4_zielgruppen_psychografisch'))) ? get_option('div4_zielgruppen_psychografisch'):array();
+			foreach( $_POST['div4_zielgruppen_psychografisch'] as $checkbox_name )
+			{
+				if( in_array($checkbox_name, $div4_zielgruppen_psychografisch, true) )
+				{
+					$ids_to_add[] = "({$EM_Location->location_id}, 'div4_zielgruppen_psychografisch', '$checkbox_name')";
+					$EM_Location->mndzeug['div4_zielgruppen_psychografisch'][] = $checkbox_name;
+				}
+			}
+		}
+		
+		//speichern
+		if( count($ids_to_add) > 0 )
+		{
+			$wpdb->query("INSERT INTO ".EM_META_TABLE." (object_id, meta_key, meta_value) VALUES ".implode(',',$ids_to_add));
+		}
+	}
+	return $result;
+}
+add_filter('em_location_save','mnd_em_loc_save',1,2);
+
+/**
+ * helferfunktion zum vervollständigen der mysql abfrage 
+ * wird nur benutzt, um das löschen einfach zu machen
+ */
+function mnd_em_get_loc_meta_keys($arg)
+{
+	$metakeytobe = "meta_key='formular_art'";
+	if($arg == 'handelsort')
+	{
+		$einzel_keys = array
+		(
+			'div1_checkboxes', 'div1_radio', 'div4_zielgruppen_demografisch', 'div4_zielgruppen_psychografisch'
+		);
+		$div3_teile = (is_array(get_option('handel_div3_teile'))) ? get_option('handel_div3_teile'):array();
+		$div4_teile = (is_array(get_option('handel_div4_teile'))) ? get_option('handel_div4_teile'):array();
+		foreach( array_merge($div3_teile, $div4_teile, $einzel_keys) as $div_teil )
+		{
+			$metakeytobe = $metakeytobe." OR meta_key='".$div_teil."' ";
+		}
+	}
+	elseif($arg == 'lernort')
+	{
+		$einzel_keys = array
+		(
+			'div1_checkboxes', 'div1_radio', 'div4_zielgruppen_demografisch', 'div4_zielgruppen_psychografisch'
+		);
+		$lernort_div1_teile = (is_array(get_option('lernort_div1_teile'))) ? get_option('lernort_div1_teile'):array();
+		$lernort_div3_teile = (is_array(get_option('lernort_div3_teile'))) ? get_option('lernort_div3_teile'):array();
+		$lernort_div4_teile = (is_array(get_option('lernort_div4_teile'))) ? get_option('lernort_div4_teile'):array();
+		foreach( array_merge($lernort_div1_teile, $lernort_div3_teile, $lernort_div4_teile, $einzel_keys) as $div_teil )
+		{
+			$metakeytobe = $metakeytobe." OR meta_key='".$div_teil."' ";
+		}
+	}
+	elseif($arg == 'repaircafe')
+	{
+		$einzel_keys = array
+		(
+			'div1_checkboxes', 'div1_radio', 'div4_zielgruppen_demografisch', 'div4_zielgruppen_psychografisch',
+			'div3_fokus_cb', 'oeffnungstage'
+		);
+		$repaircafe_div1_teile = (is_array(get_option('repaircafe_div1_teile'))) ? get_option('repaircafe_div1_teile'):array();
+		$repaircafe_div3_teile = (is_array(get_option('repaircafe_div3_teile'))) ? get_option('repaircafe_div3_teile'):array();
+		$repaircafe_div4_teile = (is_array(get_option('repaircafe_div4_teile'))) ? get_option('repaircafe_div4_teile'):array();
+		foreach( array_merge($repaircafe_div1_teile, $repaircafe_div3_teile, $repaircafe_div4_teile, $einzel_keys) as $div_teil )
+		{
+			$metakeytobe = $metakeytobe." OR meta_key='".$div_teil."' ";
+		}
+	}
+	return "( ".$metakeytobe." )";
+}
+
+/**
+ * löscht die meta einträge aus der datenbank, wenn der zugehörige ort gelöscht wird
+ * @param boolean $result
+ * @param EM_Location $EM_Location
+ * @return boolean
+ */
+function mnd_em_loc_delete_meta($result, $EM_Location)
+{
+	global $wpdb;
+	$sql = $wpdb->prepare("DELETE FROM ".EM_META_TABLE." WHERE ".mnd_em_get_loc_meta_keys($EM_Location->mndzeug['formular_art'])." AND object_id = %d", $EM_Location->location_id);
+	$wpdb->query($sql);
+	return $result;
+}
+add_filter('em_location_delete_meta','mnd_em_loc_delete_meta',1,3);
+
+
+
+?>
