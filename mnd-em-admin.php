@@ -4,22 +4,21 @@
 /**
  * hakt das untermenü mit dem namen AnderBox im Events Manager adminmenü ein 
  */
-function mnds_em_admin_submenu()
+function mnd_em_admin_submenu()
 {
-	$ms_global_mode = !EM_MS_GLOBAL || is_main_site();
-	if(function_exists('add_submenu_page') && ($ms_global_mode) ) 
+	if(function_exists('add_submenu_page')) 
 	{
    		//             add_submenu_page( string $parent_slug, string $page_title, string $menu_title, string $capability, string $menu_slug, callable $function = '' )
-		$plugin_page = add_submenu_page('edit.php?post_type='.EM_POST_TYPE_EVENT, 'Ander Boxen', 'AnderBox', 'edit_locations', "events-manager-mndbox", 'mnds_em_admin_page');
+		$plugin_page = add_submenu_page('edit.php?post_type='.EM_POST_TYPE_EVENT, 'Ander Boxen', 'AnderBox', 'edit_locations', "events-manager-mndbox", 'mnd_em_admin_page');
   	}
 }
-add_action('admin_menu','mnds_em_admin_submenu', 20);
+add_action('admin_menu','mnd_em_admin_submenu', 20);
 
 
 /**
  * das AnderBox untermenü
  */
-function mnds_em_admin_page()
+function mnd_em_admin_page()
 {
 	global $EM_Notices;
 	
