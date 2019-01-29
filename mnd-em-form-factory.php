@@ -139,16 +139,8 @@ function mnd_em_loc_checkboxset($checkbox_array, $post_array_name, $id_prefix, $
 				name="<?php echo $post_array_name; ?>" 
 				id="<?php echo $id_prefix.$mnd_checkbox_id; ?>"
 				value="<?php echo $mnd_checkbox; ?>" 
-				<?php 
-				if( $editing && in_array($mnd_checkbox, $EM_Location->mndzeug[$mndzeug_key]) )
-				{
-					?> checked <?php 
-				}
-				if( !$cur_user_can )
-				{
-					?> disabled <?php 
-				}
-				?>
+				<?php if( $editing && in_array($mnd_checkbox, $EM_Location->mndzeug[$mndzeug_key]) ) { ?> checked <?php	} ?>
+				<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
 			/> 
 			
 		<label for="<?php echo $id_prefix.$mnd_checkbox_id; ?>">
