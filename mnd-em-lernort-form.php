@@ -124,7 +124,7 @@ function mnd_lernortform($editing = false)
 			</td>
 		</tr>
 		<?php
-		mnd_em_loc_number_tr('Preis pro Stunde in €', 0, 0.01, 'andereseminar_preis', 'andereseminar_preis', $editing, true);
+		mnd_em_loc_number_tr('Preis pro Stunde in €', 0, 0.01, 'andereseminar_preis', 'andereseminar_preis', $editing, true, false);
 		mnd_em_loc_textfeld_tr('Bedingungen', 'andereseminar_beding', 'andereseminar_beding', $editing, true, false);
 		?>
 	</table>		

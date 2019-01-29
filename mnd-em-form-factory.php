@@ -82,7 +82,7 @@ function mnd_em_loc_textarea_tr($th_text, $rows, $cols, $maxlength, $post_name, 
 	<?php
 }
 
-function mnd_em_loc_number_tr($th_text, $min, $step, $post_name, $mndzeug_key, $editing, $cur_user_can)
+function mnd_em_loc_number_tr($th_text, $min, $step, $post_name, $mndzeug_key, $editing, $cur_user_can, $required)
 {
 	global $EM_Location;
 	?>
@@ -96,6 +96,7 @@ function mnd_em_loc_number_tr($th_text, $min, $step, $post_name, $mndzeug_key, $
 					id="<?php echo $post_name; ?>" 
 					<?php if($editing) { ?> value="<?php echo $EM_Location->mndzeug[$mndzeug_key]; ?>" <?php } ?>
 					<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
+					<?php if( $required ) { ?> required <?php } ?>
 			/> 
 		</td>
 	</tr>
