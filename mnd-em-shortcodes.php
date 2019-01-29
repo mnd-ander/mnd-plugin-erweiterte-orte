@@ -129,7 +129,7 @@ function mnd_em_loc_placeholders($replace, $EM_Location, $result)
 				{
 					$sortiment[] = $sortimentti;
 				}
-				$replaceparts[] = implode(', ', $sortiment);
+				$replaceparts[] = implode('<br>', $sortiment);
 				//fokus_sonstig
 				$replaceparts[] = "<strong>Sonstiger Fokus:</strong> ".$EM_Location->mndzeug['fokus_sonstiges'];
 				
