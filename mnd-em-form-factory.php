@@ -41,7 +41,7 @@ function mnd_em_loc_radioset($radioset, $br_offset, $post_name, $mndzeug_key, $e
 
 
 
-function mnd_em_loc_date_tr($th_text, $post_name, $mndzeug_key, $editing, $cur_user_can)
+function mnd_em_loc_date_tr($th_text, $post_name, $mndzeug_key, $editing, $cur_user_can, $required)
 {
 	global $EM_Location;
 	?>
@@ -51,6 +51,7 @@ function mnd_em_loc_date_tr($th_text, $post_name, $mndzeug_key, $editing, $cur_u
 			<input 	type="date" 
 					name="<?php echo $post_name; ?>" 
 					id="<?php echo $post_name; ?>" 
+					<?php if( $required ) { ?> required <?php } ?>
 					<?php if($editing) { ?> value="<?php echo $EM_Location->mndzeug[$mndzeug_key]; ?>" <?php } ?>
 					<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
 				/> 

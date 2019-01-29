@@ -94,7 +94,7 @@ function mnd_repairform($editing = false)
 		<h4>Weitere Informationen</h4>
 		<table class="em-location-data">
 		<?php
-		mnd_em_loc_date_tr('Rückruftermin', 'rueckruftermin', 'rueckruftermin', $editing, $bool_rechte);
+		mnd_em_loc_date_tr('Rückruftermin', 'rueckruftermin', 'rueckruftermin', $editing, $bool_rechte, false);
 		mnd_em_loc_textfeld_tr('Atmosphäre', 'atmosphaere', 'atmosphaere', $editing, $bool_rechte, false);
 		?>
 		</table>
