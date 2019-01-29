@@ -120,7 +120,7 @@ function mnd_handelsortform($editing = false)
 		
 		<table class="em-location-data">
 		<?php
-		mnd_em_loc_textarea_tr('Kommentar', 5, 40, 600, 'pitch', 'pitch', $editing, $bool_rechte);
+		mnd_em_loc_textarea_tr('Kommentar', 5, 40, 600, 'pitch', 'pitch', $editing, $bool_rechte, false);
 		?>
 		<tr class="em-location-data-address">
 			<th>Letzter Kontakt</th>

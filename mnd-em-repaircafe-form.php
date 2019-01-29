@@ -115,7 +115,7 @@ function mnd_repairform($editing = false)
 		</fieldset>
 		<table class="em-location-data">
 		<?php
-		mnd_em_loc_textarea_tr('Kommentar', 5, 40, 600, 'kommentar', 'kommentar', $editing, $bool_rechte);
+		mnd_em_loc_textarea_tr('Kommentar', 5, 40, 600, 'kommentar', 'kommentar', $editing, $bool_rechte, false);
 		?>
 		<tr class="em-location-data-address">
 			<th>Letzter Kontakt</th>

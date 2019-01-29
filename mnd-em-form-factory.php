@@ -60,7 +60,7 @@ function mnd_em_loc_date_tr($th_text, $post_name, $mndzeug_key, $editing, $cur_u
 	<?php
 }
 
-function mnd_em_loc_textarea_tr($th_text, $rows, $cols, $maxlength, $post_name, $mndzeug_key, $editing, $cur_user_can, $placeholder = "")
+function mnd_em_loc_textarea_tr($th_text, $rows, $cols, $maxlength, $post_name, $mndzeug_key, $editing, $cur_user_can, $required, $placeholder = "")
 {
 	global $EM_Location;
 	?>
@@ -74,6 +74,7 @@ function mnd_em_loc_textarea_tr($th_text, $rows, $cols, $maxlength, $post_name, 
 						maxlength="<?php echo $maxlength; ?>"
 						placeholder="<?php echo $placeholder; ?>"
 						wrap="hard"
+						<?php if( $required ) { ?> required <?php } ?>
 						<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
 			   ><?php if($editing) { echo $EM_Location->mndzeug[$mndzeug_key]; } ?></textarea>
 		</td>

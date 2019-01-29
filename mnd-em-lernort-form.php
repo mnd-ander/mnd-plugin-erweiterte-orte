@@ -47,7 +47,7 @@ function mnd_lernortform($editing = false)
 			</td>
 		</tr>
 		<?php
-		mnd_em_loc_textarea_tr('Mehr dazu', 5, 40, 600, 'catering_text', 'catering_text', $editing, true, 'Sag etwas mehr dazu…(z.B. Küchen- & Geschirrnutzung, Kaffeekannen, Kaffeepreise, Getränkepreise usw.)');
+		mnd_em_loc_textarea_tr('Mehr dazu', 5, 40, 600, 'catering_text', 'catering_text', $editing, true, false, 'Sag etwas mehr dazu…(z.B. Küchen- & Geschirrnutzung, Kaffeekannen, Kaffeepreise, Getränkepreise usw.)');
 		mnd_em_loc_radioset_tr('Café vorhanden?', array('Ja','Nein'), 1, 'cafevorhanden', 'cafevorhanden', $editing, true, false);
 		?>
 	</table>
@@ -77,7 +77,7 @@ function mnd_lernortform($editing = false)
 		</tr>
 		<?php
 		mnd_em_loc_textfeld_tr('Lernraumsituation', 'lernraum', 'lernraum', $editing, true, false);
-		mnd_em_loc_textarea_tr('Anmerkungen', 5, 40, 600, 'anmerkungen', 'anmerkungen', $editing, true);
+		mnd_em_loc_textarea_tr('Anmerkungen', 5, 40, 600, 'anmerkungen', 'anmerkungen', $editing, true, false);
 		mnd_em_loc_textfeld_tr('Ansprechpartner des Eigentümers Rückruf', 'ansprechpartner', 'ansprechpartner', $editing, true, false);
 		mnd_em_loc_textfeld_tr('Rückrufnummer', 'ansprechpartner_nr', 'ansprechpartner_nr', $editing, true, false);
 		mnd_em_loc_textfeld_tr('Raum wird verwaltet durch', 'raumverwaltung', 'raumverwaltung', $editing, true, false);
@@ -163,7 +163,7 @@ function mnd_lernortform($editing = false)
 		</fieldset>
 		<table class="em-location-data">
 		<?php
-		mnd_em_loc_textarea_tr('Kommentar', 5, 40, 600, 'kommentar', 'kommentar', $editing, $bool_rechte);
+		mnd_em_loc_textarea_tr('Kommentar', 5, 40, 600, 'kommentar', 'kommentar', $editing, $bool_rechte, false);
 		?>
 		<tr class="em-location-data-address">
 			<th>Letzter Kontakt</th>
