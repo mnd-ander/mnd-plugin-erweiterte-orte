@@ -20,6 +20,10 @@ function mnd_em_loc_placeholders($replace, $EM_Location, $result)
 		{
 			$replace = ucfirst($EM_Location->mndzeug['div1_radio']);
 		}
+		elseif( $result == '#_MNDUNTERTYPCSS' )
+		{
+			$replace = strtolower( $string = str_replace(' ', '', ($EM_Location->mndzeug['div1_radio'])) );
+		}
 		elseif( $result == '#_MNDDIV1' )
 		{
 			$replaceparts = array();
