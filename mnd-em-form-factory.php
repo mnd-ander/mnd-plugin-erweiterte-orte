@@ -41,7 +41,7 @@ function mnd_em_loc_radioset($radioset, $br_offset, $post_name, $mndzeug_key, $e
 
 
 
-function mnd_em_loc_date_tr($th_text, $post_name, $mndzeug_key, $editing, $cur_user_can)
+function mnd_em_loc_date_tr($th_text, $post_name, $mndzeug_key, $editing, $cur_user_can, $required)
 {
 	global $EM_Location;
 	?>
@@ -51,6 +51,7 @@ function mnd_em_loc_date_tr($th_text, $post_name, $mndzeug_key, $editing, $cur_u
 			<input 	type="date" 
 					name="<?php echo $post_name; ?>" 
 					id="<?php echo $post_name; ?>" 
+					<?php if( $required ) { ?> required <?php } ?>
 					<?php if($editing) { ?> value="<?php echo $EM_Location->mndzeug[$mndzeug_key]; ?>" <?php } ?>
 					<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
 				/> 
@@ -59,7 +60,7 @@ function mnd_em_loc_date_tr($th_text, $post_name, $mndzeug_key, $editing, $cur_u
 	<?php
 }
 
-function mnd_em_loc_textarea_tr($th_text, $rows, $cols, $maxlength, $post_name, $mndzeug_key, $editing, $cur_user_can, $placeholder = "")
+function mnd_em_loc_textarea_tr($th_text, $rows, $cols, $maxlength, $post_name, $mndzeug_key, $editing, $cur_user_can, $required, $placeholder = "")
 {
 	global $EM_Location;
 	?>
@@ -73,6 +74,7 @@ function mnd_em_loc_textarea_tr($th_text, $rows, $cols, $maxlength, $post_name, 
 						maxlength="<?php echo $maxlength; ?>"
 						placeholder="<?php echo $placeholder; ?>"
 						wrap="hard"
+						<?php if( $required ) { ?> required <?php } ?>
 						<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
 			   ><?php if($editing) { echo $EM_Location->mndzeug[$mndzeug_key]; } ?></textarea>
 		</td>
@@ -80,7 +82,7 @@ function mnd_em_loc_textarea_tr($th_text, $rows, $cols, $maxlength, $post_name, 
 	<?php
 }
 
-function mnd_em_loc_number_tr($th_text, $min, $step, $post_name, $mndzeug_key, $editing, $cur_user_can)
+function mnd_em_loc_number_tr($th_text, $min, $step, $post_name, $mndzeug_key, $editing, $cur_user_can, $required)
 {
 	global $EM_Location;
 	?>
@@ -94,6 +96,7 @@ function mnd_em_loc_number_tr($th_text, $min, $step, $post_name, $mndzeug_key, $
 					id="<?php echo $post_name; ?>" 
 					<?php if($editing) { ?> value="<?php echo $EM_Location->mndzeug[$mndzeug_key]; ?>" <?php } ?>
 					<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
+					<?php if( $required ) { ?> required <?php } ?>
 			/> 
 		</td>
 	</tr>
@@ -136,16 +139,8 @@ function mnd_em_loc_checkboxset($checkbox_array, $post_array_name, $id_prefix, $
 				name="<?php echo $post_array_name; ?>" 
 				id="<?php echo $id_prefix.$mnd_checkbox_id; ?>"
 				value="<?php echo $mnd_checkbox; ?>" 
-				<?php 
-				if( $editing && in_array($mnd_checkbox, $EM_Location->mndzeug[$mndzeug_key]) )
-				{
-					?> checked <?php 
-				}
-				if( !$cur_user_can )
-				{
-					?> disabled <?php 
-				}
-				?>
+				<?php if( $editing && in_array($mnd_checkbox, $EM_Location->mndzeug[$mndzeug_key]) ) { ?> checked <?php	} ?>
+				<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
 			/> 
 			
 		<label for="<?php echo $id_prefix.$mnd_checkbox_id; ?>">
