@@ -5,10 +5,10 @@ Plugin URI: https://www.shakuras.me
 Description: Bitte die Bedienungsanleitung beachten (unter Events->Anderbox). Dieses Plugin erweitert die Funktionalität des Events Manager Plugins um Orttypen. 
 Author: Alexander Schmidt
 Author URI: https://www.shakuras.me
-Version: 0.8.9
+Version: 0.8.10
 */
 
-define('MND_VERSION', 0.0809); 
+define('MND_VERSION', 0.0810); 
 /*
 versionsnummern sind a.b.c
 a = erfüllt alle aktuellen anforderungen
@@ -227,6 +227,10 @@ add_filter('em_ms_globals', 'mnd_em_ms_globals', 10, 1);
 	--------------
 	informationen:
 	--------------
+	- um die Funktionsweise dieses Plugins zu verstehen, muss man sich mit Wordpress-Pluginerstellung vertraut machen
+	  speziell filter verstehen ist wichtig
+	- das Plugin hält sich nur an die internen Prozesse von EventsManager und 'filtert' (= fügt dort hinzu) 
+	  man muss sich die stellen im EventsManager anschauen, in denen jeweils die funktionen 'eingehakt' wurden
 	- das Fehlen von POST daten ist kaum irgendwo bedacht und macht vielleicht irgendwann in einer situation probleme,
 	  zur zeit sollte es aber nichts ausmachen (solange der programmiermensch nichts falsch macht...)
 	- es ist egal, dass event manager meta und location meta im selben EM_META_TABLE gespeichert wird,
@@ -237,30 +241,27 @@ add_filter('em_ms_globals', 'mnd_em_ms_globals', 10, 1);
 	------------------------------------
 	- abrufbare option in mnd_em_init() anlegen 				=> repaircafe erledigt
 	- optionen in uninstall.php mitnehmen						=> repaircafe erledigt
-	- mnd_em_ms_globals optionen für multisite bereitstellen  => repaircafe erledigt
-	- mnd-em-location-forms.php die form elemente einsetzen   => repaircafe erledigt
+	- mnd_em_ms_globals optionen für multisite bereitstellen  	=> repaircafe erledigt
+	- mnd-em-location-forms.php die form elemente einsetzen   	=> repaircafe erledigt
 	- löschen meta_key abfrage hinzufügen						=> repaircafe erledigt
 	- laden meta_key abfrage hinzufügen							=> repaircafe erledigt
 	- speichern meta_key abfrage hinzufügen						=> repaircafe erledigt
-	- mnd_em_loc_placeholders shortcodes erweitern/hinzufügen => repaircafe erledigt
+	- mnd_em_loc_placeholders shortcodes erweitern/hinzufügen 	=> repaircafe erledigt
 	
 	----------------------------------
 	Arbeitsschritte neue Formularform:
 	----------------------------------
 	- in mnd_em_loc_metabox() die editierbarkeit durch eintrag des funktionsaufrufs ermöglichen	=> repaircafe erledigt
 	- in mnd_em_loc_frontend_form_input() das formular zum einsenden bereitstellen				=> repaircafe erledigt
-	- alle formularerweiterungsarbeitsschritte														=> repaircafe erledigt
+	- alle formularerweiterungsarbeitsschritte													=> repaircafe erledigt
 	
 	-----
 	todo:
 	-----
-	repaircafe formular div3_fokus_cb lädt nicht, aber wird eindeutig richtig gespeicher+gelöscht
-	
-	form-factory funktionen mit $required parameter erweitern und alle aufrufe anpassen (in 2-3 funktionen bereits geschehen)
 	
 	seite mit kommenden rückrufterminen => https://wp-events-plugin.com/tutorials/create-custom-event-information-pages/
 	
-	metadaten klasse mit table? macht das formular erweitern/laden/speichern 100mal besser
+	metadaten klasse mit table? macht das formular erweitern/laden/speichern sicher viel besser
 	
 	---------------------------------------------------
 	veraltete formularteile für aufräumfunktion später:
