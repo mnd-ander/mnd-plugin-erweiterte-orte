@@ -132,19 +132,18 @@ function mnd_em_loc_checkboxset($checkbox_array, $post_array_name, $id_prefix, $
 	global $EM_Location;
 	//cur_user_can zb current_user_can(edit-locations)
 	//post_array_name zb 'div1[]'
-	foreach( $checkbox_array as $mnd_checkbox_id => $mnd_checkbox )
+	foreach( $checkbox_array as $checkbox_id => $checkbox )
 	{
 		?>
 		<input 	type="checkbox" 
 				name="<?php echo $post_array_name; ?>" 
-				id="<?php echo $id_prefix.$mnd_checkbox_id; ?>"
-				value="<?php echo $mnd_checkbox; ?>" 
-				<?php if( $editing && in_array($mnd_checkbox, $EM_Location->mndzeug[$mndzeug_key]) ) { ?> checked <?php	} ?>
+				id="<?php echo $id_prefix.$checkbox_id; ?>"
+				value="<?php echo $checkbox; ?>" 
+				<?php if( $editing && in_array($checkbox, $EM_Location->mndzeug[$mndzeug_key]) ) { ?> checked <?php	} ?>
 				<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
-			/> 
-			
-		<label for="<?php echo $id_prefix.$mnd_checkbox_id; ?>">
-		<?php echo $mnd_checkbox; ?>
+			/>
+		<label for="<?php echo $id_prefix.$checkbox_id; ?>">
+		<?php echo $checkbox; ?>
 		</label>
 		
 		<br />
