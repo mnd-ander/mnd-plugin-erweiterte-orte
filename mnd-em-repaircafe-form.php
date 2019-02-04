@@ -1,5 +1,11 @@
+<script type="text/javascript">
+	function toggle_die_boxen()
+	{
+		
+	}
+</script>
 <?php
-
+ 
 
 function mnd_repairform($editing = false)
 {

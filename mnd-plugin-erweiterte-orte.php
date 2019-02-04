@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Events Manager - Ander Plugin
+Plugin Name: Events Manager - MND Erweiterte Orte
 Plugin URI: https://www.shakuras.me
 Description: Bitte die Bedienungsanleitung beachten (unter Events->Anderbox). Dieses Plugin erweitert die Funktionalität des Events Manager Plugins um Orttypen. 
 Author: Alexander Schmidt
