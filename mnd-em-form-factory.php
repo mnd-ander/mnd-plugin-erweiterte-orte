@@ -166,34 +166,15 @@ function mnd_em_loc_checkboxset_multiclick($checkbox_array, $post_array_name, $i
 		?>
 		<input 	type="checkbox" 
 				<?php if($i != 0) { ?> style="margin-left:35px" <?php } ?>
-				<?php if($i == 0) { ?> onClick="toggle_die_boxen(<?php echo $str_source; ?>, <?php echo json_encode($str_targets); ?>)" <?php } ?>
+				<?php if($i == 0) { ?> onClick="toggle_die_boxen('<?php echo($str_source); ?>', '<?php echo(json_encode($str_targets)); ?>)'" <?php } ?>
 				name="<?php echo $post_array_name; ?>" 
 				id="<?php echo $id_prefix.$i; ?>"
-				value="<?php echo $checkbox; ?>" 
-				<?php if( $editing && in_array($checkbox, $EM_Location->mndzeug[$mndzeug_key]) ) { ?> checked <?php	} ?>
+				value="<?php echo $checkbox_array[$i]; ?>" 
+				<?php if( $editing && in_array($checkbox_array[$i], $EM_Location->mndzeug[$mndzeug_key]) ) { ?> checked <?php	} ?>
 				<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
 			/>
 		<label for="<?php echo $id_prefix.$i; ?>">
-		<?php echo $checkbox; ?>
-		</label>
-		
-		<br />
-		<?php
-	}
-	
-	foreach( $checkbox_array as $checkbox_id => $checkbox )
-	{
-		?>
-		<input 	type="checkbox" 
-				style="margin-left:35px"
-				name="<?php echo $post_array_name; ?>" 
-				id="<?php echo $id_prefix.$checkbox_id; ?>"
-				value="<?php echo $checkbox; ?>" 
-				<?php if( $editing && in_array($checkbox, $EM_Location->mndzeug[$mndzeug_key]) ) { ?> checked <?php	} ?>
-				<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
-			/>
-		<label for="<?php echo $id_prefix.$checkbox_id; ?>">
-		<?php echo $checkbox; ?>
+		<?php echo $checkbox_array[$i]; ?>
 		</label>
 		
 		<br />
