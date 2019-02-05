@@ -175,16 +175,33 @@ function repaircafe_formularteile_anlegen()
 		"fokus_sonstiges"
 	);
 	update_option('repaircafe_div3_teile',$repaircafe_div3_teile);
-	$repaircafe_div3_fokus_cb = array
+		
+	$repaircafe_div3_fokus_cb1 = array
 	(
-		"Selbstständige Reparatur", 
-		"Elektronik Reparatur", "Handy Reparatur", "Computer Reparatur", "Tablet Reparatur",
-		"Mobilität", "Fahrrad Reparatur", "Roller Reparatur", "Auto Reparatur",
-		"Haushalts- & Küchengeräte", "Kaffeemaschine Reparatur", "Waschmaschine Reparatur", "Staubsauger Reparatur",
-		"Kreativität", "Selbst nähen", "Upcycling", "Downcycling", "Kunst", "Brainstorming",
+		"Selbstständige Reparatur"
+	);
+	update_option('repaircafe_div3_fokus_cb1',$repaircafe_div3_fokus_cb1);
+	$repaircafe_div3_fokus_cb2 = array
+	(
+		"Elektronik Reparatur", "Handy Reparatur", "Computer Reparatur", "Tablet Reparatur"
+	);
+	update_option('repaircafe_div3_fokus_cb2',$repaircafe_div3_fokus_cb2);
+	$repaircafe_div3_fokus_cb3 = array
+	(
+		"Mobilität", "Fahrrad Reparatur", "Roller Reparatur", "Auto Reparatur"
+	);
+	update_option('repaircafe_div3_fokus_cb3',$repaircafe_div3_fokus_cb3);
+	$repaircafe_div3_fokus_cb4 = array
+	(
+		"Kreativität", "Selbst nähen", "Upcycling", "Downcycling", "Kunst", "Brainstorming"
+	);
+	update_option('repaircafe_div3_fokus_cb4',$repaircafe_div3_fokus_cb4);
+	$repaircafe_div3_fokus_cb5 = array
+	(
 		"Coworking", "Connecting", "Recherche", "Selbstverwirklichung"
 	);
-	update_option('repaircafe_div3_fokus_cb',$repaircafe_div3_fokus_cb);
+	update_option('repaircafe_div3_fokus_cb5',$repaircafe_div3_fokus_cb5);
+	
 	$repaircafe_div4_teile = array
 	(
 		"rueckruftermin", "atmosphaere", "kommentar", "letzter_kontakt"

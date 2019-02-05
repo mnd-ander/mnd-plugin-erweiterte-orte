@@ -1,7 +1,11 @@
 <script type="text/javascript">
-	function toggle_die_boxen()
+	function toggle_die_boxen(source, targets)
 	{
-		
+		var target_state = (document.getElementById(source)).checked;
+		for(var checkbox in targets)
+		{
+			(document.getElementById(checkbox)).checked = target_state;
+		}
 	}
 </script>
 <?php
@@ -77,8 +81,20 @@ function mnd_repairform($editing = false)
 	</table>
 	<h4>Fokus</h4>
 	<?php
-	$repaircafe_div3_fokus_cb = (is_array(get_option('repaircafe_div3_fokus_cb'))) ? get_option('repaircafe_div3_fokus_cb'):array();
-	mnd_em_loc_checkboxset($repaircafe_div3_fokus_cb, 'div3_fokus_cb[]', 'fokusCB', 'div3_fokus_cb', $editing, true);
+	$repaircafe_div3_fokus_cb1 = (is_array(get_option('repaircafe_div3_fokus_cb1'))) ? get_option('repaircafe_div3_fokus_cb1'):array();
+	mnd_em_loc_checkboxset($repaircafe_div3_fokus_cb1, 'div3_fokus_cb[]', 'fokusCB1', 'div3_fokus_cb', $editing, true);
+	
+	$repaircafe_div3_fokus_cb2 = (is_array(get_option('repaircafe_div3_fokus_cb2'))) ? get_option('repaircafe_div3_fokus_cb2'):array();
+	mnd_em_loc_checkboxset_multiclick($repaircafe_div3_fokus_cb2, 'div3_fokus_cb[]', 'fokusCB2', 'div3_fokus_cb', $editing, true);
+	
+	$repaircafe_div3_fokus_cb3 = (is_array(get_option('repaircafe_div3_fokus_cb3'))) ? get_option('repaircafe_div3_fokus_cb3'):array();
+	mnd_em_loc_checkboxset_multiclick($repaircafe_div3_fokus_cb3, 'div3_fokus_cb[]', 'fokusCB3', 'div3_fokus_cb', $editing, true);
+	
+	$repaircafe_div3_fokus_cb4 = (is_array(get_option('repaircafe_div3_fokus_cb4'))) ? get_option('repaircafe_div3_fokus_cb4'):array();
+	mnd_em_loc_checkboxset_multiclick($repaircafe_div3_fokus_cb4, 'div3_fokus_cb[]', 'fokusCB4', 'div3_fokus_cb', $editing, true);
+	
+	$repaircafe_div3_fokus_cb5 = (is_array(get_option('repaircafe_div3_fokus_cb5'))) ? get_option('repaircafe_div3_fokus_cb5'):array();
+	mnd_em_loc_checkboxset_multiclick($repaircafe_div3_fokus_cb5, 'div3_fokus_cb[]', 'fokusCB5', 'div3_fokus_cb', $editing, true);
 	?>
 	<table class="em-location-data">
 	<?php
