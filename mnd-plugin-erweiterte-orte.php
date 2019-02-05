@@ -31,12 +31,22 @@ include('mnd-em-repaircafe-form.php');
 include('mnd-em-locationzeug.php');
 include('mnd-em-shortcodes.php');
 
-function multiclick_js_hinzu() 
-{
-    wp_enqueue_script( 'mnd-multiclick-js', plugins_url( '/mnd-multiclick.js', __FILE__ ));
+function my_header_scripts(){
+  ?>
+  <script type='text/javascript'>
+	function toggle_die_boxen(source, targets)
+	{
+		var source_checkbox = document.getElementById(source);
+		for(var i=0, n=targets.length; i < n; i++) 
+		{
+			var target_checkbox = document.getElementById(targets[i]);
+			target_checkbox.checked = source_checkbox.checked;
+		}
+	}
+  </script>
+  <?php
 }
-add_action('wp_enqueue_scripts','multiclick_js_hinzu');
-
+add_action( 'wp_head', 'my_header_scripts' );
 
 function mnd_em_init()
 {

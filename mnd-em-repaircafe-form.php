@@ -76,7 +76,7 @@ function mnd_repairform($editing = false)
 	
 	$repaircafe_div3_fokus_cb2 = (is_array(get_option('repaircafe_div3_fokus_cb2'))) ? get_option('repaircafe_div3_fokus_cb2'):array();
 	mnd_em_loc_checkboxset_multiclick($repaircafe_div3_fokus_cb2, 'div3_fokus_cb[]', 'fokusCB2', 'div3_fokus_cb', $editing, true);
-	
+		
 	$repaircafe_div3_fokus_cb3 = (is_array(get_option('repaircafe_div3_fokus_cb3'))) ? get_option('repaircafe_div3_fokus_cb3'):array();
 	mnd_em_loc_checkboxset_multiclick($repaircafe_div3_fokus_cb3, 'div3_fokus_cb[]', 'fokusCB3', 'div3_fokus_cb', $editing, true);
 	

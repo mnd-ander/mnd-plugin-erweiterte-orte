@@ -156,7 +156,7 @@ function mnd_em_loc_checkboxset_multiclick($checkbox_array, $post_array_name, $i
 	
 	$str_source = $id_prefix."0";
 	$str_targets = array();
-	for($i = 0; $i < count($checkbox_array); $i++)
+	for($i = 1; $i < count($checkbox_array); $i++)
 	{
 		$str_targets[] = $id_prefix.$i;
 	}
@@ -166,7 +166,7 @@ function mnd_em_loc_checkboxset_multiclick($checkbox_array, $post_array_name, $i
 		?>
 		<input 	type='checkbox' 
 				<?php if($i != 0) { ?> style='margin-left:35px' <?php } ?>
-				<?php if($i == 0) { ?> onClick='toggle_die_boxen(<?php echo($str_source); ?>, <?php echo(json_encode($str_targets)); ?>)' <?php } ?>
+				<?php if($i == 0) { ?> onClick='toggle_die_boxen("<?php echo($str_source); ?>", <?php echo(json_encode($str_targets)); ?>)' <?php } ?>
 				name="<?php echo $post_array_name; ?>" 
 				id="<?php echo $id_prefix.$i; ?>"
 				value="<?php echo $checkbox_array[$i]; ?>" 
