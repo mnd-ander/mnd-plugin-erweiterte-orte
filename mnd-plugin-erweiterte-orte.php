@@ -31,6 +31,12 @@ include('mnd-em-repaircafe-form.php');
 include('mnd-em-locationzeug.php');
 include('mnd-em-shortcodes.php');
 
+function multiclick_js_hinzu() 
+{
+    wp_enqueue_script( 'mnd-multiclick-js', plugins_url( '/mnd-multiclick.js', __FILE__ ));
+}
+add_action('wp_enqueue_scripts','multiclick_js_hinzu');
+
 
 function mnd_em_init()
 {

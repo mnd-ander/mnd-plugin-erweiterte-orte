@@ -164,13 +164,13 @@ function mnd_em_loc_checkboxset_multiclick($checkbox_array, $post_array_name, $i
 	for($i = 0; $i < count($checkbox_array); $i++)
 	{
 		?>
-		<input 	type="checkbox" 
-				<?php if($i != 0) { ?> style="margin-left:35px" <?php } ?>
-				<?php if($i == 0) { ?> onClick="toggle_die_boxen('<?php echo($str_source); ?>', '<?php echo(json_encode($str_targets)); ?>)'" <?php } ?>
+		<input 	type='checkbox' 
+				<?php if($i != 0) { ?> style='margin-left:35px' <?php } ?>
+				<?php if($i == 0) { ?> onClick='toggle_die_boxen(<?php echo($str_source); ?>, <?php echo(json_encode($str_targets)); ?>)' <?php } ?>
 				name="<?php echo $post_array_name; ?>" 
 				id="<?php echo $id_prefix.$i; ?>"
 				value="<?php echo $checkbox_array[$i]; ?>" 
-				<?php if( $editing && in_array($checkbox_array[$i], $EM_Location->mndzeug[$mndzeug_key]) ) { ?> checked <?php	} ?>
+				<?php if( $editing && in_array($checkbox_array[$i], $EM_Location->mndzeug[$mndzeug_key]) ) { ?> checked <?php } ?>
 				<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
 			/>
 		<label for="<?php echo $id_prefix.$i; ?>">
