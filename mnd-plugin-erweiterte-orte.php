@@ -5,10 +5,10 @@ Plugin URI: https://www.shakuras.me
 Description: Bitte die Bedienungsanleitung beachten (unter Events->Anderbox). Dieses Plugin erweitert die Funktionalität des Events Manager Plugins um Orttypen. 
 Author: Alexander Schmidt
 Author URI: https://www.shakuras.me
-Version: 0.8.10
+Version: 0.8.11
 */
 
-define('MND_VERSION', 0.0810); 
+define('MND_VERSION', 0.0811); 
 /*
 versionsnummern sind a.b.c
 a = erfüllt alle aktuellen anforderungen
@@ -31,22 +31,11 @@ include('mnd-em-repaircafe-form.php');
 include('mnd-em-locationzeug.php');
 include('mnd-em-shortcodes.php');
 
-function my_header_scripts(){
-  ?>
-  <script type='text/javascript'>
-	function toggle_die_boxen(source, targets)
-	{
-		var source_checkbox = document.getElementById(source);
-		for(var i=0, n=targets.length; i < n; i++) 
-		{
-			var target_checkbox = document.getElementById(targets[i]);
-			target_checkbox.checked = source_checkbox.checked;
-		}
-	}
-  </script>
-  <?php
+function mnd_js_init() 
+{
+    wp_enqueue_script( 'mnd-forms-js', plugins_url( '/js/mnd_forms.js', __FILE__ ));
 }
-add_action( 'wp_head', 'my_header_scripts' );
+add_action('wp_enqueue_scripts','mnd_js_init');
 
 function mnd_em_init()
 {
@@ -174,7 +163,8 @@ function repaircafe_formularteile_anlegen()
 	update_option('repaircafe_div1_radio',$repaircafe_div1_radio);
 	$repaircafe_div1_teile = array
 	(
-		//vorsicht: oeffnungstage wird extra behandelt, dafür gibts mnd_em_loc_oeffnungstage_checkboxset()
+		//vorsicht: oeffnungstage wäre teil hiervon, wird aber extra behandelt 
+		//  		-> dafür gibts mnd_em_loc_oeffnungstage_checkboxset()
 		"telefon", "email", "website", "oeffnungszeiten", "andere_oeffnungstage", "ansprechpartner", "cafevorhanden"
 	);
 	update_option('repaircafe_div1_teile',$repaircafe_div1_teile);
@@ -299,7 +289,7 @@ add_filter('em_ms_globals', 'mnd_em_ms_globals', 10, 1);
 	---------------------------------------------------
 	veraltete formularteile für aufräumfunktion später:
 	---------------------------------------------------
-	- pitch (handel_div4_teile) ändern zu: kommentar
+	- 'pitch' (handel_div4_teile) ändern zu: 'kommentar'
 */
 
 ?>
