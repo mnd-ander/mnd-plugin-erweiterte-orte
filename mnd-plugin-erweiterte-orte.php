@@ -5,10 +5,10 @@ Plugin URI: https://www.shakuras.me
 Description: Bitte die Bedienungsanleitung beachten (unter Events->Anderbox). Dieses Plugin erweitert die Funktionalität des Events Manager Plugins um Orttypen. 
 Author: Alexander Schmidt
 Author URI: https://www.shakuras.me
-Version: 0.8.11
+Version: 0.8.12
 */
 
-define('MND_VERSION', 0.0811); 
+define('MND_VERSION', 0.0812); 
 /*
 versionsnummern sind a.b.c
 a = erfüllt alle aktuellen anforderungen
@@ -111,7 +111,6 @@ function lernort_formularteile_anlegen()
 	(
 		"unterstuetzung", "anmeldung", "gruppengr_von", "gruppengr_bis",
 		"lernraum", "anmerkungen", "ansprechpartner", "ansprechpartner_nr", "raumverwaltung",
-		"gemeinnutzseminar_radio", "gemeinnutzseminar_gr_von", "gemeinnutzseminar_gr_bis", "gemeinnutzseminar_beding",
 		"andereseminar_radio", "andereseminar_gr_von", "andereseminar_gr_bis", "andereseminar_preis", "andereseminar_beding"
 	);
 	update_option('lernort_div3_teile',$lernort_div3_teile);
@@ -262,14 +261,14 @@ add_filter('em_ms_globals', 'mnd_em_ms_globals', 10, 1);
 	------------------------------------
 	Arbeitsschritte Formularerweiterung:
 	------------------------------------
-	- abrufbare option in mnd_em_init() anlegen 				=> repaircafe erledigt
-	- optionen in uninstall.php mitnehmen						=> repaircafe erledigt
-	- mnd_em_ms_globals optionen für multisite bereitstellen  	=> repaircafe erledigt
-	- mnd-em-location-forms.php die form elemente einsetzen   	=> repaircafe erledigt
-	- löschen meta_key abfrage hinzufügen						=> repaircafe erledigt
-	- laden meta_key abfrage hinzufügen							=> repaircafe erledigt
-	- speichern meta_key abfrage hinzufügen						=> repaircafe erledigt
-	- mnd_em_loc_placeholders shortcodes erweitern/hinzufügen 	=> repaircafe erledigt
+	- abrufbare option in mnd_em_init() anlegen 				=> seminar erledigt
+	- optionen in uninstall.php mitnehmen						=> seminar erledigt
+	- mnd_em_ms_globals optionen für multisite bereitstellen  	=> seminar erledigt
+	- mnd-em-location-forms.php die form elemente einsetzen   	=> seminar erledigt
+	- löschen meta_key abfrage hinzufügen						=> seminar erledigt
+	- laden meta_key abfrage hinzufügen							=> seminar erledigt
+	- speichern meta_key abfrage hinzufügen						=> seminar erledigt
+	- mnd_em_loc_placeholders shortcodes erweitern/hinzufügen 	=> seminar erledigt
 	
 	----------------------------------
 	Arbeitsschritte neue Formularform:

@@ -322,7 +322,12 @@ function mnd_em_loc_load($EM_Location)
 		$db_ergebnis = $wpdb->get_col($sql, 0);
 		
 		///vergleich mit den eingestellten checkboxen, damit kein murks angezeigt wird
-		$repaircafe_div3_fokus_cb = (is_array(get_option('repaircafe_div3_fokus_cb'))) ? get_option('repaircafe_div3_fokus_cb'):array();
+		$repaircafe_div3_fokus_cb1 = (is_array(get_option('repaircafe_div3_fokus_cb1'))) ? get_option('repaircafe_div3_fokus_cb1'):array();
+		$repaircafe_div3_fokus_cb2 = (is_array(get_option('repaircafe_div3_fokus_cb2'))) ? get_option('repaircafe_div3_fokus_cb2'):array();
+		$repaircafe_div3_fokus_cb3 = (is_array(get_option('repaircafe_div3_fokus_cb3'))) ? get_option('repaircafe_div3_fokus_cb3'):array();
+		$repaircafe_div3_fokus_cb4 = (is_array(get_option('repaircafe_div3_fokus_cb4'))) ? get_option('repaircafe_div3_fokus_cb4'):array();
+		$repaircafe_div3_fokus_cb5 = (is_array(get_option('repaircafe_div3_fokus_cb5'))) ? get_option('repaircafe_div3_fokus_cb5'):array();
+		$repaircafe_div3_fokus_cb = array_merge($repaircafe_div3_fokus_cb1, $repaircafe_div3_fokus_cb2, $repaircafe_div3_fokus_cb3, $repaircafe_div3_fokus_cb4, $repaircafe_div3_fokus_cb5);
 		
 		$mndzeug['div3_fokus_cb'] = array();
 		foreach($db_ergebnis as $meta_entry)
@@ -601,7 +606,12 @@ function mnd_em_loc_save($result,$EM_Location)
 				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
 			}
 			//div3_fokus_cb
-			$repaircafe_div3_fokus_cb = (is_array(get_option('repaircafe_div3_fokus_cb'))) ? get_option('repaircafe_div3_fokus_cb'):array();
+			$repaircafe_div3_fokus_cb1 = (is_array(get_option('repaircafe_div3_fokus_cb1'))) ? get_option('repaircafe_div3_fokus_cb1'):array();
+			$repaircafe_div3_fokus_cb2 = (is_array(get_option('repaircafe_div3_fokus_cb2'))) ? get_option('repaircafe_div3_fokus_cb2'):array();
+			$repaircafe_div3_fokus_cb3 = (is_array(get_option('repaircafe_div3_fokus_cb3'))) ? get_option('repaircafe_div3_fokus_cb3'):array();
+			$repaircafe_div3_fokus_cb4 = (is_array(get_option('repaircafe_div3_fokus_cb4'))) ? get_option('repaircafe_div3_fokus_cb4'):array();
+			$repaircafe_div3_fokus_cb5 = (is_array(get_option('repaircafe_div3_fokus_cb5'))) ? get_option('repaircafe_div3_fokus_cb5'):array();
+			$repaircafe_div3_fokus_cb = array_merge($repaircafe_div3_fokus_cb1, $repaircafe_div3_fokus_cb2, $repaircafe_div3_fokus_cb3, $repaircafe_div3_fokus_cb4, $repaircafe_div3_fokus_cb5);
 			if(isset($_POST['div3_fokus_cb']))
 			{
 				foreach( $_POST['div3_fokus_cb'] as $checkbox_name )

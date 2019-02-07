@@ -84,28 +84,6 @@ function mnd_lernortform($editing = false)
 		?>
 		<tr><th>&nbsp;</th><td>&nbsp;</td></tr><!-- linebreak tabellenzeile der einfachheit halber -->
 		<?php
-		//gemeinnutz Seminare
-		mnd_em_loc_radioset_tr('Seminarraum zur Verfügung für gemeinnützige Seminare?', array('Ja','Nein'), 1, 'gemeinnutzseminar_radio', 'gemeinnutzseminar_radio', $editing, true, false);
-		?>
-		<tr class="em-location-data-address">
-			<th>Gruppengröße</th><!-- Gruppengr gemeinnutz seminare  -->
-			<td>
-				<label for="gemeinnutzseminar_gr_von">von</label>
-				<input type="number" name="gemeinnutzseminar_gr_von" id="gemeinnutzseminar_gr_von" min="1" 
-					<?php if($editing) { ?> value="<?php echo $EM_Location->mndzeug['gemeinnutzseminar_gr_von']; ?>" <?php } ?>
-					/>
-				<br/>
-				<label for="gemeinnutzseminar_gr_bis">bis</label>
-				<input type="number" name="gemeinnutzseminar_gr_bis" id="gemeinnutzseminar_gr_bis" min="1" 
-					<?php if($editing) { ?> value="<?php echo $EM_Location->mndzeug['gemeinnutzseminar_gr_bis']; ?>" <?php } ?>
-					/> 
-			</td>
-		</tr>
-		<?php
-		mnd_em_loc_textfeld_tr('Bedingungen', 'gemeinnutzseminar_beding', 'gemeinnutzseminar_beding', $editing, true, false);
-		?>
-		<tr><th>&nbsp;</th><td>&nbsp;</td></tr><!-- linebreak tabellenzeile der einfachheit halber -->
-		<?php
 		//andere Seminare
 		mnd_em_loc_radioset_tr('Seminarraum zur Verfügung für andere Seminare?', array('Ja','Nein'), 1, 'andereseminar_radio', 'andereseminar_radio', $editing, true, false);
 		?>

@@ -110,10 +110,6 @@ function mnd_em_loc_placeholders($replace, $EM_Location, $result)
 				$replaceparts[] = "<strong>Rückrufnummer:</strong> ".$EM_Location->mndzeug['ansprechpartner_nr'];
 				$replaceparts[] = "<strong>Raum wird verwaltet durch:</strong> ".$EM_Location->mndzeug['raumverwaltung'];
 				$replaceparts[] = " ";
-				$replaceparts[] = "<strong>Raum für gemmeinnützige Seminare:</strong> ".$EM_Location->mndzeug['gemeinnutzseminar_radio'];
-				$replaceparts[] = "<strong>Gruppengröße:</strong> von ".$EM_Location->mndzeug['gemeinnutzseminar_gr_von']." bis ".$EM_Location->mndzeug['gemeinnutzseminar_gr_bis'];
-				$replaceparts[] = "<strong>Bedingungen:</strong> ".$EM_Location->mndzeug['gemeinnutzseminar_beding'];
-				$replaceparts[] = " ";
 				$replaceparts[] = "<strong>Raum für andere Seminare:</strong> ".$EM_Location->mndzeug['andereseminar_radio'];
 				$replaceparts[] = "<strong>Gruppengröße:</strong> von ".$EM_Location->mndzeug['andereseminar_gr_von']." bis ".$EM_Location->mndzeug['andereseminar_gr_bis'];
 				$replaceparts[] = "<strong>Preis pro Stunde:</strong> ".$EM_Location->mndzeug['andereseminar_preis'];

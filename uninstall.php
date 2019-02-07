@@ -38,12 +38,27 @@ if(get_option('mnd_em_version') <= 0.0810)
 	delete_option('ander_em_version');	
 	delete_option('handel_div4_checkboxes');
 	delete_option('repaircafe_div3_fokus_cb');
-	
+}
+
+/* von lerntort_div3 entfernt in 0.0812
+"gemeinnutzseminar_radio", "gemeinnutzseminar_gr_von", "gemeinnutzseminar_gr_bis", "gemeinnutzseminar_beding"
+*/
+if(get_option('mnd_em_version') <= 0.0812)
+{
+	$veraltete_metakeys = array
+	(
+		"gemeinnutzseminar_radio", "gemeinnutzseminar_gr_von", "gemeinnutzseminar_gr_bis", "gemeinnutzseminar_beding"
+	);
+	$zu_loeschende_keys = "meta_key='gemeinnutzseminar_radio'";
+	foreach($veraltete_metakeys as $alter_key)
+	{
+		$zu_loeschende_keys = $zu_loeschende_keys." OR meta_key='".$alter_key."' ";
+	}
+	$wpdb->query("DELETE FROM ".EM_META_TABLE
+				." WHERE ".$zu_loeschende_keys;
 }
 
 //versionsnummer als letztes gelöscht, damit vielleicht mal veraltete optionen nur bei alten versionen gelöscht werden
 delete_option('mnd_em_version');	
-
-
 
 ?>
