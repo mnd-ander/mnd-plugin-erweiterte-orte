@@ -17,18 +17,72 @@ c = iterationen von b
 a,b,c können/sollen/dürfen 2-stellig sein
 */
 
+/*
+	--------------
+	informationen:
+	--------------
+	- um die Funktionsweise dieses Plugins zu verstehen, muss man sich mit Wordpress-Pluginerstellung vertraut machen
+	  speziell filter verstehen ist wichtig
+	- das Plugin hält sich nur an die internen Prozesse von EventsManager und 'filtert' (= fügt dort hinzu) 
+	  man muss sich die stellen im EventsManager anschauen, in denen jeweils die funktionen 'eingehakt' wurden
+	- das Fehlen von POST daten ist kaum irgendwo bedacht und macht vielleicht irgendwann in einer situation probleme,
+	  zur zeit sollte es aber nichts ausmachen (solange der programmiermensch nichts falsch macht...)
+	- es ist egal, dass event manager meta und location meta im selben EM_META_TABLE gespeichert wird,
+	  denn beim laden eines ortes/events werden nur die von uns im code eingestellten attribute gelesen/bearbeitet
+	
+	------------------------------------
+	Arbeitsschritte Formularerweiterung:
+	------------------------------------
+	- abrufbare option in mnd_em_init() anlegen 				=> seminar erledigt
+	- optionen in uninstall.php mitnehmen						=> seminar erledigt
+	- mnd_em_ms_globals optionen für multisite bereitstellen  	=> seminar erledigt
+	- mnd-em-location-forms.php die form elemente einsetzen   	=> seminar erledigt
+	- löschen meta_key abfrage hinzufügen						=> seminar erledigt
+	- laden meta_key abfrage hinzufügen							=> seminar erledigt
+	- speichern meta_key abfrage hinzufügen						=> seminar erledigt
+	- mnd_em_loc_placeholders shortcodes erweitern/hinzufügen 	=> seminar erledigt
+	
+	----------------------------------
+	Arbeitsschritte neue Formularform:
+	----------------------------------
+	- in mnd_em_loc_metabox() die editierbarkeit durch eintrag des funktionsaufrufs ermöglichen	=> repaircafe erledigt
+	- in mnd_em_loc_frontend_form_input() das formular zum einsenden bereitstellen				=> repaircafe erledigt
+	- alle formularerweiterungsarbeitsschritte													=> repaircafe erledigt
+	
+	-----
+	todo:
+	-----
+	
+	seite mit kommenden rückrufterminen => https://wp-events-plugin.com/tutorials/create-custom-event-information-pages/
+	
+	metadaten klasse mit table? macht das formular erweitern/laden/speichern sicher viel besser
+	
+	---------------------------------------------------
+	veraltete formularteile für aufräumfunktion später:
+	---------------------------------------------------
+	- 'pitch' (handel_div4_teile) ändern zu: 'kommentar'
+*/
+
 //wenn nutzer nur edit_locations rechte hat, können orte eingereicht werden, aber sie müssen noch bestätigt werden
 define('MND_TEST_RECHTE', 'edit_locations');
 
+//das adminmenü im dashboard mit der bedienungsanleitung
 include('mnd-em-admin.php');
 
-include('mnd-em-form-factory.php');
+//auswahllogik damit das richtige formular erscheint
 include('mnd-em-location-forms.php');
+
+//formular-bausteine
+include('mnd-em-form-factory.php');
+//die einzelnen formulare
 include('mnd-em-handelsort-form.php');
 include('mnd-em-lernort-form.php');
 include('mnd-em-repaircafe-form.php');
 
+//die laden/speichern/löschen filter-funktionen
 include('mnd-em-locationzeug.php');
+
+//shortcodes
 include('mnd-em-shortcodes.php');
 
 function mnd_js_init() 
@@ -245,50 +299,6 @@ function mnd_em_ms_globals( $globals )
 	return $globals;
 }
 add_filter('em_ms_globals', 'mnd_em_ms_globals', 10, 1);
-/*
-	--------------
-	informationen:
-	--------------
-	- um die Funktionsweise dieses Plugins zu verstehen, muss man sich mit Wordpress-Pluginerstellung vertraut machen
-	  speziell filter verstehen ist wichtig
-	- das Plugin hält sich nur an die internen Prozesse von EventsManager und 'filtert' (= fügt dort hinzu) 
-	  man muss sich die stellen im EventsManager anschauen, in denen jeweils die funktionen 'eingehakt' wurden
-	- das Fehlen von POST daten ist kaum irgendwo bedacht und macht vielleicht irgendwann in einer situation probleme,
-	  zur zeit sollte es aber nichts ausmachen (solange der programmiermensch nichts falsch macht...)
-	- es ist egal, dass event manager meta und location meta im selben EM_META_TABLE gespeichert wird,
-	  denn beim laden eines ortes/events werden nur die von uns im code eingestellten attribute gelesen/bearbeitet
-	
-	------------------------------------
-	Arbeitsschritte Formularerweiterung:
-	------------------------------------
-	- abrufbare option in mnd_em_init() anlegen 				=> seminar erledigt
-	- optionen in uninstall.php mitnehmen						=> seminar erledigt
-	- mnd_em_ms_globals optionen für multisite bereitstellen  	=> seminar erledigt
-	- mnd-em-location-forms.php die form elemente einsetzen   	=> seminar erledigt
-	- löschen meta_key abfrage hinzufügen						=> seminar erledigt
-	- laden meta_key abfrage hinzufügen							=> seminar erledigt
-	- speichern meta_key abfrage hinzufügen						=> seminar erledigt
-	- mnd_em_loc_placeholders shortcodes erweitern/hinzufügen 	=> seminar erledigt
-	
-	----------------------------------
-	Arbeitsschritte neue Formularform:
-	----------------------------------
-	- in mnd_em_loc_metabox() die editierbarkeit durch eintrag des funktionsaufrufs ermöglichen	=> repaircafe erledigt
-	- in mnd_em_loc_frontend_form_input() das formular zum einsenden bereitstellen				=> repaircafe erledigt
-	- alle formularerweiterungsarbeitsschritte													=> repaircafe erledigt
-	
-	-----
-	todo:
-	-----
-	
-	seite mit kommenden rückrufterminen => https://wp-events-plugin.com/tutorials/create-custom-event-information-pages/
-	
-	metadaten klasse mit table? macht das formular erweitern/laden/speichern sicher viel besser
-	
-	---------------------------------------------------
-	veraltete formularteile für aufräumfunktion später:
-	---------------------------------------------------
-	- 'pitch' (handel_div4_teile) ändern zu: 'kommentar'
-*/
+
 
 ?>
