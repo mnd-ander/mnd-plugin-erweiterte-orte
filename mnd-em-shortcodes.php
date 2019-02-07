@@ -253,15 +253,19 @@ add_filter('em_location_output_placeholder','mnd_em_loc_placeholders',1,3);
 
 
 
-/* print content of enclosing shortcode if user is of role attribute */
-/*
-[user_role role="administrator"]
-You can see this text if you are an administrator.
-[/user_role]
-[user_role role="subscriber"]
-You can read this if you are a common subscriber.
-[/user_role]
-Anyone can read this text.
+/* 
+print content of enclosing shortcode if user is of role attribute 
+
+beispiel:
+	[user_role role="administrator"]
+	You can see this text if you are an administrator.
+	[/user_role]
+	
+	[user_role role="subscriber"]
+	You can read this if you are a common subscriber.
+	[/user_role]
+	
+	Anyone can read this text.
 */
 function check_user_role( $atts, $content = null ) 
 {
@@ -280,7 +284,7 @@ add_shortcode( 'user_role', 'check_user_role' );
 /*
 	ruft das location formular von em auf
 		[location_form "repaircafe"] (mit oder ohne anführungszeichen, ist egal)
-		funktioniert nur noch mit argument, um bedienungsfehler zu verringern
+	funktioniert nur noch mit einem argument, um bedienungsfehler zu verringern
 */
 function mnd_em_get_location_form_shortcode( $args = array() )
 {
@@ -299,16 +303,21 @@ function mnd_em_get_location_form_shortcode( $args = array() )
 }
 add_shortcode ( 'location_form', 'mnd_em_get_location_form_shortcode');
 
+/*
+in das gewöhnliche location form von events manager 
+	wurde mit add_action 'MNDPLATZHALTER' als eindeutiger orientierungspunkt eingefügt.
+diesen platzhalter nutzen wir nun, um die MND formularteile an der richtigen stelle einzufügen.
+*/
 function mnd_location_form_filter($string, $arg )
 {
-    $iposi = strpos($string, 'MNDPLATZHALTER'); //16zeichen
+    $iposi = strpos($string, 'MNDPLATZHALTER'); //14zeichen
 	
 	if($iposi === false)
 	{
 		return "FATAL ERROR - mnd plugin"
 				."<br>"."EM location-editor missing";
 	}
-	$komplettes_form = substr_replace($string, mnd_em_loc_frontend_form_input($arg), $iposi, 16); //hier die 16zeichen
+	$komplettes_form = substr_replace($string, mnd_em_loc_frontend_form_input($arg), $iposi, 14); //hier die 14zeichen
 	
 	return $komplettes_form;
 }

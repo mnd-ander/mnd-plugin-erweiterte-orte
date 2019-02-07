@@ -111,7 +111,7 @@ add_filter('init','mnd_em_init', 10);
 function allgemeine_formularteile_anlegen()
 {
 	/*
-	 * das hier soll noch in alle formulare eingefügt werden
+	 * das hier soll noch in alle formulare eingefügt werden, wie und wo ist noch nicht bekannt
 	 
 	$div3_allgemein_teile = array
 	(
