@@ -60,6 +60,61 @@ function mnd_repaircafe_placeholder_div1($EM_Location)
 	$replaceparts[] = implode(', ', $sortiment);
 	return implode('<br>', $replaceparts);
 }
+
+function mnd_handelsort_placeholder_div3($EM_Location)
+{
+	$replaceparts = array();
+	//div3 teile
+	$replaceparts[] = "<strong><u>Für Besucher:</u></strong>";
+	$replaceparts[] = "<strong>Unterstützung vor Ort:</strong> ".$EM_Location->mndzeug['unterstuetzung'];
+	$replaceparts[] = "<strong>Anmeldung erforderlich:</strong> ".$EM_Location->mndzeug['anmeldung'];
+	$replaceparts[] = "<strong>Gruppengröße:</strong> von ".$EM_Location->mndzeug['gruppengr_von']." bis ".$EM_Location->mndzeug['gruppengr_bis'];
+	$replaceparts[] = "<strong>Lernraumsituation:</strong> ".$EM_Location->mndzeug['lernraum'];
+	$replaceparts[] = "<strong>Café vorhanden:</strong> ".$EM_Location->mndzeug['cafevorhanden'];
+	$replaceparts[] = "<strong>Anmerkungen:</strong> ".$EM_Location->mndzeug['anmerkungen'];
+	return implode('<br>', $replaceparts);
+}
+function mnd_lernort_placeholder_div3($EM_Location)
+{
+	$replaceparts = array();
+	//div3 einzelstücke
+	$replaceparts[] = "<strong><u>Weitere Informationen:</u></strong>";
+	$replaceparts[] = "<strong>Unterstützung vor Ort:</strong> ".$EM_Location->mndzeug['unterstuetzung'];
+	$replaceparts[] = "<strong>Anmeldung erforderlich:</strong> ".$EM_Location->mndzeug['anmeldung'];
+	$replaceparts[] = "<strong>Gruppengröße:</strong> von ".$EM_Location->mndzeug['gruppengr_von']." bis ".$EM_Location->mndzeug['gruppengr_bis'];
+	$replaceparts[] = "<strong>Lernraumsituation:</strong> ".$EM_Location->mndzeug['lernraum'];
+	$replaceparts[] = "<strong>Anmerkungen:</strong> ".$EM_Location->mndzeug['anmerkungen'];
+	$replaceparts[] = "<strong>Ansprechpartner Rückruf:</strong> ".$EM_Location->mndzeug['ansprechpartner'];
+	$replaceparts[] = "<strong>Rückrufnummer:</strong> ".$EM_Location->mndzeug['ansprechpartner_nr'];
+	$replaceparts[] = "<strong>Raum wird verwaltet durch:</strong> ".$EM_Location->mndzeug['raumverwaltung'];
+	$replaceparts[] = " ";
+	$replaceparts[] = "<strong>Raum für andere Seminare:</strong> ".$EM_Location->mndzeug['andereseminar_radio'];
+	$replaceparts[] = "<strong>Gruppengröße:</strong> von ".$EM_Location->mndzeug['andereseminar_gr_von']." bis ".$EM_Location->mndzeug['andereseminar_gr_bis'];
+	$replaceparts[] = "<strong>Preis pro Stunde:</strong> ".$EM_Location->mndzeug['andereseminar_preis'];
+	$replaceparts[] = "<strong>Bedingungen:</strong> ".$EM_Location->mndzeug['andereseminar_beding'];
+	return implode('<br>', $replaceparts);
+}
+
+function mnd_repaircafe_placeholder_div3($EM_Location)
+{
+	$replaceparts = array();
+	//div3 einzelstücke
+	$replaceparts[] = "<strong><u>Weitere Informationen:</u></strong>";
+	$replaceparts[] = "<strong>Unterstützung vor Ort:</strong> ".$EM_Location->mndzeug['unterstuetzung'];
+	$replaceparts[] = "<strong>Anmeldung erforderlich:</strong> ".$EM_Location->mndzeug['anmeldung'];
+	$replaceparts[] = "<strong>Gruppengröße:</strong> von ".$EM_Location->mndzeug['gruppengr_von']." bis ".$EM_Location->mndzeug['gruppengr_bis'];
+	//div3_fokus
+	$replaceparts[] = "<strong>Fokus:</strong>";
+	$sortiment = array();
+	foreach($EM_Location->mndzeug['div3_fokus_cb'] as $sortimentti)
+	{
+		$sortiment[] = $sortimentti;
+	}
+	$replaceparts[] = implode('<br>', $sortiment);
+	//fokus_sonstig
+	$replaceparts[] = "<strong>Sonstiger Fokus:</strong> ".$EM_Location->mndzeug['fokus_sonstiges'];
+	return implode('<br>', $replaceparts);
+}
 /**
  * wenn events manager nach placeholdern schaut, wird dieser filter angewandt, 
  *    um die mnd-placeholder mit dem entsprechenden inhalt zu ersetzen
@@ -102,56 +157,18 @@ function mnd_em_loc_placeholders($replace, $EM_Location, $result)
 		}
 		elseif( $result == '#_MNDDIV3' )
 		{
-			$replaceparts = array();
 			if($EM_Location->mndzeug['formular_art'] == "handelsort")
 			{
-				//div3 teile
-				$replaceparts[] = "<strong><u>Für Besucher:</u></strong>";
-				$replaceparts[] = "<strong>Unterstützung vor Ort:</strong> ".$EM_Location->mndzeug['unterstuetzung'];
-				$replaceparts[] = "<strong>Anmeldung erforderlich:</strong> ".$EM_Location->mndzeug['anmeldung'];
-				$replaceparts[] = "<strong>Gruppengröße:</strong> von ".$EM_Location->mndzeug['gruppengr_von']." bis ".$EM_Location->mndzeug['gruppengr_bis'];
-				$replaceparts[] = "<strong>Lernraumsituation:</strong> ".$EM_Location->mndzeug['lernraum'];
-				$replaceparts[] = "<strong>Café vorhanden:</strong> ".$EM_Location->mndzeug['cafevorhanden'];
-				$replaceparts[] = "<strong>Anmerkungen:</strong> ".$EM_Location->mndzeug['anmerkungen'];
+				return mnd_handelsort_placeholder_div3($EM_Location);
 			}
 			elseif($EM_Location->mndzeug['formular_art'] == "lernort")
 			{
-				//div3 einzelstücke
-				$replaceparts[] = "<strong><u>Weitere Informationen:</u></strong>";
-				$replaceparts[] = "<strong>Unterstützung vor Ort:</strong> ".$EM_Location->mndzeug['unterstuetzung'];
-				$replaceparts[] = "<strong>Anmeldung erforderlich:</strong> ".$EM_Location->mndzeug['anmeldung'];
-				$replaceparts[] = "<strong>Gruppengröße:</strong> von ".$EM_Location->mndzeug['gruppengr_von']." bis ".$EM_Location->mndzeug['gruppengr_bis'];
-				$replaceparts[] = "<strong>Lernraumsituation:</strong> ".$EM_Location->mndzeug['lernraum'];
-				$replaceparts[] = "<strong>Anmerkungen:</strong> ".$EM_Location->mndzeug['anmerkungen'];
-				$replaceparts[] = "<strong>Ansprechpartner Rückruf:</strong> ".$EM_Location->mndzeug['ansprechpartner'];
-				$replaceparts[] = "<strong>Rückrufnummer:</strong> ".$EM_Location->mndzeug['ansprechpartner_nr'];
-				$replaceparts[] = "<strong>Raum wird verwaltet durch:</strong> ".$EM_Location->mndzeug['raumverwaltung'];
-				$replaceparts[] = " ";
-				$replaceparts[] = "<strong>Raum für andere Seminare:</strong> ".$EM_Location->mndzeug['andereseminar_radio'];
-				$replaceparts[] = "<strong>Gruppengröße:</strong> von ".$EM_Location->mndzeug['andereseminar_gr_von']." bis ".$EM_Location->mndzeug['andereseminar_gr_bis'];
-				$replaceparts[] = "<strong>Preis pro Stunde:</strong> ".$EM_Location->mndzeug['andereseminar_preis'];
-				$replaceparts[] = "<strong>Bedingungen:</strong> ".$EM_Location->mndzeug['andereseminar_beding'];
+				return mnd_lernort_placeholder_div3($EM_Location);
 			}
 			elseif($EM_Location->mndzeug['formular_art'] == "repaircafe")
 			{
-				//div3 einzelstücke
-				$replaceparts[] = "<strong><u>Weitere Informationen:</u></strong>";
-				$replaceparts[] = "<strong>Unterstützung vor Ort:</strong> ".$EM_Location->mndzeug['unterstuetzung'];
-				$replaceparts[] = "<strong>Anmeldung erforderlich:</strong> ".$EM_Location->mndzeug['anmeldung'];
-				$replaceparts[] = "<strong>Gruppengröße:</strong> von ".$EM_Location->mndzeug['gruppengr_von']." bis ".$EM_Location->mndzeug['gruppengr_bis'];
-				//div3_fokus
-				$replaceparts[] = "<strong>Fokus:</strong>";
-				$sortiment = array();
-				foreach($EM_Location->mndzeug['div3_fokus_cb'] as $sortimentti)
-				{
-					$sortiment[] = $sortimentti;
-				}
-				$replaceparts[] = implode('<br>', $sortiment);
-				//fokus_sonstig
-				$replaceparts[] = "<strong>Sonstiger Fokus:</strong> ".$EM_Location->mndzeug['fokus_sonstiges'];
-				
+				return mnd_repaircafe_placeholder_div3($EM_Location);
 			}
-			$replace = implode('<br>', $replaceparts);
 		}
 		elseif( $result == '#_MNDDIV4' )
 		{
