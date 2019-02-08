@@ -1,8 +1,69 @@
 <?php
 
+function mnd_handelsort_placeholder_div1($EM_Location)
+{
+	$replaceparts = array();
+	$replaceparts[] = "<strong>Sortiment:</strong>";
+	$sortiment = array();
+	foreach($EM_Location->mndzeug['div1_checkboxes'] as $sortimentti)
+	{
+		$sortiment[] = $sortimentti;
+	}
+	$replaceparts[] = implode(', ', $sortiment);
+	return implode('<br>', $replaceparts);
+}
+function mnd_lernort_placeholder_div1($EM_Location)
+{
+	$replaceparts = array();
+	//div1 teile checkboxen
+	$replaceparts[] = "<strong>Inventar:</strong>";
+	$sortiment = array();
+	foreach($EM_Location->mndzeug['div1_checkboxes'] as $sortimentti)
+	{
+		$sortiment[] = $sortimentti;
+	}
+	$replaceparts[] = implode(', ', $sortiment);
+	//div1 einzelstücke
+	$replaceparts[] = "<strong>Catering:</strong> ".$EM_Location->mndzeug['catering_radio'];
+	$replaceparts[] = "<strong>Mehr dazu:</strong> ".$EM_Location->mndzeug['catering_text'];
+	$replaceparts[] = "<strong>Café vorhanden:</strong> ".$EM_Location->mndzeug['cafevorhanden'];
+	return implode('<br>', $replaceparts);
+}
+
+function mnd_repaircafe_placeholder_div1($EM_Location)
+{
+	$replaceparts = array();
+	//div1 einzelstücke
+	$replaceparts[] = "<strong>Telefon:</strong> ".$EM_Location->mndzeug['telefon'];
+	$replaceparts[] = "<strong>E-Mail:</strong> ".$EM_Location->mndzeug['email'];
+	$replaceparts[] = "<strong>Website:</strong> ".$EM_Location->mndzeug['website'];
+	$replaceparts[] = "<strong>Öffnungszeiten:</strong> ".$EM_Location->mndzeug['oeffnungszeiten'];
+	//div1 oeffnungstage
+	$replaceparts[] = "<strong>Öffnungstage:</strong>";
+	$sortiment = array();
+	foreach($EM_Location->mndzeug['oeffnungstage'] as $sortimentti)
+	{
+		$sortiment[] = $sortimentti;
+	}
+	$replaceparts[] = implode(', ', $sortiment);
+	//div1 einzelstücke fortsetzung
+	$replaceparts[] = "<strong>Andere Öffnungstage:</strong> ".$EM_Location->mndzeug['andere_oeffnungstage'];
+	$replaceparts[] = "<strong>Ansprechpartner/in:</strong> ".$EM_Location->mndzeug['ansprechpartner'];
+	$replaceparts[] = "<strong>Café vorhanden:</strong> ".$EM_Location->mndzeug['cafevorhanden'];
+	//div1 teile checkboxen
+	$replaceparts[] = "<strong>Ausstattung:</strong>";
+	$sortiment = array();
+	foreach($EM_Location->mndzeug['div1_checkboxes'] as $sortimentti)
+	{
+		$sortiment[] = $sortimentti;
+	}
+	$replaceparts[] = implode(', ', $sortiment);
+	return implode('<br>', $replaceparts);
+}
 /**
- * erstellt einen events manager placeholder zum einfügen auf location seiten und zeigt somit die metadaten eines ortes an
- *  
+ * wenn events manager nach placeholdern schaut, wird dieser filter angewandt, 
+ *    um die mnd-placeholder mit dem entsprechenden inhalt zu ersetzen
+ *
  * @param string $replace
  * @param EM_Location $EM_Location
  * @param string $result
@@ -14,74 +75,30 @@ function mnd_em_loc_placeholders($replace, $EM_Location, $result)
 	{
 		if( $result == '#_MNDTYP' )
 		{
-			$replace = ucfirst($EM_Location->mndzeug['formular_art']);
+			return ucfirst($EM_Location->mndzeug['formular_art']);
 		}
 		elseif( $result == '#_MNDUNTERTYP' )
 		{
-			$replace = ucfirst($EM_Location->mndzeug['div1_radio']);
+			return ucfirst($EM_Location->mndzeug['div1_radio']);
 		}
 		elseif( $result == '#_MNDUNTERTYPCSS' )
 		{
-			$replace = strtolower( $string = str_replace(' ', '', ($EM_Location->mndzeug['div1_radio'])) );
+			return strtolower( $string = str_replace(' ', '', ($EM_Location->mndzeug['div1_radio'])) );
 		}
 		elseif( $result == '#_MNDDIV1' )
 		{
-			$replaceparts = array();
 			if($EM_Location->mndzeug['formular_art'] == "handelsort")
 			{
-				//div1 teile checkboxen
-				$replaceparts[] = "<strong>Sortiment:</strong>";
-				$sortiment = array();
-				foreach($EM_Location->mndzeug['div1_checkboxes'] as $sortimentti)
-				{
-					$sortiment[] = $sortimentti;
-				}
-				$replaceparts[] = implode(', ', $sortiment);
+				return mnd_handelsort_placeholder_div1($EM_Location);
 			}
 			elseif($EM_Location->mndzeug['formular_art'] == "lernort")
 			{
-				//div1 teile checkboxen
-				$replaceparts[] = "<strong>Inventar:</strong>";
-				$sortiment = array();
-				foreach($EM_Location->mndzeug['div1_checkboxes'] as $sortimentti)
-				{
-					$sortiment[] = $sortimentti;
-				}
-				$replaceparts[] = implode(', ', $sortiment);
-				//div1 einzelstücke
-				$replaceparts[] = "<strong>Catering:</strong> ".$EM_Location->mndzeug['catering_radio'];
-				$replaceparts[] = "<strong>Mehr dazu:</strong> ".$EM_Location->mndzeug['catering_text'];
-				$replaceparts[] = "<strong>Café vorhanden:</strong> ".$EM_Location->mndzeug['cafevorhanden'];
+				return mnd_lernort_placeholder_div1($EM_Location);
 			}
 			elseif($EM_Location->mndzeug['formular_art'] == "repaircafe")
 			{
-				//div1 einzelstücke
-				$replaceparts[] = "<strong>Telefon:</strong> ".$EM_Location->mndzeug['telefon'];
-				$replaceparts[] = "<strong>E-Mail:</strong> ".$EM_Location->mndzeug['email'];
-				$replaceparts[] = "<strong>Website:</strong> ".$EM_Location->mndzeug['website'];
-				$replaceparts[] = "<strong>Öffnungszeiten:</strong> ".$EM_Location->mndzeug['oeffnungszeiten'];
-				//div1 oeffnungstage
-				$replaceparts[] = "<strong>Öffnungstage:</strong>";
-				$sortiment = array();
-				foreach($EM_Location->mndzeug['oeffnungstage'] as $sortimentti)
-				{
-					$sortiment[] = $sortimentti;
-				}
-				$replaceparts[] = implode(', ', $sortiment);
-				//div1 einzelstücke fortsetzung
-				$replaceparts[] = "<strong>Andere Öffnungstage:</strong> ".$EM_Location->mndzeug['andere_oeffnungstage'];
-				$replaceparts[] = "<strong>Ansprechpartner/in:</strong> ".$EM_Location->mndzeug['ansprechpartner'];
-				$replaceparts[] = "<strong>Café vorhanden:</strong> ".$EM_Location->mndzeug['cafevorhanden'];
-				//div1 teile checkboxen
-				$replaceparts[] = "<strong>Ausstattung:</strong>";
-				$sortiment = array();
-				foreach($EM_Location->mndzeug['div1_checkboxes'] as $sortimentti)
-				{
-					$sortiment[] = $sortimentti;
-				}
-				$replaceparts[] = implode(', ', $sortiment);
+				return mnd_repaircafe_placeholder_div1($EM_Location);
 			}
-			$replace = implode('<br>', $replaceparts);
 		}
 		elseif( $result == '#_MNDDIV3' )
 		{
