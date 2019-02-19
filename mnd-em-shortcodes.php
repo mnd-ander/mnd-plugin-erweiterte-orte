@@ -273,7 +273,7 @@ function mnd_em_loc_placeholders($replace, $EM_Location, $result)
 			{
 				if(isset($EM_Location->mndzeug['rueckruftermin']))
 				{
-					return str_replace('-', '/', ($EM_Location->mndzeug['rueckruftermin']));
+					return $EM_Location->mndzeug['rueckruftermin'];
 				}
 				else return "Kein Rückruftermin";
 			}
