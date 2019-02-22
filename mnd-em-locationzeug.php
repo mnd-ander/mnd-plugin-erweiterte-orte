@@ -425,14 +425,19 @@ function mnd_em_loc_save_queryteile_array_auffuellen_einzelteile( $option_name, 
 	}
 	return $ids_to_add;
 }
-function mnd_em_loc_save_queryteile_array_auffuellen_checkbox( $option_name, $ids_to_add = array() )
+function mnd_em_loc_save_queryteile_array_auffuellen_checkbox( $option_name, $post_name, $meta_key, $ids_to_add = array() )
 {
-	$div_teile = (is_array(get_option($option_name))) ? get_option($option_name):array();
-	foreach( $div_teile as $div_teil )
+	$div1_checkboxes = (is_array(get_option('handel_div1_checkboxes'))) ? get_option('handel_div1_checkboxes'):array();
+	if(isset($_POST[$post_name]))
 	{
-		$meta_value = $_POST[$div_teil];
-		$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
-		$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_value')";
+		foreach( $_POST[$post_name] as $checkbox_name )
+		{
+			if( in_array($checkbox_name, $div1_checkboxes, true) )
+			{
+				$ids_to_add[] = "({$EM_Location->location_id}, '$meta_key', '$checkbox_name')";
+				$EM_Location->mndzeug[$meta_key][] = $checkbox_name;
+			}
+		}
 	}
 	return $ids_to_add;
 }
@@ -471,25 +476,14 @@ function mnd_em_loc_save($result,$EM_Location)
 			$ids_to_add[] = "({$EM_Location->location_id}, 'formular_art', 'handelsort')";
 			
 			//div1
-			$div1_checkboxes = (is_array(get_option('handel_div1_checkboxes'))) ? get_option('handel_div1_checkboxes'):array();
+			$ids_to_add = mnd_em_loc_save_queryteile_array_auffuellen_checkbox( 'handel_div1_checkboxes', 'div1', 'div1_checkboxes', $ids_to_add);
+			
 			$div1_radio = (is_array(get_option('handel_div1_radio'))) ? get_option('handel_div1_radio'):array();
 			$chosen_radio = (isset($_POST['div1_radio'])) ? $_POST['div1_radio'] : null;
 			if( in_array($chosen_radio, $div1_radio, true) )
 			{
 				$ids_to_add[] = "({$EM_Location->location_id}, 'div1_radio', '$chosen_radio')";
 				$EM_Location->mndzeug['div1_radio'] = $chosen_radio;
-			}
-			
-			if(isset($_POST['div1']))
-			{
-				foreach( $_POST['div1'] as $checkbox_name )
-				{
-					if( in_array($checkbox_name, $div1_checkboxes, true) )
-					{
-						$ids_to_add[] = "({$EM_Location->location_id}, 'div1_checkboxes', '$checkbox_name')";
-						$EM_Location->mndzeug['div1_checkboxes'][] = $checkbox_name;
-					}
-				}
 			}
 			
 			//div3
