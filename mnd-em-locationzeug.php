@@ -412,6 +412,30 @@ function mnd_em_loc_load($EM_Location)
 }
 add_action('em_location','mnd_em_loc_load',1,1);
 
+
+
+function mnd_em_loc_save_queryteile_array_auffuellen_einzelteile( $option_name, $ids_to_add = array() )
+{
+	$div_teile = (is_array(get_option($option_name))) ? get_option($option_name):array();
+	foreach( $div_teile as $div_teil )
+	{
+		$meta_value = $_POST[$div_teil];
+		$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
+		$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_value')";
+	}
+	return $ids_to_add;
+}
+function mnd_em_loc_save_queryteile_array_auffuellen_checkbox( $option_name, $ids_to_add = array() )
+{
+	$div_teile = (is_array(get_option($option_name))) ? get_option($option_name):array();
+	foreach( $div_teile as $div_teil )
+	{
+		$meta_value = $_POST[$div_teil];
+		$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
+		$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_value')";
+	}
+	return $ids_to_add;
+}
 /**
  * speichert die metadaten in die datenbank im EM_META_TABLE
  * @param bool $result
@@ -466,26 +490,13 @@ function mnd_em_loc_save($result,$EM_Location)
 						$EM_Location->mndzeug['div1_checkboxes'][] = $checkbox_name;
 					}
 				}
-			}			
+			}
 			
 			//div3
-			$div3_teile = (is_array(get_option('handel_div3_teile'))) ? get_option('handel_div3_teile'):array();
-			foreach( $div3_teile as $div_teil )
-			{
-				$meta_val = $_POST[$div_teil];
-				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
-				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
-			}
+			$ids_to_add = mnd_em_loc_save_queryteile_array_auffuellen_einzelteile( 'handel_div3_teile', $ids_to_add );
 			
 			//div4
-			$div4_teile = (is_array(get_option('handel_div4_teile'))) ? get_option('handel_div4_teile'):array();
-			foreach( $div4_teile as $div_teil )
-			{
-				$meta_val = $_POST[$div_teil];
-				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
-				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
-			}
-			
+			$ids_to_add = mnd_em_loc_save_queryteile_array_auffuellen_einzelteile( 'handel_div4_teile', $ids_to_add );
 		}
 		elseif($_POST['formular_art'] == 'lernort')
 		{
@@ -517,31 +528,11 @@ function mnd_em_loc_save($result,$EM_Location)
 			}
 			
 			//div1
-			$div1_teile = (is_array(get_option('lernort_div1_teile'))) ? get_option('lernort_div1_teile'):array();
-			foreach( $div1_teile as $div_teil )
-			{
-				$meta_val = $_POST[$div_teil];
-				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
-				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
-			}
-			
+			$ids_to_add = mnd_em_loc_save_queryteile_array_auffuellen_einzelteile('lernort_div1_teile', $ids_to_add);
 			//div3
-			$div3_teile = (is_array(get_option('lernort_div3_teile'))) ? get_option('lernort_div3_teile'):array();
-			foreach( $div3_teile as $div_teil )
-			{
-				$meta_val = $_POST[$div_teil];
-				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
-				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
-			}
-			
+			$ids_to_add = mnd_em_loc_save_queryteile_array_auffuellen_einzelteile('lernort_div3_teile', $ids_to_add);			
 			//div4
-			$div4_teile = (is_array(get_option('lernort_div4_teile'))) ? get_option('lernort_div4_teile'):array();
-			foreach( $div4_teile as $div_teil )
-			{
-				$meta_val = $_POST[$div_teil];
-				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
-				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
-			}
+			$ids_to_add = mnd_em_loc_save_queryteile_array_auffuellen_einzelteile('lernort_div4_teile', $ids_to_add);
 		}
 		elseif($_POST['formular_art'] == 'repaircafe')
 		{
@@ -573,13 +564,7 @@ function mnd_em_loc_save($result,$EM_Location)
 			}
 			
 			//div1_teile
-			$div1_teile = (is_array(get_option('repaircafe_div1_teile'))) ? get_option('repaircafe_div1_teile'):array();
-			foreach( $div1_teile as $div_teil )
-			{
-				$meta_val = $_POST[$div_teil];
-				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
-				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
-			}
+			$ids_to_add = mnd_em_loc_save_queryteile_array_auffuellen_einzelteile('repaircafe_div1_teile', $ids_to_add);
 			//div1_oeffnungstage
 			$wochentage = array
 			(
@@ -598,13 +583,7 @@ function mnd_em_loc_save($result,$EM_Location)
 			}
 			
 			//div3
-			$div3_teile = (is_array(get_option('repaircafe_div3_teile'))) ? get_option('repaircafe_div3_teile'):array();
-			foreach( $div3_teile as $div_teil )
-			{
-				$meta_val = $_POST[$div_teil];
-				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
-				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
-			}
+			$ids_to_add = mnd_em_loc_save_queryteile_array_auffuellen_einzelteile('repaircafe_div3_teile', $ids_to_add);
 			//div3_fokus_cb
 			$repaircafe_div3_fokus_cb1 = (is_array(get_option('repaircafe_div3_fokus_cb1'))) ? get_option('repaircafe_div3_fokus_cb1'):array();
 			$repaircafe_div3_fokus_cb2 = (is_array(get_option('repaircafe_div3_fokus_cb2'))) ? get_option('repaircafe_div3_fokus_cb2'):array();
@@ -625,15 +604,9 @@ function mnd_em_loc_save($result,$EM_Location)
 			}
 			
 			//div4
-			$div4_teile = (is_array(get_option('repaircafe_div4_teile'))) ? get_option('repaircafe_div4_teile'):array();
-			foreach( $div4_teile as $div_teil )
-			{
-				$meta_val = $_POST[$div_teil];
-				$EM_Location->mndzeug[$div_teil] = $_POST[$div_teil];
-				$ids_to_add[] = "({$EM_Location->location_id}, '$div_teil', '$meta_val')";
-			}
+			$ids_to_add = mnd_em_loc_save_queryteile_array_auffuellen_einzelteile('repaircafe_div4_teile', $ids_to_add);
 		}
-		//zielgruppen sind bei einzigen zwei orttypen gleich, daher hier einfach immer hintendran
+		//zielgruppen sind bei allen orttypen gleich, daher hier einfach immer hintendran
 		//dieser umstand könnte sich irgendwann ändern, also beachten und eventuell ändern
 		if(isset($_POST['div4_zielgruppen_demografisch']))
 		{
