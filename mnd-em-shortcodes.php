@@ -115,6 +115,95 @@ function mnd_repaircafe_placeholder_div3($EM_Location)
 	$replaceparts[] = "<strong>Sonstiger Fokus:</strong> ".$EM_Location->mndzeug['fokus_sonstiges'];
 	return implode('<br>', $replaceparts);
 }
+
+
+function mnd_handelsort_placeholder_div4($EM_Location)
+{
+	$replaceparts = array();
+	$replaceparts[] = "<strong><u>Weitere Informationen:</u></strong>";
+	$replaceparts[] = "<strong>Ansprechpartner Rückruf:</strong> ".$EM_Location->mndzeug['ansprechpartner'];
+	$replaceparts[] = "<strong>Rückrufnummer:</strong> ".$EM_Location->mndzeug['ansprechpartner_nr'];
+	$replaceparts[] = "<strong>Rückruftermin:</strong> ".$EM_Location->mndzeug['rueckruftermin'];
+	$replaceparts[] = "<strong>Atmosphäre:</strong> ".$EM_Location->mndzeug['atmosphaere'];
+	
+	//div4_zielgruppen_demografisch
+	$replaceparts[] = "<strong>Zielgruppe demografisch:</strong>";
+	$sortiment = array();
+	foreach($EM_Location->mndzeug['div4_zielgruppen_demografisch'] as $sortimentti)
+	{
+		$sortiment[] = $sortimentti;
+	}
+	$replaceparts[] = implode(', ', $sortiment);
+	//div4_zielgruppen_psychografisch
+	$replaceparts[] = "<strong>Zielgruppe psychographisch:</strong>";
+	$sortiment = array();
+	foreach($EM_Location->mndzeug['div4_zielgruppen_psychografisch'] as $sortimentti)
+	{
+		$sortiment[] = $sortimentti;
+	}
+	$replaceparts[] = implode(', ', $sortiment);					
+	
+	$replaceparts[] = "<strong>Kommentar:</strong> ".$EM_Location->mndzeug['pitch'];
+	$replaceparts[] = "<strong>Letzter Kontakt:</strong> ".$EM_Location->mndzeug['letzter_kontakt'];
+	return implode('<br>', $replaceparts);
+}
+function mnd_lernort_placeholder_div4($EM_Location)
+{
+	$replaceparts = array();
+	$replaceparts[] = "<strong><u>Für Abonnenten:</u></strong>";
+	$replaceparts[] = "<strong>Rückruftermin:</strong> ".$EM_Location->mndzeug['rueckruftermin'];
+	$replaceparts[] = "<strong>Atmosphäre:</strong> ".$EM_Location->mndzeug['atmosphaere'];
+	
+	//div4_zielgruppen_demografisch
+	$replaceparts[] = "<strong>Zielgruppe demografisch:</strong>";
+	$sortiment = array();
+	foreach($EM_Location->mndzeug['div4_zielgruppen_demografisch'] as $sortimentti)
+	{
+		$sortiment[] = $sortimentti;
+	}
+	$replaceparts[] = implode(', ', $sortiment);
+	//div4_zielgruppen_psychografisch
+	$replaceparts[] = "<strong>Zielgruppe psychographisch:</strong>";
+	$sortiment = array();
+	foreach($EM_Location->mndzeug['div4_zielgruppen_psychografisch'] as $sortimentti)
+	{
+		$sortiment[] = $sortimentti;
+	}
+	$replaceparts[] = implode(', ', $sortiment);					
+	
+	$replaceparts[] = "<strong>Kommentar:</strong> ".$EM_Location->mndzeug['kommentar'];
+	$replaceparts[] = "<strong>Letzter Kontakt:</strong> ".$EM_Location->mndzeug['letzter_kontakt'];
+	return implode('<br>', $replaceparts);
+}
+
+function mnd_repaircafe_placeholder_div4($EM_Location)
+{
+	$replaceparts = array();
+	$replaceparts[] = "<strong><u>Für Abonnenten:</u></strong>";
+	$replaceparts[] = "<strong>Rückruftermin:</strong> ".$EM_Location->mndzeug['rueckruftermin'];
+	$replaceparts[] = "<strong>Atmosphäre:</strong> ".$EM_Location->mndzeug['atmosphaere'];
+	
+	//div4_zielgruppen_demografisch
+	$replaceparts[] = "<strong>Zielgruppe demografisch:</strong>";
+	$sortiment = array();
+	foreach($EM_Location->mndzeug['div4_zielgruppen_demografisch'] as $sortimentti)
+	{
+		$sortiment[] = $sortimentti;
+	}
+	$replaceparts[] = implode(', ', $sortiment);
+	//div4_zielgruppen_psychografisch
+	$replaceparts[] = "<strong>Zielgruppe psychographisch:</strong>";
+	$sortiment = array();
+	foreach($EM_Location->mndzeug['div4_zielgruppen_psychografisch'] as $sortimentti)
+	{
+		$sortiment[] = $sortimentti;
+	}
+	$replaceparts[] = implode(', ', $sortiment);					
+	
+	$replaceparts[] = "<strong>Kommentar:</strong> ".$EM_Location->mndzeug['kommentar'];
+	$replaceparts[] = "<strong>Letzter Kontakt:</strong> ".$EM_Location->mndzeug['letzter_kontakt'];
+	return implode('<br>', $replaceparts);
+}
 /**
  * wenn events manager nach placeholdern schaut, wird dieser filter angewandt, 
  *    um die mnd-placeholder mit dem entsprechenden inhalt zu ersetzen
@@ -170,102 +259,20 @@ function mnd_em_loc_placeholders($replace, $EM_Location, $result)
 				return mnd_repaircafe_placeholder_div3($EM_Location);
 			}
 		}
-		elseif( $result == '#_MNDDIV4' )
+		elseif( $result == '#_MNDDIV4' && current_user_can(MND_TEST_RECHTE)) //div4 nur für abonnenten
 		{
-			$replaceparts = array();
 			if($EM_Location->mndzeug['formular_art'] == "handelsort")
 			{
-				//div4 teile
-				if(current_user_can(MND_TEST_RECHTE))
-				{
-					$replaceparts[] = "<strong><u>Weitere Informationen:</u></strong>";
-					$replaceparts[] = "<strong>Ansprechpartner Rückruf:</strong> ".$EM_Location->mndzeug['ansprechpartner'];
-					$replaceparts[] = "<strong>Rückrufnummer:</strong> ".$EM_Location->mndzeug['ansprechpartner_nr'];
-					$replaceparts[] = "<strong>Rückruftermin:</strong> ".$EM_Location->mndzeug['rueckruftermin'];
-					$replaceparts[] = "<strong>Atmosphäre:</strong> ".$EM_Location->mndzeug['atmosphaere'];
-					
-					//div4_zielgruppen_demografisch
-					$replaceparts[] = "<strong>Zielgruppe demografisch:</strong>";
-					$sortiment = array();
-					foreach($EM_Location->mndzeug['div4_zielgruppen_demografisch'] as $sortimentti)
-					{
-						$sortiment[] = $sortimentti;
-					}
-					$replaceparts[] = implode(', ', $sortiment);
-					//div4_zielgruppen_psychografisch
-					$replaceparts[] = "<strong>Zielgruppe psychographisch:</strong>";
-					$sortiment = array();
-					foreach($EM_Location->mndzeug['div4_zielgruppen_psychografisch'] as $sortimentti)
-					{
-						$sortiment[] = $sortimentti;
-					}
-					$replaceparts[] = implode(', ', $sortiment);					
-					
-					$replaceparts[] = "<strong>Kommentar:</strong> ".$EM_Location->mndzeug['pitch'];
-					$replaceparts[] = "<strong>Letzter Kontakt:</strong> ".$EM_Location->mndzeug['letzter_kontakt'];
-				}
+				return mnd_handelsort_placeholder_div4($EM_Location);
 			}
 			elseif($EM_Location->mndzeug['formular_art'] == "lernort")
 			{
-				//div4 teile
-				if(current_user_can(MND_TEST_RECHTE))
-				{
-					$replaceparts[] = "<strong><u>Für Abonnenten:</u></strong>";
-					$replaceparts[] = "<strong>Rückruftermin:</strong> ".$EM_Location->mndzeug['rueckruftermin'];
-					$replaceparts[] = "<strong>Atmosphäre:</strong> ".$EM_Location->mndzeug['atmosphaere'];
-					
-					//div4_zielgruppen_demografisch
-					$replaceparts[] = "<strong>Zielgruppe demografisch:</strong>";
-					$sortiment = array();
-					foreach($EM_Location->mndzeug['div4_zielgruppen_demografisch'] as $sortimentti)
-					{
-						$sortiment[] = $sortimentti;
-					}
-					$replaceparts[] = implode(', ', $sortiment);
-					//div4_zielgruppen_psychografisch
-					$replaceparts[] = "<strong>Zielgruppe psychographisch:</strong>";
-					$sortiment = array();
-					foreach($EM_Location->mndzeug['div4_zielgruppen_psychografisch'] as $sortimentti)
-					{
-						$sortiment[] = $sortimentti;
-					}
-					$replaceparts[] = implode(', ', $sortiment);					
-					
-					$replaceparts[] = "<strong>Kommentar:</strong> ".$EM_Location->mndzeug['kommentar'];
-					$replaceparts[] = "<strong>Letzter Kontakt:</strong> ".$EM_Location->mndzeug['letzter_kontakt'];
-				}
+				return mnd_lernort_placeholder_div4($EM_Location);
 			}
 			elseif($EM_Location->mndzeug['formular_art'] == "repaircafe")
 			{
-				//div4 teile
-				if(current_user_can(MND_TEST_RECHTE))
-				{
-					$replaceparts[] = "<strong><u>Für Abonnenten:</u></strong>";
-					$replaceparts[] = "<strong>Rückruftermin:</strong> ".$EM_Location->mndzeug['rueckruftermin'];
-					$replaceparts[] = "<strong>Atmosphäre:</strong> ".$EM_Location->mndzeug['atmosphaere'];
-					
-					//div4_zielgruppen_demografisch
-					$replaceparts[] = "<strong>Zielgruppe demografisch:</strong>";
-					$sortiment = array();
-					foreach($EM_Location->mndzeug['div4_zielgruppen_demografisch'] as $sortimentti)
-					{
-						$sortiment[] = $sortimentti;
-					}
-					$replaceparts[] = implode(', ', $sortiment);
-					//div4_zielgruppen_psychografisch
-					$replaceparts[] = "<strong>Zielgruppe psychographisch:</strong>";
-					$sortiment = array();
-					foreach($EM_Location->mndzeug['div4_zielgruppen_psychografisch'] as $sortimentti)
-					{
-						$sortiment[] = $sortimentti;
-					}
-					$replaceparts[] = implode(', ', $sortiment);					
-					
-					$replaceparts[] = "<strong>Kommentar:</strong> ".$EM_Location->mndzeug['kommentar'];
-					$replaceparts[] = "<strong>Letzter Kontakt:</strong> ".$EM_Location->mndzeug['letzter_kontakt'];
-				}
+				return mnd_repaircafe_placeholder_div4($EM_Location);
 			}
-			$replace = implode('<br>', $replaceparts);
 		}
 		elseif( $result == '#_MNDRUECKRUF' )
 		{
