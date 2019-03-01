@@ -55,7 +55,7 @@ if(get_option('mnd_em_version') <= 0.0812)
 		$zu_loeschende_keys = $zu_loeschende_keys." OR meta_key='".$alter_key."' ";
 	}
 	$wpdb->query("DELETE FROM ".EM_META_TABLE
-				." WHERE ".$zu_loeschende_keys;
+				." WHERE ".$zu_loeschende_keys);
 }
 
 //versionsnummer als letztes gelöscht, damit vielleicht mal veraltete optionen nur bei alten versionen gelöscht werden
