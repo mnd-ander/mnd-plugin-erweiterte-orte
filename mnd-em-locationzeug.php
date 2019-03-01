@@ -1,10 +1,10 @@
 <?php
 
-function mnd_em_loc_load_radio(&$mndzeug ,$loc_id, $option_name, $meta_key)
+function mnd_em_loc_load_radio($mndzeug ,$loc_id, $option_name, $meta_key)
 {
     global $wpdb;
 	
-    $query = "SELECT meta_value FROM ".EM_META_TABLE." WHERE object_id=".$loc_id." AND meta_key='$meta_key'";
+    $query = "SELECT meta_value FROM ".EM_META_TABLE." WHERE object_id='".$loc_id."' AND meta_key='".$meta_key."'";
     $db_ergebnis = $wpdb->get_var($query);
     //vergleich mit eingestellten radios, damit kein murks angezeigt wird
     $div1_radio = (is_array(get_option($option_name))) ? get_option($option_name):array();
@@ -12,15 +12,17 @@ function mnd_em_loc_load_radio(&$mndzeug ,$loc_id, $option_name, $meta_key)
     {
         $mndzeug[$meta_key] = $db_ergebnis;
     }
+	
+	return $mndzeug;
 }
-function mnd_em_loc_load_checkboxen(&$mndzeug ,$loc_id, $option_name, $meta_key)
+function mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, $option_name, $meta_key)
 {
 	global $wpdb;
 	
 	$metakeytobe = "meta_key='$meta_key'";
 	//checkboxen metakey abfrage ausführen
 	$sql = $wpdb->prepare("SELECT meta_value FROM ".EM_META_TABLE
-												." WHERE object_id=".$loc_id." AND ".$metakeytobe);
+												." WHERE object_id='".$loc_id."' AND ".$metakeytobe);
 
 	$db_ergebnis = $wpdb->get_col($sql, 0);
 
@@ -35,8 +37,9 @@ function mnd_em_loc_load_checkboxen(&$mndzeug ,$loc_id, $option_name, $meta_key)
 			$mndzeug[$meta_key][] = $meta_entry;
 		}
 	}
+	return $mndzeug;
 }
-function mnd_em_loc_load_einzelteile(&$mndzeug ,$loc_id, $option_name)
+function mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, $option_name)
 {
 	global $wpdb;
 	
@@ -50,7 +53,7 @@ function mnd_em_loc_load_einzelteile(&$mndzeug ,$loc_id, $option_name)
 	$metakeytobe = "( ".$metakeytobe." )";
 
 	$sql = $wpdb->prepare("SELECT * FROM ".EM_META_TABLE
-										." WHERE object_id=".$loc_id." AND ".$metakeytobe);
+										." WHERE object_id='".$loc_id."' AND ".$metakeytobe);
 	$db_ergebnis = $wpdb->get_results($sql);
 
 	if($db_ergebnis)
@@ -61,6 +64,7 @@ function mnd_em_loc_load_einzelteile(&$mndzeug ,$loc_id, $option_name)
 			$mndzeug[$dbzeile_mit_key_und_value->meta_key] = $dbzeile_mit_key_und_value->meta_value;
 		}
 	}
+	return $mndzeug;
 }
 /**
  * fügt das mndzeug array dem event zu, wenn es von der db instanziiert wird
@@ -82,33 +86,33 @@ function mnd_em_loc_load($EM_Location)
         $mndzeug['formular_art'] = 'handelsort';
 
         //div1
-        mnd_em_loc_load_radio($mndzeug, $loc_id, 'handel_div1_radio', 'div1_radio');
-		mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'handel_div1_checkboxes', 'div1_checkboxes');
+        $mndzeug = mnd_em_loc_load_radio($mndzeug, $loc_id, 'handel_div1_radio', 'div1_radio');
+		$mndzeug = mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'handel_div1_checkboxes', 'div1_checkboxes');
         //div3
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'handel_div3_teile');
+		$mndzeug = mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'handel_div3_teile');
         //div4
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'handel_div4_teile');
+		$mndzeug = mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'handel_div4_teile');
     }
     elseif($db_ergebnis == 'lernort')
     {
         $mndzeug['formular_art'] = 'lernort';
 
         //div1
-		mnd_em_loc_load_radio($mndzeug, $loc_id, 'lernort_div1_radio', 'div1_radio');
-		mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'lernort_div1_inventar_cb', 'div1_checkboxes');	
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'lernort_div1_teile');
+		$mndzeug = mnd_em_loc_load_radio($mndzeug, $loc_id, 'lernort_div1_radio', 'div1_radio');
+		$mndzeug = mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'lernort_div1_inventar_cb', 'div1_checkboxes');	
+		$mndzeug = mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'lernort_div1_teile');
 		//div3
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'lernort_div3_teile');
+		$mndzeug = mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'lernort_div3_teile');
 		//div4
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'lernort_div4_teile');
+		$mndzeug = mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'lernort_div4_teile');
     }
     elseif($db_ergebnis == 'repaircafe')
     {
         $mndzeug['formular_art'] = 'repaircafe';
 
         //div1
-		mnd_em_loc_load_radio($mndzeug, $loc_id, 'repaircafe_div1_radio', 'div1_radio');
-		mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'repaircafe_div1_ausstattung_cb', 'div1_checkboxes');	
+		$mndzeug = mnd_em_loc_load_radio($mndzeug, $loc_id, 'repaircafe_div1_radio', 'div1_radio');
+		$mndzeug = mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'repaircafe_div1_ausstattung_cb', 'div1_checkboxes');	
 		//div1_oeffnungstage
         $metakeytobe = "meta_key='oeffnungstage'";
         ///checkboxen metakey abfrage ausführen
@@ -154,24 +158,25 @@ function mnd_em_loc_load($EM_Location)
         {
 			if(in_array($meta_entry, $repaircafe_div3_fokus_cb))
 			{
-					$mndzeug['div3_fokus_cb'][] = $meta_entry;
+				$mndzeug['div3_fokus_cb'][] = $meta_entry;
 			}
         }
 
         //div1+3+4_teile 
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'repaircafe_div1_teile');
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'repaircafe_div3_teile');
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'repaircafe_div4_teile');
+		$mndzeug = mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'repaircafe_div1_teile');
+		$mndzeug = mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'repaircafe_div3_teile');
+		$mndzeug = mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'repaircafe_div4_teile');
        
-    } //ende elseif($db_ergebnis == 'repaircafe')
+    }//ende elseif($db_ergebnis == 'repaircafe')
 	if(isset($mndzeug['formular_art']))
 	{
-		 //zielgruppen
-		mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'div4_zielgruppen_demografisch', 'div4_zielgruppen_demografisch');
-		mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'div4_zielgruppen_psychografisch', 'div4_zielgruppen_psychografisch');
+		//zielgruppen
+		$mndzeug = mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'div4_zielgruppen_demografisch', 'div4_zielgruppen_demografisch');
+		$mndzeug = mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'div4_zielgruppen_psychografisch', 'div4_zielgruppen_psychografisch');
 	}
-
+	
     $EM_Location->mndzeug = $mndzeug;
+	return $EM_Location;
 }
 add_action('em_location','mnd_em_loc_load',1,1);
 
