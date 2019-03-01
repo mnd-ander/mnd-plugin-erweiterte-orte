@@ -464,9 +464,9 @@ function mnd_em_loc_save($result,$EM_Location)
     //First delete any old saves of meta
     if(!empty($_POST['formular_art']))
     {
-            $wpdb->query("DELETE FROM ".EM_META_TABLE
-                            ." WHERE object_id='{$EM_Location->location_id}' AND "
-                            .mnd_em_get_loc_meta_keys($_POST['formular_art']) );
+        $wpdb->query("DELETE FROM ".EM_META_TABLE
+                        ." WHERE object_id='{$EM_Location->location_id}' AND "
+                        .mnd_em_get_loc_meta_keys($_POST['formular_art']) );
     }
 
     //$EM_Location->location_id bedeutet, dass es eine location_id hat, also dass es ein ordentlich gespeicherter ort ist
