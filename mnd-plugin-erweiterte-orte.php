@@ -55,7 +55,7 @@ a,b,c können/sollen/dürfen 2-stellig sein
 	
 	seite mit kommenden rückrufterminen => https://wp-events-plugin.com/tutorials/create-custom-event-information-pages/
 	
-	metadaten klasse mit table? macht das formular erweitern/laden/speichern sicher viel besser
+	metadaten klasse mit table? macht das formular erweitern/laden/speichern vermutlich viel besser
 	
 	---------------------------------------------------
 	veraltete formularteile für aufräumfunktion später:
@@ -293,7 +293,11 @@ function mnd_em_ms_globals( $globals )
 	$globals[] = 'repaircafe_div1_teile';
 	$globals[] = 'repaircafe_div1_ausstattung_cb';
 	$globals[] = 'repaircafe_div3_teile';
-	$globals[] = 'repaircafe_div3_fokus_cb';
+	$globals[] = 'repaircafe_div3_fokus_cb1';
+	$globals[] = 'repaircafe_div3_fokus_cb2';
+	$globals[] = 'repaircafe_div3_fokus_cb3';
+	$globals[] = 'repaircafe_div3_fokus_cb4';
+	$globals[] = 'repaircafe_div3_fokus_cb5';
 	$globals[] = 'repaircafe_div4_teile';
 	
 	return $globals;
