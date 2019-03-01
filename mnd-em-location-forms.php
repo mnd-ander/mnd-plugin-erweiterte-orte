@@ -68,6 +68,7 @@ function mnd_platzhalter_in_locationeditor_einfuegen()
 	//hier noch ein hinweis für den bildupload davor
 	?>
 	<h4>Maximale Größe: 200 kb</h4>
+	<h4>Minimale Auflösung: 200x200</h4>
 	<h4>Maximale Auflösung: 700x700</h4>
 	<?php
 	//hier die eigentliche funktion
