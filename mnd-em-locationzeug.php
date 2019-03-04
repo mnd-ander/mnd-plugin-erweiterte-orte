@@ -352,44 +352,44 @@ function mnd_em_get_loc_meta_keys($arg)
     $metakeytobe = "meta_key='formular_art'";
     if($arg == 'handelsort')
     {
-        $einzel_keys = array
-        (
-            'div1_checkboxes', 'div1_radio', 'div4_zielgruppen_demografisch', 'div4_zielgruppen_psychografisch'
-        );
-        $div3_teile = (is_array(get_option('handel_div3_teile'))) ? get_option('handel_div3_teile'):array();
-        $div4_teile = (is_array(get_option('handel_div4_teile'))) ? get_option('handel_div4_teile'):array();
-        foreach( array_merge($div3_teile, $div4_teile, $einzel_keys) as $div_teil )
-        {
-            $metakeytobe = $metakeytobe." OR meta_key='".$div_teil."' ";
-        }
+            $einzel_keys = array
+            (
+                    'div1_checkboxes', 'div1_radio', 'div4_zielgruppen_demografisch', 'div4_zielgruppen_psychografisch'
+            );
+            $div3_teile = (is_array(get_option('handel_div3_teile'))) ? get_option('handel_div3_teile'):array();
+            $div4_teile = (is_array(get_option('handel_div4_teile'))) ? get_option('handel_div4_teile'):array();
+            foreach( array_merge($div3_teile, $div4_teile, $einzel_keys) as $div_teil )
+            {
+                    $metakeytobe = $metakeytobe." OR meta_key='".$div_teil."' ";
+            }
     }
     elseif($arg == 'lernort')
     {
-        $einzel_keys = array
-        (
-            'div1_checkboxes', 'div1_radio', 'div4_zielgruppen_demografisch', 'div4_zielgruppen_psychografisch'
-        );
-        $lernort_div1_teile = (is_array(get_option('lernort_div1_teile'))) ? get_option('lernort_div1_teile'):array();
-        $lernort_div3_teile = (is_array(get_option('lernort_div3_teile'))) ? get_option('lernort_div3_teile'):array();
-        $lernort_div4_teile = (is_array(get_option('lernort_div4_teile'))) ? get_option('lernort_div4_teile'):array();
-        foreach( array_merge($lernort_div1_teile, $lernort_div3_teile, $lernort_div4_teile, $einzel_keys) as $div_teil )
-        {
-            $metakeytobe = $metakeytobe." OR meta_key='".$div_teil."' ";
-        }
+            $einzel_keys = array
+            (
+                    'div1_checkboxes', 'div1_radio', 'div4_zielgruppen_demografisch', 'div4_zielgruppen_psychografisch'
+            );
+            $lernort_div1_teile = (is_array(get_option('lernort_div1_teile'))) ? get_option('lernort_div1_teile'):array();
+            $lernort_div3_teile = (is_array(get_option('lernort_div3_teile'))) ? get_option('lernort_div3_teile'):array();
+            $lernort_div4_teile = (is_array(get_option('lernort_div4_teile'))) ? get_option('lernort_div4_teile'):array();
+            foreach( array_merge($lernort_div1_teile, $lernort_div3_teile, $lernort_div4_teile, $einzel_keys) as $div_teil )
+            {
+                    $metakeytobe = $metakeytobe." OR meta_key='".$div_teil."' ";
+            }
     }
     elseif($arg == 'repaircafe')
     {
         $einzel_keys = array
         (
-            'div1_checkboxes', 'div1_radio', 'div4_zielgruppen_demografisch', 'div4_zielgruppen_psychografisch',
-            'div3_fokus_cb', 'oeffnungstage'
+                'div1_checkboxes', 'div1_radio', 'div4_zielgruppen_demografisch', 'div4_zielgruppen_psychografisch',
+                'div3_fokus_cb', 'oeffnungstage'
         );
         $repaircafe_div1_teile = (is_array(get_option('repaircafe_div1_teile'))) ? get_option('repaircafe_div1_teile'):array();
         $repaircafe_div3_teile = (is_array(get_option('repaircafe_div3_teile'))) ? get_option('repaircafe_div3_teile'):array();
         $repaircafe_div4_teile = (is_array(get_option('repaircafe_div4_teile'))) ? get_option('repaircafe_div4_teile'):array();
         foreach( array_merge($repaircafe_div1_teile, $repaircafe_div3_teile, $repaircafe_div4_teile, $einzel_keys) as $div_teil )
         {
-            $metakeytobe = $metakeytobe." OR meta_key='".$div_teil."' ";
+                $metakeytobe = $metakeytobe." OR meta_key='".$div_teil."' ";
         }
     }
     return "( ".$metakeytobe." )";
