@@ -36,7 +36,7 @@ function mnd_repairform($editing = false)
 	<h4>Ausstattung</h4>
 	<?php
 	$repaircafe_div1_ausstattung_cb = (is_array(get_option('repaircafe_div1_ausstattung_cb'))) ? get_option('repaircafe_div1_ausstattung_cb'):array();
-	mnd_em_loc_checkboxset($repaircafe_div1_ausstattung_cb, 'div1[]', 'lernortCB', 'div1_checkboxes', $editing, true);
+	mnd_em_loc_checkboxset($repaircafe_div1_ausstattung_cb, 'div1[]', 'repairCB', 'div1_checkboxes', $editing, true);
 	?>
 	<table class="em-location-data">
 	<?php
@@ -146,6 +146,7 @@ function mnd_repairform($editing = false)
 	?>
 	<!-- div4 ende -->
 	</div>
+	<script>repaircafe_tooltips_einfuegen();</script>
 	<?php
 }
 

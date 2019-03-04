@@ -62,3 +62,54 @@ function handel_tooltips_einfuegen()
 	"Die einfachsten Formen sind leihen und tauschen";
 	lbl.setAttribute("title", reusetext);
 }
+function repaircafe_tooltips_einfuegen()
+{
+	var lbl = findeLabelZumElement(document.getElementById("div1_radioCoworking Space"));
+	lbl.setAttribute("data-toggle", "tooltip");
+	lbl.setAttribute("data-placement", "top");
+	var reusetext = "Coworking - (auch Co-working, englisch für 'zusammen arbeiten' bzw. koarbeiten oder kollaborativ arbeiten) ist eine Entwicklung im Bereich „neue Arbeitsformen“. Freiberufler, Kreative, kleinere Startups oder digitale Nomaden arbeiten dabei zugleich in meist größeren, offenen Räumen und können auf diese Weise voneinander profitieren. Sie können unabhängig voneinander agieren und in unterschiedlichen Firmen und Projekten aktiv sein, oder auch gemeinsam Projekte verwirklichen und Hilfe sowie neue Mitstreiter finden.";
+	lbl.setAttribute("title", reusetext);
+	
+	lbl = findeLabelZumElement(document.getElementById("fokusCB50"));
+	lbl.setAttribute("data-toggle", "tooltip");
+	lbl.setAttribute("data-placement", "top");
+	//coworking text hier wieder
+	lbl.setAttribute("title", reusetext);
+	
+	//downcycling
+	lbl = findeLabelZumElement(document.getElementById("fokusCB43"));
+	lbl.setAttribute("data-toggle", "tooltip");
+	lbl.setAttribute("data-placement", "top");
+	reusetext = "Downcycling - Rohstoffwiederverwertung mit Qualitätseinbußen ( mindestens genau so wichtig wie Upcycling)";
+	lbl.setAttribute("title", reusetext);
+	//connecting
+	lbl = findeLabelZumElement(document.getElementById("fokusCB51"));
+	lbl.setAttribute("data-toggle", "tooltip");
+	lbl.setAttribute("data-placement", "top");
+	reusetext = "Connecting - meint vernetzen verbünden.";
+	lbl.setAttribute("title", reusetext);
+	//brainstormen
+	lbl = findeLabelZumElement(document.getElementById("fokusCB45"));
+	lbl.setAttribute("data-toggle", "tooltip");
+	lbl.setAttribute("data-placement", "top");
+	reusetext = "Brainstormen - kurze Versammlung um spontane Ideen zu sammeln.";
+	lbl.setAttribute("title", reusetext);
+	//lötkolben
+	lbl = findeLabelZumElement(document.getElementById("repairCB2"));
+	lbl.setAttribute("data-toggle", "tooltip");
+	lbl.setAttribute("data-placement", "top");
+	reusetext = "Der Lötkolben ist ein Gerät zum Aufschmelzen von Metallen, um Bauteile durch Weichlöten zu verbinden. (unter 450 Grad wird es Weichlöten genannt alles darüber wird Hartlöten genannt).";
+	lbl.setAttribute("title", reusetext);
+	//werkzeugkoffer
+	lbl = findeLabelZumElement(document.getElementById("repairCB0"));
+	lbl.setAttribute("data-toggle", "tooltip");
+	lbl.setAttribute("data-placement", "top");
+	reusetext = "Werkzeugkoffer: Ein Werkzeugkoffer beinhaltet den kompletten Bedarf an Werkzeugen, die für Reparaturen gebraucht werden. Wie z. B." + "\n" +
+				"Verschiedene Schraubendreher, Schlitz und Kreuzschlitz sowie Torx-Schraubendreher in gängigen Größen" + "\n" +
+			    "(Kleines) Stemmeisen" + "\n" +
+			    "Tuch zum Abwischen" + "\n" +
+			    "Schnur" + "\n" +
+			    "1-2 Schleifpapiere" + "\n" +
+			    "Schraubenschlüsselsatz, gängige Größen, vor allem 8 bis 14, als Maul- und Ringschlüssel)";
+	lbl.setAttribute("title", reusetext);
+}
