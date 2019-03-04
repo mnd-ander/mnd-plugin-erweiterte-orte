@@ -83,11 +83,11 @@ function mnd_em_loc_load($EM_Location)
 
         //div1
         mnd_em_loc_load_radio($mndzeug, $loc_id, 'handel_div1_radio', 'div1_radio');
-		mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'handel_div1_checkboxes', 'div1_checkboxes');
+		mnd_em_loc_load_checkboxen(&$mndzeug ,$loc_id, 'handel_div1_checkboxes', 'div1_checkboxes');
         //div3
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'handel_div3_teile');
+		mnd_em_loc_load_einzelteile(&$mndzeug ,$loc_id, 'handel_div3_teile');
         //div4
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'handel_div4_teile');
+		mnd_em_loc_load_einzelteile(&$mndzeug ,$loc_id, 'handel_div4_teile');
     }
     elseif($db_ergebnis == 'lernort')
     {
@@ -95,12 +95,12 @@ function mnd_em_loc_load($EM_Location)
 
         //div1
 		mnd_em_loc_load_radio($mndzeug, $loc_id, 'lernort_div1_radio', 'div1_radio');
-		mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'lernort_div1_inventar_cb', 'div1_checkboxes');	
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'lernort_div1_teile');
+		mnd_em_loc_load_checkboxen(&$mndzeug ,$loc_id, 'lernort_div1_inventar_cb', 'div1_checkboxes');	
+		mnd_em_loc_load_einzelteile(&$mndzeug ,$loc_id, 'lernort_div1_teile');
 		//div3
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'lernort_div3_teile');
+		mnd_em_loc_load_einzelteile(&$mndzeug ,$loc_id, 'lernort_div3_teile');
 		//div4
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'lernort_div4_teile');
+		mnd_em_loc_load_einzelteile(&$mndzeug ,$loc_id, 'lernort_div4_teile');
     }
     elseif($db_ergebnis == 'repaircafe')
     {
@@ -108,7 +108,7 @@ function mnd_em_loc_load($EM_Location)
 
         //div1
 		mnd_em_loc_load_radio($mndzeug, $loc_id, 'repaircafe_div1_radio', 'div1_radio');
-		mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'repaircafe_div1_ausstattung_cb', 'div1_checkboxes');	
+		mnd_em_loc_load_checkboxen(&$mndzeug ,$loc_id, 'repaircafe_div1_ausstattung_cb', 'div1_checkboxes');	
 		//div1_oeffnungstage
         $metakeytobe = "meta_key='oeffnungstage'";
         ///checkboxen metakey abfrage ausführen
@@ -159,16 +159,16 @@ function mnd_em_loc_load($EM_Location)
         }
 
         //div1+3+4_teile 
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'repaircafe_div1_teile');
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'repaircafe_div3_teile');
-		mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'repaircafe_div4_teile');
+		mnd_em_loc_load_einzelteile(&$mndzeug ,$loc_id, 'repaircafe_div1_teile');
+		mnd_em_loc_load_einzelteile(&$mndzeug ,$loc_id, 'repaircafe_div3_teile');
+		mnd_em_loc_load_einzelteile(&$mndzeug ,$loc_id, 'repaircafe_div4_teile');
        
     } //ende elseif($db_ergebnis == 'repaircafe')
 	if(isset($mndzeug['formular_art']))
 	{
 		 //zielgruppen
-		mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'div4_zielgruppen_demografisch', 'div4_zielgruppen_demografisch');
-		mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'div4_zielgruppen_psychografisch', 'div4_zielgruppen_psychografisch');
+		mnd_em_loc_load_checkboxen(&$mndzeug ,$loc_id, 'div4_zielgruppen_demografisch', 'div4_zielgruppen_demografisch');
+		mnd_em_loc_load_checkboxen(&$mndzeug ,$loc_id, 'div4_zielgruppen_psychografisch', 'div4_zielgruppen_psychografisch');
 	}
 
     $EM_Location->mndzeug = $mndzeug;
