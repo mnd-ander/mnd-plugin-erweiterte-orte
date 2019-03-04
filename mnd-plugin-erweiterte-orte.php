@@ -178,7 +178,7 @@ function handelsort_formularteile_anlegen()
 {
 	$handel_div1_radio = array
 	(
-		"Einzelhandel", "Re-Use", "Neue Formen", "Bauernhof", "Straßenmarkt", "Markthalle", "Sonstige" 
+		"Einzelhandel", "Reuse", "Neue Formen", "Bauernhof", "Straßenmarkt", "Markthalle", "Sonstige" 
 	);
 	update_option('handel_div1_radio',$handel_div1_radio);
 	

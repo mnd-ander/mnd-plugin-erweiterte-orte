@@ -1,10 +1,10 @@
 <?php
 
-function mnd_em_loc_load_radio($mndzeug, $loc_id, $option_name, $meta_key)
+function mnd_em_loc_load_radio($mndzeug ,$loc_id, $option_name, $meta_key)
 {
     global $wpdb;
 	
-    $query = "SELECT meta_value FROM ".EM_META_TABLE." WHERE object_id=".$loc_id." AND meta_key='".$meta_key."'";
+    $query = "SELECT meta_value FROM ".EM_META_TABLE." WHERE object_id='".$loc_id."' AND meta_key='".$meta_key."'";
     $db_ergebnis = $wpdb->get_var($query);
     //vergleich mit eingestellten radios, damit kein murks angezeigt wird
     $div1_radio = (is_array(get_option($option_name))) ? get_option($option_name):array();
@@ -12,17 +12,17 @@ function mnd_em_loc_load_radio($mndzeug, $loc_id, $option_name, $meta_key)
     {
         $mndzeug[$meta_key] = $db_ergebnis;
     }
-		var_dump($mndzeug);
+	
 	return $mndzeug;
 }
-function mnd_em_loc_load_checkboxen($mndzeug, $loc_id, $option_name, $meta_key)
+function mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, $option_name, $meta_key)
 {
 	global $wpdb;
 	
 	$metakeytobe = "meta_key='$meta_key'";
 	//checkboxen metakey abfrage ausführen
 	$sql = $wpdb->prepare("SELECT meta_value FROM ".EM_META_TABLE
-												." WHERE object_id=".$loc_id." AND ".$metakeytobe);
+												." WHERE object_id='".$loc_id."' AND ".$metakeytobe);
 
 	$db_ergebnis = $wpdb->get_col($sql, 0);
 
@@ -37,7 +37,6 @@ function mnd_em_loc_load_checkboxen($mndzeug, $loc_id, $option_name, $meta_key)
 			$mndzeug[$meta_key][] = $meta_entry;
 		}
 	}
-		var_dump($mndzeug);
 	return $mndzeug;
 }
 function mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, $option_name)
@@ -54,7 +53,7 @@ function mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, $option_name)
 	$metakeytobe = "( ".$metakeytobe." )";
 
 	$sql = $wpdb->prepare("SELECT * FROM ".EM_META_TABLE
-										." WHERE object_id=".$loc_id." AND ".$metakeytobe);
+										." WHERE object_id='".$loc_id."' AND ".$metakeytobe);
 	$db_ergebnis = $wpdb->get_results($sql);
 
 	if($db_ergebnis)
@@ -65,7 +64,6 @@ function mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, $option_name)
 			$mndzeug[$dbzeile_mit_key_und_value->meta_key] = $dbzeile_mit_key_und_value->meta_value;
 		}
 	}
-		var_dump($mndzeug);
 	return $mndzeug;
 }
 /**
@@ -168,6 +166,7 @@ function mnd_em_loc_load($EM_Location)
 		$mndzeug = mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'repaircafe_div1_teile');
 		$mndzeug = mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'repaircafe_div3_teile');
 		$mndzeug = mnd_em_loc_load_einzelteile($mndzeug ,$loc_id, 'repaircafe_div4_teile');
+       
     }//ende elseif($db_ergebnis == 'repaircafe')
 	if(isset($mndzeug['formular_art']))
 	{
@@ -176,8 +175,8 @@ function mnd_em_loc_load($EM_Location)
 		$mndzeug = mnd_em_loc_load_checkboxen($mndzeug ,$loc_id, 'div4_zielgruppen_psychografisch', 'div4_zielgruppen_psychografisch');
 	}
 	
-		var_dump($mndzeug);
     $EM_Location->mndzeug = $mndzeug;
+	return $EM_Location;
 }
 add_action('em_location','mnd_em_loc_load',1,1);
 
