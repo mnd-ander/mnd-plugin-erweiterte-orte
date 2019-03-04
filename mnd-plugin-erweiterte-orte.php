@@ -5,10 +5,10 @@ Plugin URI: https://www.shakuras.me
 Description: Bitte die Bedienungsanleitung beachten (unter Events->Anderbox). Dieses Plugin erweitert die Funktionalität des Events Manager Plugins um Orttypen. 
 Author: Alexander Schmidt
 Author URI: https://www.shakuras.me
-Version: 0.8.12
+Version: 0.8.14
 */
 
-define('MND_VERSION', 0.0812); 
+define('MND_VERSION', 0.0814); 
 /*
 versionsnummern sind a.b.c
 a = erfüllt alle aktuellen anforderungen
@@ -142,7 +142,7 @@ function lernort_formularteile_anlegen()
 {
 	$lernort_div1_radio = array
 	(
-		"Einzelhandel", "Reuse", "Neue Formen", "Bauernhof", 
+		"Einzelhandel", "Re-Use", "Neue Formen", "Bauernhof", 
 		"Straßenmarkt", "Markthalle", "Bildungseinrichtung", "Öffentliche Einrichtung",
 		"Gastronomie", "Privat", "Sonstige"		
 	);
