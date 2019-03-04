@@ -160,6 +160,7 @@ function mnd_lernortform($editing = false)
 	?>
 	<!-- div4 ende -->
 	</div>
+	<script>lernort_tooltips_einfuegen();</script>
 	<?php
 }
 
