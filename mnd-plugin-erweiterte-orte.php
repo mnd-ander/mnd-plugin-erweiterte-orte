@@ -5,10 +5,10 @@ Plugin URI: https://www.shakuras.me
 Description: Bitte die Bedienungsanleitung beachten (unter Events->Anderbox). Dieses Plugin erweitert die Funktionalität des Events Manager Plugins um Orttypen. 
 Author: Alexander Schmidt
 Author URI: https://www.shakuras.me
-Version: 0.8.13
+Version: 0.8.12
 */
 
-define('MND_VERSION', 0.0813); 
+define('MND_VERSION', 0.0812); 
 /*
 versionsnummern sind a.b.c
 a = erfüllt alle aktuellen anforderungen
