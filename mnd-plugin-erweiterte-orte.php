@@ -5,10 +5,10 @@ Plugin URI: https://www.shakuras.me
 Description: Bitte die Bedienungsanleitung beachten (unter Events->Anderbox). Dieses Plugin erweitert die Funktionalität des Events Manager Plugins um Orttypen. 
 Author: Alexander Schmidt
 Author URI: https://www.shakuras.me
-Version: 0.8.12
+Version: 0.8.14
 */
 
-define('MND_VERSION', 0.0812); 
+define('MND_VERSION', 0.0814); 
 /*
 versionsnummern sind a.b.c
 a = erfüllt alle aktuellen anforderungen
@@ -55,7 +55,7 @@ a,b,c können/sollen/dürfen 2-stellig sein
 	
 	seite mit kommenden rückrufterminen => https://wp-events-plugin.com/tutorials/create-custom-event-information-pages/
 	
-	metadaten klasse mit table? macht das formular erweitern/laden/speichern sicher viel besser
+	metadaten klasse mit table? macht das formular erweitern/laden/speichern vermutlich viel besser
 	
 	---------------------------------------------------
 	veraltete formularteile für aufräumfunktion später:
@@ -111,7 +111,7 @@ add_filter('init','mnd_em_init', 10);
 function allgemeine_formularteile_anlegen()
 {
 	/*
-	 * das hier soll noch in alle formulare eingefügt werden
+	 * das hier soll noch in alle formulare eingefügt werden, wie und wo ist noch nicht bekannt
 	 
 	$div3_allgemein_teile = array
 	(
@@ -142,7 +142,7 @@ function lernort_formularteile_anlegen()
 {
 	$lernort_div1_radio = array
 	(
-		"Einzelhandel", "Reuse", "Neue Formen", "Bauernhof", 
+		"Einzelhandel", "Re-Use", "Neue Formen", "Bauernhof", 
 		"Straßenmarkt", "Markthalle", "Bildungseinrichtung", "Öffentliche Einrichtung",
 		"Gastronomie", "Privat", "Sonstige"		
 	);
@@ -178,7 +178,7 @@ function handelsort_formularteile_anlegen()
 {
 	$handel_div1_radio = array
 	(
-		"Einzelhandel", "Reuse", "Neue Formen", "Bauernhof", "Straßenmarkt", "Markthalle", "Sonstige" 
+		"Einzelhandel", "Re-Use", "Neue Formen", "Bauernhof", "Straßenmarkt", "Markthalle", "Sonstige" 
 	);
 	update_option('handel_div1_radio',$handel_div1_radio);
 	
@@ -293,7 +293,11 @@ function mnd_em_ms_globals( $globals )
 	$globals[] = 'repaircafe_div1_teile';
 	$globals[] = 'repaircafe_div1_ausstattung_cb';
 	$globals[] = 'repaircafe_div3_teile';
-	$globals[] = 'repaircafe_div3_fokus_cb';
+	$globals[] = 'repaircafe_div3_fokus_cb1';
+	$globals[] = 'repaircafe_div3_fokus_cb2';
+	$globals[] = 'repaircafe_div3_fokus_cb3';
+	$globals[] = 'repaircafe_div3_fokus_cb4';
+	$globals[] = 'repaircafe_div3_fokus_cb5';
 	$globals[] = 'repaircafe_div4_teile';
 	
 	return $globals;
