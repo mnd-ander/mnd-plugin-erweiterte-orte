@@ -141,6 +141,7 @@ function mnd_handelsortform($editing = false)
 	<!-- div4 ende -->
 	<br/><!-- extra br damit der button etwas abstand hat -->
 	</div><!-- div handelsort form ende -->
+	<script>handel_tooltips_einfuegen();</script>
 	<?php
 }
 
