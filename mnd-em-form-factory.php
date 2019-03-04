@@ -21,7 +21,6 @@ function mnd_em_loc_radioset($radioset, $br_offset, $post_name, $mndzeug_key, $e
 	foreach( $radioset as $radiopart )
 	{
 		?>
-		<label for="<?php echo $post_name.$radiopart; ?>"><?php echo $radiopart; ?></label>
 		<input type="radio" 
 				id="<?php echo $post_name.$radiopart; ?>" 
 				name="<?php echo $post_name; ?>" 
@@ -30,6 +29,8 @@ function mnd_em_loc_radioset($radioset, $br_offset, $post_name, $mndzeug_key, $e
 				<?php if($editing && $EM_Location->mndzeug[$mndzeug_key] == $radiopart) { ?> checked <?php } ?>
 				<?php if( !$cur_user_can ) { ?> disabled <?php } ?>
 				/>
+		<label for="<?php echo $post_name.$radiopart; ?>"><?php echo $radiopart; ?></label>
+		
 		<?php 
 		//linebreak nach jedem x-ten
 		if( $counting++ % $br_offset == 0 )
