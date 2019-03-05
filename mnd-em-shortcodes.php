@@ -357,8 +357,7 @@ function mnd_location_form_filter($string, $arg )
 	
 	if($iposi === false)
 	{
-		return "FATAL ERROR - mnd plugin"
-				."<br>"."EM location-editor missing";
+		return "Sie haben nicht die nötigen Berechtigungen, um dieses Formular zu nutzen. <br> Sind Sie eingeloggt?";
 	}
 	$komplettes_form = substr_replace($string, mnd_em_loc_frontend_form_input($arg), $iposi, 14); //hier die 14zeichen
 	
