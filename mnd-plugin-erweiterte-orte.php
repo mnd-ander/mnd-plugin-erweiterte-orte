@@ -33,14 +33,14 @@ a,b,c können/sollen/dürfen 2-stellig sein
 	------------------------------------
 	Arbeitsschritte Formularerweiterung:
 	------------------------------------
-	- abrufbare option in mnd_em_init() anlegen 				=> seminar erledigt
-	- optionen in uninstall.php mitnehmen						=> seminar erledigt
-	- mnd_em_ms_globals optionen für multisite bereitstellen  	=> seminar erledigt
-	- mnd-em-location-forms.php die form elemente einsetzen   	=> seminar erledigt
-	- löschen meta_key abfrage hinzufügen						=> seminar erledigt
-	- laden meta_key abfrage hinzufügen							=> seminar erledigt
-	- speichern meta_key abfrage hinzufügen						=> seminar erledigt
-	- mnd_em_loc_placeholders shortcodes erweitern/hinzufügen 	=> seminar erledigt
+	- abrufbare option in mnd_em_init() anlegen 				=>  erledigt
+	- optionen in uninstall.php mitnehmen						=>  erledigt
+	- mnd_em_ms_globals optionen für multisite bereitstellen  	=>  erledigt
+	- mnd-em-location-forms.php die form elemente einsetzen   	=>  erledigt
+	- löschen meta_key abfrage hinzufügen						=>  erledigt
+	- laden meta_key abfrage hinzufügen							=>  erledigt
+	- speichern meta_key abfrage hinzufügen						=>  erledigt
+	- mnd_em_loc_placeholders shortcodes erweitern/hinzufügen 	=>  erledigt
 	
 	----------------------------------
 	Arbeitsschritte neue Formularform:
@@ -195,13 +195,13 @@ function handelsort_formularteile_anlegen()
 	$handel_div3_teile = array
 	(
 		"unterstuetzung", "anmeldung", "gruppengr_von", "gruppengr_bis",
-		"lernraum", "cafevorhanden", "anmerkungen"
+		"lernraum", "cafevorhanden", "anmerkungen", "ansprechpartner", "ansprechpartner_nr"
 	);
 	update_option('handel_div3_teile',$handel_div3_teile);
 	
 	$handel_div4_teile = array
 	(
-		"ansprechpartner", "ansprechpartner_nr", "rueckruftermin", "atmosphaere",
+		"rueckruftermin", "atmosphaere",
 		"pitch", "letzter_kontakt"
 	);
 	update_option('handel_div4_teile',$handel_div4_teile);

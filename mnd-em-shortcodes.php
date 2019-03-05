@@ -72,6 +72,8 @@ function mnd_handelsort_placeholder_div3($EM_Location)
 	$replaceparts[] = "<strong>Lernraumsituation:</strong> ".$EM_Location->mndzeug['lernraum'];
 	$replaceparts[] = "<strong>Café vorhanden:</strong> ".$EM_Location->mndzeug['cafevorhanden'];
 	$replaceparts[] = "<strong>Anmerkungen:</strong> ".$EM_Location->mndzeug['anmerkungen'];
+	$replaceparts[] = "<strong>Ansprechpartner Rückruf:</strong> ".$EM_Location->mndzeug['ansprechpartner'];
+	$replaceparts[] = "<strong>Rückrufnummer:</strong> ".$EM_Location->mndzeug['ansprechpartner_nr'];
 	return implode('<br>', $replaceparts);
 }
 function mnd_lernort_placeholder_div3($EM_Location)

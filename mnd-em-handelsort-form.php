@@ -80,7 +80,10 @@ function mnd_handelsortform($editing = false)
                   wrap="hard" ><?php if($editing) { echo $EM_Location->mndzeug['anmerkungen']; } ?></textarea>
 			</td>
 		</tr>
-		
+		<?php
+		mnd_em_loc_textfeld_tr('Ansprechpartner/in Rückruf [*]', 'ansprechpartner', 'ansprechpartner', $editing, true, true);
+		mnd_em_loc_textfeld_tr('Rückrufnummer [*]', 'ansprechpartner_nr', 'ansprechpartner_nr', $editing, true, true);
+		?>
 	</table>
 	<!-- div3 ende -->
 	
@@ -96,8 +99,6 @@ function mnd_handelsortform($editing = false)
 		<h4>Weitere Informationen</h4>
 		<table class="em-location-data">
 		<?php
-		mnd_em_loc_textfeld_tr('Ansprechpartner/in Rückruf [*]', 'ansprechpartner', 'ansprechpartner', $editing, $bool_rechte, true);
-		mnd_em_loc_textfeld_tr('Rückrufnummer [*]', 'ansprechpartner_nr', 'ansprechpartner_nr', $editing, $bool_rechte, true);
 		mnd_em_loc_date_tr('Rückruftermin', 'rueckruftermin', 'rueckruftermin', $editing, $bool_rechte, false);
 		mnd_em_loc_textfeld_tr('Atmosphäre', 'atmosphaere', 'atmosphaere', $editing, $bool_rechte, false);
 		?>
