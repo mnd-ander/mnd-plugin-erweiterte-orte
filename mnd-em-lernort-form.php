@@ -15,7 +15,7 @@ function mnd_lernortform($editing = false)
 	
 	<!-- div1 anfang -->
 	<fieldset name="lernort_div1">
-	<h4>Unterart des Lernortes</h4>
+	<h4>Unterart des Lernortes [*]</h4>
 	<?php
 	$lernort_div1_radio = (is_array(get_option('lernort_div1_radio'))) ? get_option('lernort_div1_radio'):array();
 	mnd_em_loc_radioset($lernort_div1_radio, 1, 'div1_radio', 'div1_radio', $editing, true, true);
@@ -27,26 +27,8 @@ function mnd_lernortform($editing = false)
 	?>
 	<h4>Angaben zum Catering</h4>
 	<table class="em-location-data">
-		<tr class="em-location-data-address">
-		<th>Catering</th>
-			<td>
-				<label for="catering_radioja">Ja</label>
-				<input type="radio" id="catering_radioja" name="catering_radio" value="Ja" 
-						<?php if($editing && $EM_Location->mndzeug['catering_radio'] == 'Ja') { ?> checked <?php } ?>
-						/>
-						<br/>
-				<label for="catering_radionein">Nein</label>
-				<input type="radio" id="catering_radionein" name="catering_radio" value="Nein" 
-						<?php if(($editing && $EM_Location->mndzeug['catering_radio'] == 'Nein') || !$editing) { ?> checked <?php } ?>
-						/>
-						<br/>
-				<label for="catering_radiovlt">In Absprache</label>
-				<input type="radio" id="catering_radiovlt" name="catering_radio" value="In Absprache" 
-						<?php if($editing && $EM_Location->mndzeug['catering_radio'] == 'In Absprache') { ?> checked <?php } ?>
-						/>
-			</td>
-		</tr>
 		<?php
+		mnd_em_loc_radioset_tr('Catering [*]', array('Ja','Nein', 'In Absprache'), 1, 'cafevorhanden', 'cafevorhanden', $editing, true, true);
 		mnd_em_loc_textarea_tr('Mehr dazu', 5, 40, 600, 'catering_text', 'catering_text', $editing, true, false, 'Sag etwas mehr dazu…(z.B. Küchen- & Geschirrnutzung, Kaffeekannen, Kaffeepreise, Getränkepreise usw.)');
 		mnd_em_loc_radioset_tr('Café vorhanden?', array('Ja','Nein'), 1, 'cafevorhanden', 'cafevorhanden', $editing, true, false);
 		?>
@@ -59,7 +41,7 @@ function mnd_lernortform($editing = false)
 	<table class="em-location-data">
 		<?php
 		mnd_em_loc_textfeld_tr('Unterstützung vor Ort', 'unterstuetzung', 'unterstuetzung', $editing, true, false);
-		mnd_em_loc_radioset_tr('Anmeldung erforderlich', array('Ja','Nein'), 1, 'anmeldung', 'anmeldung', $editing, true, false);
+		mnd_em_loc_radioset_tr('Anmeldung erforderlich [*]', array('Ja','Nein'), 1, 'anmeldung', 'anmeldung', $editing, true, true);
 		?>
 		<tr class="em-location-data-address">
 			<th>Gruppengröße</th>
@@ -78,32 +60,32 @@ function mnd_lernortform($editing = false)
 		<?php
 		mnd_em_loc_textfeld_tr('Lernraumsituation', 'lernraum', 'lernraum', $editing, true, false);
 		mnd_em_loc_textarea_tr('Anmerkungen', 5, 40, 600, 'anmerkungen', 'anmerkungen', $editing, true, false);
-		mnd_em_loc_textfeld_tr('Ansprechpartner des Eigentümers Rückruf', 'ansprechpartner', 'ansprechpartner', $editing, true, false);
-		mnd_em_loc_textfeld_tr('Rückrufnummer', 'ansprechpartner_nr', 'ansprechpartner_nr', $editing, true, false);
+		mnd_em_loc_textfeld_tr('Ansprechpartner des Eigentümers für Rückruf [*]', 'ansprechpartner', 'ansprechpartner', $editing, true, true);
+		mnd_em_loc_textfeld_tr('Rückrufnummer [*]', 'ansprechpartner_nr', 'ansprechpartner_nr', $editing, true, true);
 		mnd_em_loc_textfeld_tr('Raum wird verwaltet durch', 'raumverwaltung', 'raumverwaltung', $editing, true, false);
 		?>
 		<tr><th>&nbsp;</th><td>&nbsp;</td></tr><!-- linebreak tabellenzeile der einfachheit halber -->
 		<?php
 		//andere Seminare
-		mnd_em_loc_radioset_tr('Seminarraum zur Verfügung für andere Seminare?', array('Ja','Nein'), 1, 'andereseminar_radio', 'andereseminar_radio', $editing, true, false);
+		mnd_em_loc_radioset_tr('Seminarraum steht zur Verfügung für Seminare? [*]', array('Ja','Nein'), 1, 'andereseminar_radio', 'andereseminar_radio', $editing, true, true);
 		?>
 		<tr class="em-location-data-address">
-			<th>Gruppengröße</th><!-- Gruppengr andere seminare  -->
+			<th>Gruppengröße [*]</th><!-- Gruppengr andere seminare  -->
 			<td>
 				<label for="andereseminar_gr_von">von</label>
-				<input type="number" name="andereseminar_gr_von" id="andereseminar_gr_von" min="1" 
+				<input type="number" name="andereseminar_gr_von" id="andereseminar_gr_von" min="1" required
 					<?php if($editing) { ?> value="<?php echo $EM_Location->mndzeug['andereseminar_gr_von']; ?>" <?php } ?>
 					/>
 				<br/>
 				<label for="andereseminar_gr_bis">bis</label>
-				<input type="number" name="andereseminar_gr_bis" id="andereseminar_gr_bis" min="1" 
+				<input type="number" name="andereseminar_gr_bis" id="andereseminar_gr_bis" min="1" required
 					<?php if($editing) { ?> value="<?php echo $EM_Location->mndzeug['andereseminar_gr_bis']; ?>" <?php } ?>
 					/> 
 			</td>
 		</tr>
 		<?php
-		mnd_em_loc_number_tr('Preis pro Stunde in €', 0, 0.01, 'andereseminar_preis', 'andereseminar_preis', $editing, true, false);
-		mnd_em_loc_textfeld_tr('Bedingungen', 'andereseminar_beding', 'andereseminar_beding', $editing, true, false);
+		//mnd_em_loc_number_tr('Preis pro Stunde in €', 0, 0.01, 'andereseminar_preis', 'andereseminar_preis', $editing, true, false);
+		mnd_em_loc_textfeld_tr('Weitere Bedingungen', 'andereseminar_beding', 'andereseminar_beding', $editing, true, false);
 		?>
 	</table>		
 	<!-- div3 ende -->

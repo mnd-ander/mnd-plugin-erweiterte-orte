@@ -16,7 +16,7 @@ function mnd_repairform($editing = false)
 	
 	<!-- div1 anfang -->
 	<fieldset name="repaircafe_div1">
-	<h4>Art des DIY Ortes</h4>
+	<h4>Art des DIY Ortes [*]</h4>
 	<?php
 	$repaircafe_div1_radio = (is_array(get_option('repaircafe_div1_radio'))) ? get_option('repaircafe_div1_radio'):array();
 	mnd_em_loc_radioset($repaircafe_div1_radio, 1, 'div1_radio', 'div1_radio', $editing, true, true);
@@ -24,23 +24,23 @@ function mnd_repairform($editing = false)
 	<h4>BasisInfos</h4>
 	<table class="em-location-data">
 	<?php
-	mnd_em_loc_textfeld_tr('Telefon', 'telefon', 'telefon', $editing, true, false);
-	mnd_em_loc_textfeld_tr('E-Mail', 'email', 'email', $editing, true, false);
+	mnd_em_loc_textfeld_tr('Telefon [*]', 'telefon', 'telefon', $editing, true, true);
+	mnd_em_loc_textfeld_tr('E-Mail [*]', 'email', 'email', $editing, true, true);
 	mnd_em_loc_textfeld_tr('Website', 'website', 'website', $editing, true, false);
-	mnd_em_loc_textfeld_tr('Öffnungszeiten', 'oeffnungszeiten', 'oeffnungszeiten', $editing, true, false);
-	mnd_em_loc_oeffnungstage_checkboxset_tr('Öffnungstage', 'oeffnungstage[]', 'oeffnungstage', $editing, true);
+	mnd_em_loc_textfeld_tr('Öffnungszeiten [*]', 'oeffnungszeiten', 'oeffnungszeiten', $editing, true, true);
+	mnd_em_loc_oeffnungstage_checkboxset_tr('Öffnungstage [*]', 'oeffnungstage[]', 'oeffnungstage', $editing, true);
 	mnd_em_loc_textfeld_tr('Andere Öffnungstage', 'andere_oeffnungstage', 'andere_oeffnungstage', $editing, true, false);
-	mnd_em_loc_textfeld_tr('Ansprechpartner/in', 'ansprechpartner', 'ansprechpartner', $editing, true, false);
+	mnd_em_loc_textfeld_tr('Ansprechpartner/in [*]', 'ansprechpartner', 'ansprechpartner', $editing, true, true);
 	?>
 	</table>
-	<h4>Ausstattung</h4>
+	<h4>Ausstattung [*]</h4>
 	<?php
 	$repaircafe_div1_ausstattung_cb = (is_array(get_option('repaircafe_div1_ausstattung_cb'))) ? get_option('repaircafe_div1_ausstattung_cb'):array();
 	mnd_em_loc_checkboxset($repaircafe_div1_ausstattung_cb, 'div1[]', 'repairCB', 'div1_checkboxes', $editing, true);
 	?>
 	<table class="em-location-data">
 	<?php
-	mnd_em_loc_radioset_tr('Café vorhanden?', array('Ja','Nein'), 1, 'cafevorhanden', 'cafevorhanden', $editing, true, false);
+	mnd_em_loc_radioset_tr('Café vorhanden? [*]', array('Ja','Nein'), 1, 'cafevorhanden', 'cafevorhanden', $editing, true, true);
 	?>
 	</table>
 	</fieldset>
@@ -52,7 +52,7 @@ function mnd_repairform($editing = false)
 	<table class="em-location-data">
 		<?php
 		mnd_em_loc_textfeld_tr('Unterstützung vor Ort', 'unterstuetzung', 'unterstuetzung', $editing, true, false);
-		mnd_em_loc_radioset_tr('Anmeldung erforderlich', array('Ja','Nein'), 1, 'anmeldung', 'anmeldung', $editing, true, false);
+		mnd_em_loc_radioset_tr('Anmeldung erforderlich [*]', array('Ja','Nein'), 1, 'anmeldung', 'anmeldung', $editing, true, true);
 		?>
 		<tr class="em-location-data-address">
 			<th>Gruppengröße</th>
@@ -69,7 +69,7 @@ function mnd_repairform($editing = false)
 			</td>
 		</tr>
 	</table>
-	<h4>Fokus</h4>
+	<h4>Fokus [*]</h4>
 	<?php
 	$repaircafe_div3_fokus_cb1 = (is_array(get_option('repaircafe_div3_fokus_cb1'))) ? get_option('repaircafe_div3_fokus_cb1'):array();
 	mnd_em_loc_checkboxset($repaircafe_div3_fokus_cb1, 'div3_fokus_cb[]', 'fokusCB1', 'div3_fokus_cb', $editing, true);

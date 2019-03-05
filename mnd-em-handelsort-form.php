@@ -15,12 +15,12 @@ function mnd_handelsortform($editing = false)
 	
 	<!-- div1 anfang -->
 	<fieldset name="sortiment">
-	<h4>Unterart des Handelsortes</h4>
+	<h4>Unterart des Handelsortes [*]</h4>
 	<?php
 	$handel_div1_radio = (is_array(get_option('handel_div1_radio'))) ? get_option('handel_div1_radio'):array();
 	mnd_em_loc_radioset($handel_div1_radio, 1, 'div1_radio', 'div1_radio', $editing, true, true);
 	?>
-	<h4>Kernsortiment</h4>
+	<h4>Kernsortiment [*]</h4>
 	<?php	
 	$checkboxes = (is_array(get_option('handel_div1_checkboxes'))) ? get_option('handel_div1_checkboxes'):array();
 	mnd_em_loc_checkboxset($checkboxes, 'div1[]', 'handelCB', 'div1_checkboxes', $editing, true);
@@ -34,7 +34,7 @@ function mnd_handelsortform($editing = false)
 	<table class="em-location-data">
 		<?php
 		mnd_em_loc_textfeld_tr('Unterstützung vor Ort', 'unterstuetzung', 'unterstuetzung', $editing, true, false);
-		mnd_em_loc_radioset_tr('Anmeldung erforderlich', array('Ja','Nein'), 1, 'anmeldung', 'anmeldung', $editing, true, false);
+		mnd_em_loc_radioset_tr('Anmeldung erforderlich [*]', array('Ja','Nein'), 1, 'anmeldung', 'anmeldung', $editing, true, true);
 		?>
 		<tr class="em-location-data-address">
 			<th>Gruppengröße</th>
@@ -96,8 +96,8 @@ function mnd_handelsortform($editing = false)
 		<h4>Weitere Informationen</h4>
 		<table class="em-location-data">
 		<?php
-		mnd_em_loc_textfeld_tr('Ansprechpartner Rückruf', 'ansprechpartner', 'ansprechpartner', $editing, $bool_rechte, false);
-		mnd_em_loc_textfeld_tr('Rückrufnummer', 'ansprechpartner_nr', 'ansprechpartner_nr', $editing, $bool_rechte, false);
+		mnd_em_loc_textfeld_tr('Ansprechpartner/in Rückruf [*]', 'ansprechpartner', 'ansprechpartner', $editing, $bool_rechte, true);
+		mnd_em_loc_textfeld_tr('Rückrufnummer [*]', 'ansprechpartner_nr', 'ansprechpartner_nr', $editing, $bool_rechte, true);
 		mnd_em_loc_date_tr('Rückruftermin', 'rueckruftermin', 'rueckruftermin', $editing, $bool_rechte, false);
 		mnd_em_loc_textfeld_tr('Atmosphäre', 'atmosphaere', 'atmosphaere', $editing, $bool_rechte, false);
 		?>

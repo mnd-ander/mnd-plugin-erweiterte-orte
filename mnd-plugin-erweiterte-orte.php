@@ -188,7 +188,7 @@ function handelsort_formularteile_anlegen()
 		"Gesundheit, Pflege", "Bücher, Schreibwaren", "Unterhaltungselektronik", "Elektrohaushaltsgeräte",
 		"Spielwaren, Hobbys", "Foto, Optik", "Informationstechnologie", "Schuhe, Lederwaren",
 		"Sportbedarf, Camping", "Hausrat", "Uhren, Schmuck", "Telekommunikation",
-		"Baby-, Kinderartikel", "Mobilität"
+		"Baby-, Kinderartikel", "Mobilität", "Sonstiges"
 	);
 	update_option('handel_div1_checkboxes',$handel_div1_checkboxes);
 	
@@ -257,7 +257,7 @@ function repaircafe_formularteile_anlegen()
 	update_option('repaircafe_div3_fokus_cb4',$repaircafe_div3_fokus_cb4);
 	$repaircafe_div3_fokus_cb5 = array
 	(
-		"Coworking", "Connecting", "Recherche", "Selbstverwirklichung"
+		"Coworking"
 	);
 	update_option('repaircafe_div3_fokus_cb5',$repaircafe_div3_fokus_cb5);
 	

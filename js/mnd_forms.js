@@ -20,90 +20,72 @@ function lernort_tooltips_einfuegen()
 {
 	var lbl = findeLabelZumElement(document.getElementById("div1_radioRe-Use"));
 	lbl.setAttribute("data-toggle", "tooltip");
-	lbl.setAttribute("data-placement", "top");
-	var reusetext = "Re-Use bedeutet Wiederverwertung in allen Formen, das kann sein:" + "\n" + 
-	"Upcycling Wiederverwertung durch Umnutzung von Dingen (ein Portemonaie aus einem Tetrapack basteln)" + "\n" +
-	"Second Hand (gebraucht) etwas, das jemand anderes nicht mehr braucht kaufen/tauschen, um es weiter zu nutzen z.B. Kleidung oder Elektronik";
+	lbl.setAttribute("data-placement", "right");
+	var reusetext = "Re-Use : An diesen Orten geht es um das Wiederverwerten von bereits genutzten Produkten. Klassische Beispiele sind Second-Hand Läden, Gebraucht- oder Tauschmärkte.";
 	lbl.setAttribute("title", reusetext);
 	
 	lbl = findeLabelZumElement(document.getElementById("div1_radioNeue Formen"));
 	lbl.setAttribute("data-toggle", "tooltip");
-	lbl.setAttribute("data-placement", "top");
-	reusetext = "Neuere Formen dessen sind:" + "\n" + 
-	"do it yourself (DIY): selbst etwas bauen, z.B. Möbel aus Platten" + "\n" +
-	"do it together: zusammen mit anderen das DIY Konzept umsetzen" + "\n" +
-	"Umsonstläden Abgeben oder mitnehmen von Gebrauchsgeständen etc. ohne etwas dafür bezahlen zu müssen (in einem 'Verkaufsraum')" + "\n" +
-	"Die einfachsten Formen sind leihen und tauschen";
+	lbl.setAttribute("data-placement", "right");
+	reusetext = "Neue Formen : An diesen Orten werden neue Ansätze des Konsums gelebt. Hier wird der Konsument schnell zum Prosumenten. Beispiele sind DIY-Spaces, DIT-Spaces, Zero-Waste Läden, 3D-Druckergeschäfte oder Makerspaces.";
 	lbl.setAttribute("title", reusetext);
 	
 	lbl = findeLabelZumElement(document.getElementById("div1_radioÖffentliche Einrichtung"));
 	lbl.setAttribute("data-toggle", "tooltip");
-	lbl.setAttribute("data-placement", "top");
-	reusetext = "Räume/Häuser, die der Öffentlichkeit für Austausch, kulturelle Arbeit, Bildung etc. dienen. Wie z.B. Bibliotheken(Bücher ausleihen), Museen(Geschichte bestaunen), Nachbarschaftszentren etc.";
+	lbl.setAttribute("data-placement", "right");
+	reusetext = "Öffentliche Einrichtungen : Diese Orte sind durch öffentliche Gelder finanziert. Beispiel : Bibliotheken, Schulen oder Nachbarschaftszentren.";
 	lbl.setAttribute("title", reusetext);
 }
 function handel_tooltips_einfuegen()
 {
 	var lbl = findeLabelZumElement(document.getElementById("div1_radioRe-Use"));
 	lbl.setAttribute("data-toggle", "tooltip");
-	lbl.setAttribute("data-placement", "top");
-	var reusetext = "Re-Use bedeutet Wiederverwertung in allen Formen, das kann sein:" + "\n" + 
-	"Upcycling Wiederverwertung durch Umnutzung von Dingen (ein Portemonaie aus einem Tetrapack basteln)" + "\n" +
-	"Second Hand (gebraucht) etwas, das jemand anderes nicht mehr braucht kaufen/tauschen, um es weiter zu nutzen z.B. Kleidung oder Elektronik";
+	lbl.setAttribute("data-placement", "right");
+	var reusetext = "Re-Use : An diesen Orten geht es um das Wiederverwerten von bereits genutzten Produkten. Klassische Beispiele sind Second-Hand Läden, Gebraucht- oder Tauschmärkte.";
 	lbl.setAttribute("title", reusetext);
 	
 	lbl = findeLabelZumElement(document.getElementById("div1_radioNeue Formen"));
 	lbl.setAttribute("data-toggle", "tooltip");
-	lbl.setAttribute("data-placement", "top");
-	reusetext = "Neuere Formen dessen sind:" + "\n" + 
-	"do it yourself (DIY): selbst etwas bauen, z.B. Möbel aus Platten" + "\n" +
-	"do it together: zusammen mit anderen das DIY Konzept umsetzen" + "\n" +
-	"Umsonstläden Abgeben oder mitnehmen von Gebrauchsgeständen etc. ohne etwas dafür bezahlen zu müssen (in einem 'Verkaufsraum')" + "\n" +
-	"Die einfachsten Formen sind leihen und tauschen";
+	lbl.setAttribute("data-placement", "right");
+	reusetext = "Neue Formen : An diesen Orten werden neue Ansätze des Konsums gelebt. Hier wird der Konsument schnell zum Prosumenten. Beispiele sind DIY-Spaces, DIT-Spaces, Zero-Waste Läden, 3D-Druckergeschäfte oder Makerspaces.";
 	lbl.setAttribute("title", reusetext);
 }
 function repaircafe_tooltips_einfuegen()
 {
 	var lbl = findeLabelZumElement(document.getElementById("div1_radioCoworking Space"));
 	lbl.setAttribute("data-toggle", "tooltip");
-	lbl.setAttribute("data-placement", "top");
+	lbl.setAttribute("data-placement", "right");
 	var reusetext = "Coworking - (auch Co-working, englisch für 'zusammen arbeiten' bzw. koarbeiten oder kollaborativ arbeiten) ist eine Entwicklung im Bereich „neue Arbeitsformen“. Freiberufler, Kreative, kleinere Startups oder digitale Nomaden arbeiten dabei zugleich in meist größeren, offenen Räumen und können auf diese Weise voneinander profitieren. Sie können unabhängig voneinander agieren und in unterschiedlichen Firmen und Projekten aktiv sein, oder auch gemeinsam Projekte verwirklichen und Hilfe sowie neue Mitstreiter finden.";
 	lbl.setAttribute("title", reusetext);
 	
 	lbl = findeLabelZumElement(document.getElementById("fokusCB50"));
 	lbl.setAttribute("data-toggle", "tooltip");
-	lbl.setAttribute("data-placement", "top");
+	lbl.setAttribute("data-placement", "right");
 	//coworking text hier wieder
 	lbl.setAttribute("title", reusetext);
 	
 	//downcycling
 	lbl = findeLabelZumElement(document.getElementById("fokusCB43"));
 	lbl.setAttribute("data-toggle", "tooltip");
-	lbl.setAttribute("data-placement", "top");
+	lbl.setAttribute("data-placement", "right");
 	reusetext = "Downcycling - Rohstoffwiederverwertung mit Qualitätseinbußen ( mindestens genau so wichtig wie Upcycling)";
-	lbl.setAttribute("title", reusetext);
-	//connecting
-	lbl = findeLabelZumElement(document.getElementById("fokusCB51"));
-	lbl.setAttribute("data-toggle", "tooltip");
-	lbl.setAttribute("data-placement", "top");
-	reusetext = "Connecting - meint vernetzen verbünden.";
 	lbl.setAttribute("title", reusetext);
 	//brainstormen
 	lbl = findeLabelZumElement(document.getElementById("fokusCB45"));
 	lbl.setAttribute("data-toggle", "tooltip");
-	lbl.setAttribute("data-placement", "top");
+	lbl.setAttribute("data-placement", "right");
 	reusetext = "Brainstormen - kurze Versammlung um spontane Ideen zu sammeln.";
 	lbl.setAttribute("title", reusetext);
 	//lötkolben
 	lbl = findeLabelZumElement(document.getElementById("repairCB2"));
 	lbl.setAttribute("data-toggle", "tooltip");
-	lbl.setAttribute("data-placement", "top");
+	lbl.setAttribute("data-placement", "right");
 	reusetext = "Der Lötkolben ist ein Gerät zum Aufschmelzen von Metallen, um Bauteile durch Weichlöten zu verbinden. (unter 450 Grad wird es Weichlöten genannt alles darüber wird Hartlöten genannt).";
 	lbl.setAttribute("title", reusetext);
 	//werkzeugkoffer
 	lbl = findeLabelZumElement(document.getElementById("repairCB0"));
 	lbl.setAttribute("data-toggle", "tooltip");
-	lbl.setAttribute("data-placement", "top");
+	lbl.setAttribute("data-placement", "right");
 	reusetext = "Werkzeugkoffer: Ein Werkzeugkoffer beinhaltet den kompletten Bedarf an Werkzeugen, die für Reparaturen gebraucht werden. Wie z. B." + "\n" +
 				"Verschiedene Schraubendreher, Schlitz und Kreuzschlitz sowie Torx-Schraubendreher in gängigen Größen" + "\n" +
 			    "(Kleines) Stemmeisen" + "\n" +
