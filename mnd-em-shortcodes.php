@@ -123,7 +123,7 @@ function mnd_repaircafe_placeholder_div3_fokus($foki)
 		{
 			case "Selbstständige Reparatur": $src = plugins_url( '/icons/user-cog-solid.svg', __FILE__ ); break;
 			case "Elektronik Reparatur": $src = plugins_url( '/icons/digital-tachograph-solid.svg', __FILE__ ); break;
-			case "Handy Reparatur": $src = plugins_url( '/icons/mobile-alt-solid.svg.svg', __FILE__ ); break;
+			case "Handy Reparatur": $src = plugins_url( '/icons/mobile-alt-solid.svg', __FILE__ ); break;
 			case "Computer Reparatur": $src = plugins_url( '/icons/laptop-solid.svg', __FILE__ ); break;
 			case "Tablet Reparatur": $src = plugins_url( '/icons/tablet-alt-solid.svg', __FILE__ ); break;
 			case "Mobilität": $src = plugins_url( '/icons/walking-solid.svg', __FILE__ ); break;
