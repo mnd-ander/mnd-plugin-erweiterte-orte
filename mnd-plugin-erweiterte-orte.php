@@ -5,10 +5,10 @@ Plugin URI: https://www.shakuras.me
 Description: Bitte die Bedienungsanleitung beachten (unter Events->Anderbox). Dieses Plugin erweitert die Funktionalität des Events Manager Plugins um Orttypen. Icons von fontawesome https://fontawesome.com/license/free - die Lizenz erfordert, dass dies auf der Seite kenntlich gemacht wird. 
 Author: Alexander Schmidt
 Author URI: https://www.shakuras.me
-Version: 0.9.2
+Version: 0.9.3
 */
 
-define('MND_VERSION', 0.0902); 
+define('MND_VERSION', 0.0903); 
 /*
 versionsnummern sind a.b.c
 a = erfüllt alle aktuellen anforderungen
