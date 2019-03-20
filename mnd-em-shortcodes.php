@@ -123,13 +123,23 @@ function mnd_repaircafe_placeholder_div3_fokus($foki)
 		{
 			case "Selbstständige Reparatur": $src = plugins_url( '/icons/user-cog-solid.svg', __FILE__ ); break;
 			case "Elektronik Reparatur": $src = plugins_url( '/icons/digital-tachograph-solid.svg', __FILE__ ); break;
-			//, "Handy Reparatur", "Computer Reparatur", "Tablet Reparatur", 
-			//"Mobilität", "Fahrrad Reparatur", "Roller Reparatur", "Auto Reparatur",
-			///"Kreativität", "Selbst nähen", "Upcycling", "Downcycling", "Kunst", "Brainstorming"
-			//"Coworking"
+			case "Handy Reparatur": $src = plugins_url( '/icons/mobile-alt-solid.svg.svg', __FILE__ ); break;
+			case "Computer Reparatur": $src = plugins_url( '/icons/laptop-solid.svg', __FILE__ ); break;
+			case "Tablet Reparatur": $src = plugins_url( '/icons/tablet-alt-solid.svg', __FILE__ ); break;
+			case "Mobilität": $src = plugins_url( '/icons/walking-solid.svg', __FILE__ ); break;
+			case "Fahrrad Reparatur": $src = plugins_url( '/icons/car-solid.svg', __FILE__ ); break;
+			case "Roller Reparatur": $src = plugins_url( '/icons/motorcycle-solid.svg', __FILE__ ); break;
+			case "Auto Reparatur": $src = plugins_url( '/icons/car-solid.svg', __FILE__ ); break;
+			case "Kreativität": $src = plugins_url( '/icons/pencil-ruler-solid.svg', __FILE__ ); break;
+			case "Selbst nähen": $src = plugins_url( '/icons/cut-solid.svg', __FILE__ ); break;
+			case "Upcycling": $src = plugins_url( '/icons/angle-double-up-solid.svg', __FILE__ ); break;
+			case "Downcycling": $src = plugins_url( '/icons/angle-double-down-solid.svg', __FILE__ ); break;
+			case "Kunst": $src = plugins_url( '/icons/palette-solid.svg', __FILE__ ); break;
+			case "Brainstorming": $src = plugins_url( '/icons/comments-regular.svg', __FILE__ ); break;
+			case "Coworking": $src = plugins_url( '/icons/slideshare-brands.svg', __FILE__ ); break;
 		}
 		
-		$sortiment[] = "<img class='img-fluid' src='".$src." alt='".$fokus."' /> ".$fokus;
+		$sortiment[] = "<div><img style='max-width:8%' class='img-fluid' src='".$src."' alt='".$fokus."' /> ".$fokus."</div>";
 	}
 	return $sortiment;
 }
