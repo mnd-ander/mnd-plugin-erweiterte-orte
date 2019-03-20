@@ -67,6 +67,12 @@ function mnd_em_admin_page()
 						<br>
 						"Yes" ankreuzen
 					</p>
+					<h3>Lizenzwarnung:</h3> 
+					<p>
+						Die Icons für RepairCafe Foki sind von Fontawesome und die freie Lizenz erfordert den ausdrücklichen Hinweis darauf.
+						<br>
+						Irgendwo sollte also dieser Link mit Hinweis stehen: https://fontawesome.com/license/free
+					</p>
 					<h3>Bedienungsanleitung</h3> 
 					<h4>Formular</h4>
 					<p>
