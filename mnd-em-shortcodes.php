@@ -107,15 +107,31 @@ function mnd_repaircafe_placeholder_div3($EM_Location)
 	$replaceparts[] = "<strong>Gruppengröße:</strong> von ".$EM_Location->mndzeug['gruppengr_von']." bis ".$EM_Location->mndzeug['gruppengr_bis'];
 	//div3_fokus
 	$replaceparts[] = "<strong>Fokus:</strong>";
-	$sortiment = array();
-	foreach($EM_Location->mndzeug['div3_fokus_cb'] as $sortimentti)
-	{
-		$sortiment[] = $sortimentti;
-	}
+	$sortiment = mnd_repaircafe_placeholder_div3_fokus($EM_Location->mndzeug['div3_fokus_cb']);
 	$replaceparts[] = implode('<br>', $sortiment);
 	//fokus_sonstig
 	$replaceparts[] = "<strong>Sonstiger Fokus:</strong> ".$EM_Location->mndzeug['fokus_sonstiges'];
 	return implode('<br>', $replaceparts);
+}
+function mnd_repaircafe_placeholder_div3_fokus($foki)
+{
+	$sortiment = array();
+	foreach($foki as $fokus)
+	{
+		$src = "";
+		switch($fokus)
+		{
+			case "Selbstständige Reparatur": $src = plugins_url( '/icons/user-cog-solid.svg', __FILE__ ); break;
+			case "Elektronik Reparatur": $src = plugins_url( '/icons/digital-tachograph-solid.svg', __FILE__ ); break;
+			//, "Handy Reparatur", "Computer Reparatur", "Tablet Reparatur", 
+			//"Mobilität", "Fahrrad Reparatur", "Roller Reparatur", "Auto Reparatur",
+			///"Kreativität", "Selbst nähen", "Upcycling", "Downcycling", "Kunst", "Brainstorming"
+			//"Coworking"
+		}
+		
+		$sortiment[] = "<img class='img-fluid' src='".$src." alt='".$fokus."' /> ".$fokus;
+	}
+	return $sortiment;
 }
 
 
