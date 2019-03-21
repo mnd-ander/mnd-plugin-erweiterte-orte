@@ -28,7 +28,7 @@ function mnd_lernortform($editing = false)
 	<h4>Angaben zum Catering</h4>
 	<table class="em-location-data">
 		<?php
-		mnd_em_loc_radioset_tr('Catering [*]', array('Ja','Nein', 'In Absprache'), 1, 'cafevorhanden', 'cafevorhanden', $editing, true, true);
+		mnd_em_loc_radioset_tr('Catering [*]', array('Ja','Nein', 'In Absprache'), 1, 'catering_radio', 'catering_radio', $editing, true, true);
 		mnd_em_loc_textarea_tr('Mehr dazu', 5, 40, 600, 'catering_text', 'catering_text', $editing, true, false, 'Sag etwas mehr dazu…(z.B. Küchen- & Geschirrnutzung, Kaffeekannen, Kaffeepreise, Getränkepreise usw.)');
 		mnd_em_loc_radioset_tr('Café vorhanden?', array('Ja','Nein'), 1, 'cafevorhanden', 'cafevorhanden', $editing, true, false);
 		?>
