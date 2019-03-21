@@ -165,7 +165,7 @@ function lernort_formularteile_anlegen()
 	(
 		"unterstuetzung", "anmeldung", "gruppengr_von", "gruppengr_bis",
 		"lernraum", "anmerkungen", "ansprechpartner", "ansprechpartner_nr", "raumverwaltung",
-		"andereseminar_radio", "andereseminar_gr_von", "andereseminar_gr_bis", "andereseminar_preis", "andereseminar_beding"
+		"andereseminar_radio", "andereseminar_gr_von", "andereseminar_gr_bis", "andereseminar_beding"
 	);
 	update_option('lernort_div3_teile',$lernort_div3_teile);
 	$lernort_div4_teile = array
