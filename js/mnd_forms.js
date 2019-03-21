@@ -1,3 +1,7 @@
+/*
+für multiclick im repaircafe formular fokus
+genutzt in mnd-em-form-factory.php mnd_em_loc_checkboxset_multiclick(...)
+*/
 function toggle_die_boxen(source, targets)
 {
 	var source_checkbox = document.getElementById(source);
@@ -7,6 +11,11 @@ function toggle_die_boxen(source, targets)
 		target_checkbox.checked = source_checkbox.checked;
 	}
 }
+
+/*
+hilfsfunktion zum einfügen der tooltips
+findet das gewünschte label anhand der id des formularelements
+*/
 function findeLabelZumElement(elem) 
 {
    var idVal = elem.id;
