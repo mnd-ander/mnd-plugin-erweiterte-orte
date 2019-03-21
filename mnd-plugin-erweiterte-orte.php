@@ -25,6 +25,8 @@ a,b,c können/sollen/dürfen 2-stellig sein
 	  speziell filter verstehen ist wichtig
 	- das Plugin hält sich nur an die internen Prozesse von EventsManager und 'filtert' (= fügt dort hinzu) 
 	  man muss sich die stellen im EventsManager anschauen, in denen jeweils die funktionen 'eingehakt' wurden
+	- alles hier basiert im wesentlichen auf diesem tutorial
+	  https://wp-events-plugin.com/tutorials/creating-a-events-manager-add-on-a-complete-walkthrough/
 	- das Fehlen von POST daten ist kaum irgendwo bedacht und macht vielleicht irgendwann in einer situation probleme,
 	  zur zeit sollte es aber nichts ausmachen (solange der programmiermensch nichts falsch macht...)
 	- es ist egal, dass event manager meta und location meta im selben EM_META_TABLE gespeichert wird,
