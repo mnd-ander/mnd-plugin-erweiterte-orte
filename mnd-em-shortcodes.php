@@ -312,6 +312,7 @@ function mnd_em_loc_placeholders($replace, $EM_Location, $result)
 				}
 				else return "Kein Rückruftermin";
 			}
+			else return "";
 		}
 	}
 	
