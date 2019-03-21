@@ -1,4 +1,23 @@
 <?php
+/*
+hier sind eine menge hilfsfunktionen, die die formularelemente in der gewünschten form ausspucken
+dies macht die mnd-em-xxx-form.php dateien besser lesbar und einfacher zu verändern, 
+	weil die zeilenanzahl um 90% verringert wird
+
+die formularelemente werden alle jeweils in einer <tr> ausgegeben, um die optische formatierung einfach zu gestalten
+
+parameter sind bei allen gleich benannt:
+$th_text = das steht im <th>text</th><td>form-element<td> 
+$radioset, $checkbox_array = bei sammlungen von auswahlmöglichkeiten als array
+$br_offset = bei sammlungen von auswahlmöglichkeiten, wie viele elemente pro zeile (wie oft zählen bis ein <br> kommt)
+$post_name, $post_array_name = $_POST[$post_name]
+$mndzeug_key = $EM_Location->mndzeug[$mndzeug_key]
+$editing = wird gerade editiert? boolean
+$placeholder = placeholder text
+$cur_user_can = nutzer hat MND_TEST_RECHTE ? boolean
+$required = ...
+*/
+
 function mnd_em_loc_radioset_tr($th_text, $radioset, $br_offset, $post_name, $mndzeug_key, $editing, $cur_user_can, $required)
 {
 	global $EM_Location;

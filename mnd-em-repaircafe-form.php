@@ -1,11 +1,23 @@
 <?php
  
+/*
+hier wird oft die wordpress funktion get_option() benutzt
+die optionen wurden bei der intialisierung des plugins angelegt 
+    in mnd-plugin-erweiterte-orte.php mnd_em_init()
 
+die schreibweise $var = (is_array(get_option('lernort_div1_radio'))) ? get_option('lernort_div1_radio'):array()
+stellt sicher dass auch in dem fall von verlorenen optionen (datenbankfehler?) das formular geladen wird
+  und nicht irgendeine fehlermeldung entsteht
+*/
 function mnd_repairform($editing = false)
 {
+	//wir befinden uns bei do_action('em_front_location_form_footer')
+	//EM hat hier $EM_Location als global deklariert, damit wir direkt auf die daten in dem objekt zugreifen können
 	global $EM_Location;
 	if($editing)
 	{
+		//damit niemand vergisst, um welche formularart es sich handelt, während der nutzer editiert
+		//... nicht gerade wichtig
 		?>
 		<h3>Art/Typ: RepairCafé / DIY / Werkstatt</h3>
 		<?php

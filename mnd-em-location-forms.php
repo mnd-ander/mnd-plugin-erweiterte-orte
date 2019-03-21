@@ -27,6 +27,7 @@ function mnd_em_loc_metabox()
 	global $EM_Location;
 	
 	//hier wird das richtige formular entsprechend des orttyps gewählt
+	//wir editieren also das argument $editing = true
 	switch($EM_Location->mndzeug['formular_art'])
 	{
 		case 'handelsort': mnd_handelsortform(true); break;
