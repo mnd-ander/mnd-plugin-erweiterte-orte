@@ -92,7 +92,7 @@ function mnd_lernort_placeholder_div3($EM_Location)
 	$replaceparts[] = " ";
 	$replaceparts[] = "<strong>Raum für andere Seminare:</strong> ".$EM_Location->mndzeug['andereseminar_radio'];
 	$replaceparts[] = "<strong>Gruppengröße:</strong> von ".$EM_Location->mndzeug['andereseminar_gr_von']." bis ".$EM_Location->mndzeug['andereseminar_gr_bis'];
-	$replaceparts[] = "<strong>Preis pro Stunde:</strong> ".$EM_Location->mndzeug['andereseminar_preis'];
+	//$replaceparts[] = "<strong>Preis pro Stunde:</strong> ".$EM_Location->mndzeug['andereseminar_preis'];
 	$replaceparts[] = "<strong>Bedingungen:</strong> ".$EM_Location->mndzeug['andereseminar_beding'];
 	return implode('<br>', $replaceparts);
 }
@@ -287,20 +287,24 @@ function mnd_em_loc_placeholders($replace, $EM_Location, $result)
 				return mnd_repaircafe_placeholder_div3($EM_Location);
 			}
 		}
-		elseif( $result == '#_MNDDIV4' && current_user_can(MND_TEST_RECHTE)) //div4 nur für abonnenten
+		elseif( $result == '#_MNDDIV4' ) //div4 nur für abonnenten
 		{
-			if($EM_Location->mndzeug['formular_art'] == "handelsort")
+                    if( current_user_can(MND_TEST_RECHTE))
+                    {
+                        if($EM_Location->mndzeug['formular_art'] == "handelsort")
 			{
-				return mnd_handelsort_placeholder_div4($EM_Location);
+                            return mnd_handelsort_placeholder_div4($EM_Location);
 			}
 			elseif($EM_Location->mndzeug['formular_art'] == "lernort")
 			{
-				return mnd_lernort_placeholder_div4($EM_Location);
+                            return mnd_lernort_placeholder_div4($EM_Location);
 			}
 			elseif($EM_Location->mndzeug['formular_art'] == "repaircafe")
 			{
-				return mnd_repaircafe_placeholder_div4($EM_Location);
+                            return mnd_repaircafe_placeholder_div4($EM_Location);
 			}
+                    }
+                    else return "";
 		}
 		elseif( $result == '#_MNDRUECKRUF' )
 		{
